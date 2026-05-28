@@ -1,0 +1,3739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#3D5C3F">
+<title>军庄镇研学服务平台 · 梨乡京韵</title>
+<style>
+/* =========================================================
+   军庄镇研学服务平台 · 京白梨主题样式
+   核心色系：京白梨米色 / 梨叶绿 / 贡品金 / 朱砂红
+   ========================================================= */
+
+/* 字体策略：优先使用系统中文字体（性能 + 离线可用），无需外部加载 */
+
+:root {
+  /* === 京白梨主题配色 === */
+  --pear-ivory: #FAF5E8;      /* 京白梨米白色 - 主背景 */
+  --pear-cream: #FFFBF0;      /* 浅米色 */
+  --pear-flesh: #FDF6E3;      /* 梨肉色 - 卡片背景 */
+  --pear-skin: #E8D9B5;       /* 梨皮浅黄 */
+  --pear-skin-deep: #D4BE8C;  /* 梨皮深色 */
+
+  --pear-leaf: #6B8E4E;       /* 梨叶绿 - 主色调 */
+  --pear-leaf-light: #8FB16E; /* 浅梨叶绿 */
+  --pear-leaf-deep: #3D5C3F;  /* 深绿 - 京西山色 */
+
+  --imperial-gold: #C9A961;   /* 贡品金 */
+  --gold-light: #E0C88C;      /* 浅金 */
+  --gold-deep: #A88944;       /* 深金 */
+
+  --cinnabar: #B2342B;        /* 朱砂红 - 印章/重点 */
+  --cinnabar-deep: #8C2A24;   /* 深朱红 */
+
+  --ink-black: #2C3539;       /* 墨黑 - 主文字 */
+  --ink-gray: #5C6670;        /* 墨灰 - 次文字 */
+  --ink-light: #8A9199;       /* 浅墨灰 */
+
+  --paper-white: #FAF7F0;     /* 宣纸白 */
+  --border-soft: #E8DFC8;     /* 柔软边框 */
+  --border-medium: #C8B998;   /* 中度边框 */
+
+  /* === 阴影 === */
+  --shadow-soft: 0 2px 12px rgba(61, 92, 63, 0.08);
+  --shadow-medium: 0 4px 20px rgba(61, 92, 63, 0.12);
+  --shadow-deep: 0 8px 32px rgba(61, 92, 63, 0.18);
+  --shadow-card: 0 2px 8px rgba(107, 142, 78, 0.1), 0 1px 3px rgba(44, 53, 57, 0.06);
+
+  /* === 字体：使用系统字体,确保各平台都有好的显示效果 === */
+  --font-serif: 'STSong', 'Songti SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'SimSun', '宋体', 'Times New Roman', serif;
+  --font-display: 'STKaiti', 'KaiTi', '楷体', 'STSong', 'Songti SC', 'SimSun', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* === 间距 === */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+}
+
+/* === 全局重置 === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  font-family: var(--font-sans);
+  background: var(--pear-ivory);
+  color: var(--ink-black);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: contain;
+}
+
+body {
+  background: linear-gradient(180deg, #FFFBF0 0%, #FAF5E8 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 中式纹理背景 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(201, 169, 97, 0.04) 0%, transparent 30%),
+    radial-gradient(circle at 90% 80%, rgba(107, 142, 78, 0.04) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: transparent;
+  padding-bottom: 80px;
+}
+
+/* === 视图切换 === */
+.view {
+  display: none;
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.view.active {
+  display: block;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   主页 Hero 区域
+   ========================================================= */
+.hero {
+  position: relative;
+  padding: 28px 20px 40px;
+  background:
+    linear-gradient(135deg, rgba(107, 142, 78, 0.92) 0%, rgba(61, 92, 63, 0.95) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30 50 Q40 20 50 50 Q60 80 70 50' stroke='%23ffffff20' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+  color: var(--paper-white);
+  border-radius: 0 0 24px 24px;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 251, 240, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-brand-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--paper-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.hero-brand-text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.hero-bell {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  position: relative;
+  cursor: pointer;
+}
+
+.hero-bell::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: var(--cinnabar);
+  border-radius: 50%;
+  border: 2px solid var(--pear-leaf-deep);
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-subtitle {
+  font-size: 13px;
+  opacity: 0.85;
+  letter-spacing: 4px;
+  font-family: var(--font-display);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-divider::before,
+.hero-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 251, 240, 0.5), transparent);
+}
+
+.hero-divider span {
+  font-size: 11px;
+  letter-spacing: 3px;
+  opacity: 0.7;
+}
+
+.hero-tagline {
+  font-size: 13px;
+  opacity: 0.8;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* === 公告条 === */
+.notice-bar {
+  margin: -14px 20px 20px;
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  z-index: 2;
+  border-left: 3px solid var(--imperial-gold);
+}
+
+.notice-icon {
+  color: var(--cinnabar);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.notice-text {
+  flex: 1;
+  font-size: 13px;
+  color: var(--ink-gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notice-arrow {
+  color: var(--ink-light);
+  font-size: 12px;
+}
+
+/* === 主功能区域 === */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px 12px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--ink-black);
+  letter-spacing: 1px;
+}
+
+.section-title::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 18px;
+  background: linear-gradient(180deg, var(--imperial-gold) 0%, var(--pear-leaf) 100%);
+  border-radius: 2px;
+}
+
+.section-title .section-en {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--ink-light);
+  letter-spacing: 2px;
+  margin-left: auto;
+}
+
+/* === 特色服务 - 数字课堂 === */
+.featured-card {
+  margin: 0 20px 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, #FFFBF0 0%, #F8EBC8 100%);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(178, 52, 43, 0.08);
+  cursor: pointer;
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.featured-card:active {
+  transform: scale(0.98);
+}
+
+.featured-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(178, 52, 43, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.featured-card::after {
+  content: '梨娃';
+  position: absolute;
+  bottom: -10px;
+  right: 14px;
+  font-family: var(--font-serif);
+  font-size: 80px;
+  font-weight: 900;
+  color: rgba(201, 169, 97, 0.12);
+  letter-spacing: -4px;
+  pointer-events: none;
+}
+
+.featured-badge {
+  display: inline-block;
+  background: var(--cinnabar);
+  color: white;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink-black);
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-subtitle {
+  font-size: 13px;
+  color: var(--ink-gray);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-tag {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(201, 169, 97, 0.4);
+  color: var(--gold-deep);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(4px);
+}
+
+/* === 功能入口网格 === */
+.entries-grid {
+  margin: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.entry-card {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-soft);
+  transition: all 0.25s ease;
+  min-height: 110px;
+}
+
+.entry-card:active {
+  transform: scale(0.97);
+}
+
+.entry-card.primary {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--pear-leaf) 0%, var(--pear-leaf-deep) 100%);
+  color: var(--paper-white);
+  border: none;
+  min-height: 92px;
+  flex-direction: row;
+  align-items: center;
+  padding: 18px 20px;
+  gap: 16px;
+}
+
+.entry-card.primary::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.entry-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: linear-gradient(135deg, var(--gold-light), var(--imperial-gold));
+  color: white;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 3px 8px rgba(201, 169, 97, 0.3);
+}
+
+.entry-card.primary .entry-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 251, 240, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 251, 240, 0.3);
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.entry-info {
+  flex: 1;
+}
+
+.entry-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink-black);
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.entry-card.primary .entry-title {
+  font-size: 17px;
+  color: var(--paper-white);
+}
+
+.entry-desc {
+  font-size: 11px;
+  color: var(--ink-light);
+  line-height: 1.4;
+}
+
+.entry-card.primary .entry-desc {
+  color: rgba(255, 251, 240, 0.75);
+  font-size: 12px;
+}
+
+.entry-arrow {
+  color: rgba(255, 251, 240, 0.6);
+  font-size: 16px;
+}
+
+/* === 通用页面头部 === */
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 245, 232, 0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.page-back {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper-white);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--ink-black);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s;
+}
+
+.page-back:active {
+  transform: scale(0.92);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--ink-black);
+  letter-spacing: 1px;
+}
+
+.page-content {
+  padding: 16px 20px 80px;
+}
+
+/* === Tab 切换 === */
+.tabs {
+  display: flex;
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: var(--ink-gray);
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, var(--pear-leaf) 0%, var(--pear-leaf-deep) 100%);
+  color: var(--paper-white);
+  box-shadow: 0 2px 8px rgba(107, 142, 78, 0.3);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* === 子模块入口（食宿指南、温馨提示） === */
+.sub-modules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.sub-module {
+  background: linear-gradient(135deg, rgba(232, 217, 181, 0.4), rgba(201, 169, 97, 0.15));
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.sub-module:active {
+  transform: scale(0.97);
+}
+
+.sub-module-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--paper-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-card);
+}
+
+.sub-module-text {
+  flex: 1;
+}
+
+.sub-module-title {
+  font-size: 14px;
+  color: var(--ink-black);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.sub-module-desc {
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+/* === 行程卡片 === */
+.schedule-day {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-soft);
+}
+
+.schedule-day-header {
+  background: linear-gradient(135deg, rgba(107, 142, 78, 0.08), rgba(201, 169, 97, 0.08));
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.schedule-day-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.schedule-day-num {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--imperial-gold), var(--gold-deep));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--font-serif);
+}
+
+.schedule-day-info h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink-black);
+  letter-spacing: 0.5px;
+}
+
+.schedule-day-info p {
+  font-size: 11px;
+  color: var(--ink-light);
+  margin-top: 2px;
+}
+
+.schedule-toggle {
+  color: var(--ink-gray);
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.schedule-day.expanded .schedule-toggle {
+  transform: rotate(180deg);
+}
+
+.schedule-timeline {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.schedule-day.expanded .schedule-timeline {
+  max-height: 8000px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px dashed var(--border-soft);
+  position: relative;
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-time {
+  flex-shrink: 0;
+  width: 76px;
+  font-size: 11px;
+  color: var(--imperial-gold);
+  font-weight: 700;
+  font-family: var(--font-serif);
+  padding-top: 2px;
+}
+
+.timeline-dot {
+  position: relative;
+  flex-shrink: 0;
+  padding-top: 6px;
+}
+
+.timeline-dot::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: var(--pear-leaf);
+  border-radius: 50%;
+  border: 2px solid var(--paper-white);
+  box-shadow: 0 0 0 1px var(--pear-leaf);
+}
+
+.timeline-content {
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.timeline-location {
+  font-size: 12px;
+  color: var(--pear-leaf-deep);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.timeline-title {
+  font-size: 13px;
+  color: var(--ink-black);
+  margin-bottom: 4px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.timeline-desc {
+  font-size: 12px;
+  color: var(--ink-gray);
+  line-height: 1.55;
+}
+
+.timeline-tag {
+  display: inline-block;
+  background: rgba(178, 52, 43, 0.08);
+  color: var(--cinnabar);
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* === 通用卡片 === */
+.card {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-soft);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink-black);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+}
+
+.card-title-icon {
+  font-size: 18px;
+}
+
+.card-content {
+  font-size: 13px;
+  color: var(--ink-gray);
+  line-height: 1.7;
+}
+
+.card-content p {
+  margin-bottom: 8px;
+}
+
+/* === 信息列表 === */
+.info-list {
+  list-style: none;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border-soft);
+  font-size: 13px;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item-label {
+  flex-shrink: 0;
+  color: var(--ink-light);
+  min-width: 90px;
+}
+
+.info-item-value {
+  flex: 1;
+  color: var(--ink-black);
+}
+
+/* 联系人卡片 */
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--border-soft);
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-avatar {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--gold-light), var(--imperial-gold));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-name {
+  font-size: 14px;
+  color: var(--ink-black);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.contact-role {
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+.contact-phone {
+  background: rgba(107, 142, 78, 0.1);
+  color: var(--pear-leaf-deep);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* === 表单 === */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-black);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-label .required {
+  color: var(--cinnabar);
+  margin-left: 2px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--paper-white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  color: var(--ink-black);
+  transition: all 0.25s;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--pear-leaf);
+  box-shadow: 0 0 0 3px rgba(107, 142, 78, 0.12);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-radio-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.form-radio {
+  flex: 1;
+  min-width: 90px;
+  padding: 10px;
+  background: var(--paper-white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s;
+  color: var(--ink-gray);
+}
+
+.form-radio.selected {
+  background: linear-gradient(135deg, var(--pear-leaf-light), var(--pear-leaf));
+  border-color: var(--pear-leaf);
+  color: white;
+}
+
+.form-hint {
+  font-size: 11px;
+  color: var(--ink-light);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.form-hint.warning {
+  color: var(--cinnabar);
+  background: rgba(178, 52, 43, 0.06);
+  border-left: 3px solid var(--cinnabar);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--pear-leaf) 0%, var(--pear-leaf-deep) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(107, 142, 78, 0.3);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: var(--paper-white);
+  color: var(--pear-leaf-deep);
+  border: 1px solid var(--pear-leaf);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-imperial {
+  background: linear-gradient(135deg, var(--imperial-gold) 0%, var(--gold-deep) 100%);
+  box-shadow: 0 4px 14px rgba(201, 169, 97, 0.4);
+}
+
+/* === 个人中心 === */
+.profile-header {
+  background: linear-gradient(135deg, var(--pear-leaf) 0%, var(--pear-leaf-deep) 100%);
+  padding: 28px 20px 50px;
+  position: relative;
+  border-radius: 0 0 24px 24px;
+  text-align: center;
+  color: white;
+  margin-bottom: -30px;
+}
+
+.profile-header::after {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.profile-avatar {
+  width: 84px;
+  height: 84px;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--imperial-gold) 100%);
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  border: 3px solid var(--paper-white);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-meta {
+  font-size: 12px;
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-tags {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-tag {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-stats {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin: 0 20px 16px;
+  display: flex;
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--border-soft);
+}
+
+.profile-stat {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.profile-stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background: var(--border-soft);
+}
+
+.profile-stat-num {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--imperial-gold);
+  margin-bottom: 2px;
+}
+
+.profile-stat-label {
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+.profile-menu {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  margin: 0 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-soft);
+  transition: background 0.2s;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  background: rgba(232, 217, 181, 0.2);
+}
+
+.menu-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(107, 142, 78, 0.15));
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.menu-title {
+  flex: 1;
+  font-size: 14px;
+  color: var(--ink-black);
+}
+
+.menu-badge {
+  background: var(--cinnabar);
+  color: white;
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  margin-right: 6px;
+}
+
+.menu-arrow {
+  color: var(--ink-light);
+  font-size: 12px;
+}
+
+/* === 新闻列表 === */
+.news-item {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+
+.news-item:active {
+  transform: scale(0.98);
+}
+
+.news-image {
+  width: 100%;
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.news-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.4));
+}
+
+.news-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(178, 52, 43, 0.92);
+  color: white;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  z-index: 1;
+  backdrop-filter: blur(8px);
+}
+
+.news-body {
+  padding: 14px 16px;
+}
+
+.news-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink-black);
+  margin-bottom: 6px;
+  line-height: 1.45;
+  letter-spacing: 0.5px;
+}
+
+.news-excerpt {
+  font-size: 12px;
+  color: var(--ink-gray);
+  line-height: 1.55;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+.news-footer-meta {
+  display: flex;
+  gap: 12px;
+}
+
+.news-footer-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* === 寄语墙 === */
+.message-card {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.message-card::before {
+  content: '"';
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-family: var(--font-serif);
+  font-size: 48px;
+  color: rgba(201, 169, 97, 0.15);
+  line-height: 1;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-light), var(--imperial-gold));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.message-meta {
+  flex: 1;
+}
+
+.message-name {
+  font-size: 13px;
+  color: var(--ink-black);
+  font-weight: 500;
+}
+
+.message-time {
+  font-size: 10px;
+  color: var(--ink-light);
+}
+
+.message-rating {
+  color: var(--imperial-gold);
+  font-size: 12px;
+}
+
+.message-body {
+  font-size: 13px;
+  color: var(--ink-gray);
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* === 弹窗 === */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 53, 57, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--paper-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-deep);
+  animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-icon {
+  font-size: 44px;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--ink-black);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.modal-text {
+  font-size: 13px;
+  color: var(--ink-gray);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-actions .btn {
+  flex: 1;
+  padding: 12px;
+}
+
+/* === 数字课堂特色页 === */
+.classroom-hero {
+  background: linear-gradient(135deg, #C9A961 0%, #8C2A24 100%);
+  padding: 28px 20px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.classroom-hero::before {
+  content: '梨';
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  font-family: var(--font-serif);
+  font-size: 140px;
+  color: rgba(255, 251, 240, 0.08);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.classroom-hero-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 3px;
+  position: relative;
+}
+
+.classroom-hero-subtitle {
+  font-size: 12px;
+  opacity: 0.85;
+  letter-spacing: 4px;
+  position: relative;
+}
+
+.classroom-modules {
+  padding: 18px 20px;
+}
+
+.classroom-module {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-soft);
+}
+
+.classroom-module-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(107, 142, 78, 0.06), rgba(201, 169, 97, 0.06));
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.classroom-module-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--gold-light), var(--imperial-gold));
+  color: white;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(201, 169, 97, 0.4);
+}
+
+.classroom-module-info h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink-black);
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.classroom-module-info p {
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+.classroom-module-body {
+  padding: 14px 16px;
+}
+
+.classroom-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(248, 235, 200, 0.4);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  cursor: pointer;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  transition: all 0.25s;
+}
+
+.classroom-feature:active {
+  transform: scale(0.98);
+  background: rgba(248, 235, 200, 0.7);
+}
+
+.classroom-feature:last-child {
+  margin-bottom: 0;
+}
+
+.feature-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--paper-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  flex: 1;
+  font-size: 13px;
+  color: var(--ink-black);
+}
+
+.feature-text small {
+  display: block;
+  font-size: 11px;
+  color: var(--ink-light);
+  margin-top: 1px;
+}
+
+.feature-arrow {
+  color: var(--ink-light);
+  font-size: 11px;
+}
+
+/* === 化石图鉴等专题 === */
+.fossil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.fossil-card {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+
+.fossil-card:active {
+  transform: scale(0.96);
+}
+
+.fossil-card.unlocked .fossil-image {
+  background: linear-gradient(135deg, #8A7C5E 0%, #5C4F3A 100%);
+}
+
+.fossil-card.locked {
+  opacity: 0.6;
+}
+
+.fossil-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #D4C8A8 0%, #B5A580 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  color: rgba(255, 251, 240, 0.85);
+  position: relative;
+}
+
+.fossil-card.locked .fossil-image {
+  background: repeating-linear-gradient(
+    45deg,
+    #D4C8A8,
+    #D4C8A8 8px,
+    #C8B998 8px,
+    #C8B998 16px
+  );
+}
+
+.fossil-card.locked .fossil-image::after {
+  content: '🔒';
+  position: absolute;
+  font-size: 32px;
+}
+
+.fossil-info {
+  padding: 10px 12px;
+}
+
+.fossil-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--ink-black);
+  margin-bottom: 2px;
+}
+
+.fossil-meta {
+  font-size: 10px;
+  color: var(--ink-light);
+}
+
+/* === 上传记录 === */
+.upload-zone {
+  background: linear-gradient(135deg, rgba(232, 217, 181, 0.4), rgba(201, 169, 97, 0.15));
+  border: 2px dashed var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 28px 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.upload-zone:active {
+  transform: scale(0.98);
+}
+
+.upload-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.upload-title {
+  font-size: 14px;
+  color: var(--ink-black);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.upload-hint {
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+/* === 进度条 === */
+.progress-card {
+  background: linear-gradient(135deg, var(--pear-leaf), var(--pear-leaf-deep));
+  border-radius: var(--radius-md);
+  padding: 16px;
+  color: white;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.progress-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  margin-bottom: 4px;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+
+.progress-stats {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 251, 240, 0.25);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-light), var(--imperial-gold));
+  border-radius: var(--radius-pill);
+  transition: width 0.6s ease;
+}
+
+/* === 京白梨进京记沙盘 === */
+.game-board {
+  background: linear-gradient(135deg, #FAF5E8 0%, #F0E3C5 100%);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.game-stage {
+  background: var(--paper-white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--ink-gray);
+  position: relative;
+  min-width: calc(50% - 4px);
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.game-stage.current {
+  background: linear-gradient(135deg, var(--imperial-gold), var(--gold-deep));
+  color: white;
+  border-color: var(--gold-deep);
+  box-shadow: 0 2px 8px rgba(201, 169, 97, 0.4);
+}
+
+.game-stage.completed {
+  background: rgba(107, 142, 78, 0.15);
+  color: var(--pear-leaf-deep);
+  border-color: rgba(107, 142, 78, 0.4);
+}
+
+.game-stage.completed::after {
+  content: '✓';
+  position: absolute;
+  top: 2px;
+  right: 5px;
+  color: var(--pear-leaf);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.game-stage-num {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.game-status {
+  background: var(--paper-white);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 12px;
+  color: var(--ink-gray);
+  line-height: 1.6;
+  border-left: 3px solid var(--imperial-gold);
+}
+
+.game-status strong {
+  color: var(--cinnabar);
+}
+
+/* === 演讲页 === */
+.record-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cinnabar) 0%, var(--cinnabar-deep) 100%);
+  margin: 12px auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: white;
+  box-shadow: 0 8px 28px rgba(178, 52, 43, 0.4);
+  position: relative;
+  cursor: pointer;
+}
+
+.record-circle::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 2px solid rgba(178, 52, 43, 0.3);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.08); opacity: 0; }
+}
+
+/* === 印章 === */
+.seal {
+  display: inline-block;
+  background: var(--cinnabar);
+  color: var(--paper-white);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1.1;
+  text-align: center;
+  transform: rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(178, 52, 43, 0.3);
+  letter-spacing: 0;
+  padding: 2px;
+}
+
+.seal.large {
+  width: 80px;
+  height: 80px;
+  font-size: 18px;
+}
+
+/* === 底部 nav (隐藏，用于备用) === */
+.bottom-nav {
+  display: none;
+}
+
+/* === 工具类 === */
+.text-center { text-align: center; }
+.text-cinnabar { color: var(--cinnabar); }
+.text-gold { color: var(--imperial-gold); }
+.text-leaf { color: var(--pear-leaf-deep); }
+.mt-12 { margin-top: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.spacer-20 { height: 20px; }
+.spacer-40 { height: 40px; }
+
+/* === 响应式 === */
+@media (min-width: 768px) {
+  #app {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  body {
+    background: linear-gradient(135deg, #E8DFC8 0%, #C8B998 100%);
+  }
+}
+
+@media (max-width: 360px) {
+  .entry-card {
+    min-height: 100px;
+    padding: 14px 12px;
+  }
+  .featured-title {
+    font-size: 20px;
+  }
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 169, 97, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 169, 97, 0.5);
+}
+
+</style>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='60' r='30' fill='%23F8E9C8'/%3E%3Cpath d='M50 30 Q50 20 55 15' stroke='%236B8E4E' fill='none' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M55 25 Q65 20 68 28' fill='%236B8E4E'/%3E%3C/svg%3E">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ 视图1:主页 ============ -->
+  <section class="view active" data-view="home">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-top">
+        <div class="hero-brand">
+          <div class="hero-brand-icon">🍐</div>
+          <div class="hero-brand-text">军庄·梨乡</div>
+        </div>
+        <div class="hero-bell" onclick="showToast('您有3条新消息')">🔔</div>
+      </div>
+      <div class="hero-title">梨乡京韵 · 军庄四季</div>
+      <div class="hero-subtitle">JUNZHUANG  ·  PEAR  STUDY</div>
+      <div class="hero-divider"><span>研学服务平台</span></div>
+      <div class="hero-tagline">把课堂搬进百年梨园 · 让研学成为乡村振兴的新质引擎</div>
+    </div>
+
+    <!-- 公告栏 -->
+    <div class="notice-bar" onclick="navigateTo('news')">
+      <span class="notice-icon">📢</span>
+      <span class="notice-text">「一颗贡梨读懂京西」春季研学营开放预约中</span>
+      <span class="notice-arrow">›</span>
+    </div>
+
+    <!-- 特色:数字课堂 -->
+    <div class="section-title">
+      <span>梨娃数字课堂</span>
+      <span class="section-en">DIGITAL CLASSROOM</span>
+    </div>
+
+    <div class="featured-card" onclick="navigateTo('classroom')">
+      <div class="featured-badge">★ 特色服务</div>
+      <div class="featured-title">研学伴学 · 数字赋能</div>
+      <div class="featured-subtitle">化石图鉴 · 沙盘博弈 · 演讲展演 · 三大特色课堂同步上线</div>
+      <div class="featured-tags">
+        <span class="featured-tag">🔍 化石猎人</span>
+        <span class="featured-tag">🎲 京白梨进京记</span>
+        <span class="featured-tag">🎤 梨乡少年说</span>
+      </div>
+    </div>
+
+    <!-- 功能入口 -->
+    <div class="section-title">
+      <span>研学服务</span>
+      <span class="section-en">SERVICES</span>
+    </div>
+
+    <div class="entries-grid">
+      <div class="entry-card primary" onclick="navigateTo('schedule')">
+        <div class="entry-icon">📅</div>
+        <div class="entry-info">
+          <div class="entry-title">活动日程</div>
+          <div class="entry-desc">一日研学 · 五日深度 · 食宿指南 · 温馨提示</div>
+        </div>
+        <div class="entry-arrow">›</div>
+      </div>
+
+      <div class="entry-card" onclick="navigateTo('register')">
+        <div class="entry-icon">✍️</div>
+        <div class="entry-info">
+          <div class="entry-title">报名入口</div>
+          <div class="entry-desc">个人 / 团体报名</div>
+        </div>
+      </div>
+
+      <div class="entry-card" onclick="navigateTo('profile')">
+        <div class="entry-icon">👤</div>
+        <div class="entry-info">
+          <div class="entry-title">个人中心</div>
+          <div class="entry-desc">消息 · 签到 · 反馈</div>
+        </div>
+      </div>
+
+      <div class="entry-card" onclick="navigateTo('news')">
+        <div class="entry-icon">📷</div>
+        <div class="entry-info">
+          <div class="entry-title">图片直播</div>
+          <div class="entry-desc">研学动态 · 新闻速递</div>
+        </div>
+      </div>
+
+      <div class="entry-card" onclick="navigateTo('feedback')">
+        <div class="entry-icon">💭</div>
+        <div class="entry-info">
+          <div class="entry-title">研学寄语</div>
+          <div class="entry-desc">分享您的研学感悟</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer-40"></div>
+
+    <!-- 底部品牌信息 -->
+    <div style="text-align:center; padding: 20px; font-size: 11px; color: var(--ink-light); letter-spacing: 2px;">
+      <div style="margin-bottom:8px; font-family: var(--font-display); font-size:13px; color: var(--imperial-gold); letter-spacing: 4px;">— 北京·门头沟·军庄镇 —</div>
+      <div>京白梨400年贡梨文化 × 中华农业文化遗产</div>
+    </div>
+  </section>
+
+  <!-- ============ 视图2:活动日程 ============ -->
+  <section class="view" data-view="schedule">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('home')">‹</div>
+      <div class="page-title">活动日程</div>
+    </div>
+    <div class="page-content">
+      <!-- 子模块入口 -->
+      <div class="sub-modules">
+        <div class="sub-module" onclick="navigateTo('accommodation')">
+          <div class="sub-module-icon">🏨</div>
+          <div class="sub-module-text">
+            <div class="sub-module-title">食宿指南</div>
+            <div class="sub-module-desc">住宿·餐饮安排</div>
+          </div>
+        </div>
+        <div class="sub-module" onclick="navigateTo('tips')">
+          <div class="sub-module-icon">⚠️</div>
+          <div class="sub-module-text">
+            <div class="sub-module-title">温馨提示</div>
+            <div class="sub-module-desc">注意事项·联系人</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 切换:一日 / 五日 -->
+      <div class="tabs">
+        <div class="tab active" data-tab="one-day">一日研学</div>
+        <div class="tab" data-tab="five-day">五日深度</div>
+      </div>
+
+      <!-- 一日研学 -->
+      <div class="tab-content active" data-tab-content="one-day">
+        <div class="card" style="background: linear-gradient(135deg, rgba(178, 52, 43, 0.08), rgba(201, 169, 97, 0.12)); border: 1px solid rgba(201, 169, 97, 0.3);">
+          <div class="card-title">
+            <span class="card-title-icon">🍐</span>
+            一颗贡梨 · 读懂京西
+          </div>
+          <div class="card-content">
+            <p style="color: var(--ink-black); font-size: 14px;">以京白梨农遗文化为主线,兼顾京西人文体验。</p>
+            <p style="font-size: 11px; color: var(--ink-light); margin-top: 8px;">
+              ⏱ 8小时现场教学 · 👥 30-40人/团 · 师生比1:10<br/>
+              🎓 小学高年级 - 初中 · 🗓 全年皆可
+            </p>
+          </div>
+        </div>
+
+        <div class="schedule-day expanded">
+          <div class="schedule-day-header" onclick="toggleSchedule(this)">
+            <div class="schedule-day-title">
+              <div class="schedule-day-num">一</div>
+              <div class="schedule-day-info">
+                <h3>全天行程</h3>
+                <p>12个时间节点 · 6大教学环节</p>
+              </div>
+            </div>
+            <span class="schedule-toggle">▼</span>
+          </div>
+          <div class="schedule-timeline" id="one-day-timeline"></div>
+        </div>
+      </div>
+
+      <!-- 五日深度 -->
+      <div class="tab-content" data-tab-content="five-day">
+        <div class="card" style="background: linear-gradient(135deg, rgba(107, 142, 78, 0.08), rgba(201, 169, 97, 0.12)); border: 1px solid rgba(107, 142, 78, 0.3);">
+          <div class="card-title">
+            <span class="card-title-icon">🍃</span>
+            五日梨乡 · 穿越京西
+          </div>
+          <div class="card-content">
+            <p style="color: var(--ink-black); font-size: 14px;">跨越400年贡梨文化,穿行京西古道古镇。</p>
+            <p style="font-size: 11px; color: var(--ink-light); margin-top: 8px;">
+              ⏱ 5天4晚 (约40课时) · 👥 40人/团 · 师生比1:8<br/>
+              🎓 初中7-9年级(可适配高中) · 🗓 春秋最佳
+            </p>
+          </div>
+        </div>
+        <div id="five-day-schedule"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图3:食宿指南 ============ -->
+  <section class="view" data-view="accommodation">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('schedule')">‹</div>
+      <div class="page-title">食宿指南</div>
+    </div>
+    <div class="page-content">
+      <div class="card">
+        <div class="card-title">
+          <span class="card-title-icon">🏨</span>
+          住宿安排
+        </div>
+        <div class="card-content">
+          <p style="font-weight: 500; color: var(--ink-black); margin-bottom: 6px;">梦我度假村(主营地)</p>
+          <p style="font-size: 12px;">五天连续入住,无需迁营。所有教学点摆渡车10分钟内可达。</p>
+        </div>
+        <ul class="info-list" style="margin-top: 10px;">
+          <li class="info-item">
+            <span class="info-item-label">房型</span>
+            <span class="info-item-value">标准研学客房 · 4人/间</span>
+          </li>
+          <li class="info-item">
+            <span class="info-item-label">配套</span>
+            <span class="info-item-value">独立卫浴 · 空调暖气 · 无线网络</span>
+          </li>
+          <li class="info-item">
+            <span class="info-item-label">分楼原则</span>
+            <span class="info-item-value">男女分楼/分层 · 教师同楼层</span>
+          </li>
+          <li class="info-item">
+            <span class="info-item-label">夜间巡查</span>
+            <span class="info-item-value">22:00起教师定时巡查至6:00</span>
+          </li>
+          <li class="info-item">
+            <span class="info-item-label">安全设施</span>
+            <span class="info-item-value">楼内全监控 · 每层灭火器+应急照明</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="card-title-icon">🍽️</span>
+          餐饮安排
+        </div>
+        <div class="card-content">
+          <p style="margin-bottom: 12px;">五日15餐,以京西农家菜为主,特色菜品作为课程嵌入。</p>
+          <div style="background: rgba(232, 217, 181, 0.3); padding: 12px; border-radius: 8px; border-left: 3px solid var(--imperial-gold);">
+            <p style="font-weight: 500; color: var(--ink-black); font-size: 13px; margin-bottom: 6px;">✨ 特色餐</p>
+            <p style="font-size: 12px;">• Day1:全梨宴(梨糕/梨羹/京白梨饭/锅翻儿等6道)</p>
+            <p style="font-size: 12px;">• Day4:梨园野餐(便当+梨汁)</p>
+            <p style="font-size: 12px;">• Day5:庆功餐(梨酒/梨膏/梨干/梨茶/梨线香品鉴)</p>
+          </div>
+          <p style="margin-top: 10px; font-size: 11px; color: var(--ink-light);">⚠️ 过敏源已逐人登记,厨房食材48小时留样</p>
+        </div>
+      </div>
+
+      <div class="card" style="background: linear-gradient(135deg, rgba(107, 142, 78, 0.05), rgba(201, 169, 97, 0.08));">
+        <div class="card-title">
+          <span class="card-title-icon">📍</span>
+          营地周边
+        </div>
+        <div class="card-content">
+          <p style="font-size: 12px;">陈列馆 1.2km · 核心保护区 1.8km · 御梨园 2.2km</p>
+          <p style="font-size: 12px;">党建广场 1.5km · 将军山遗址 3.5km · 西杨坨大集 0.6km</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图4:温馨提示主页 ============ -->
+  <section class="view" data-view="tips">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('schedule')">‹</div>
+      <div class="page-title">温馨提示</div>
+    </div>
+    <div class="page-content">
+      <div class="sub-modules" style="grid-template-columns: 1fr; gap: 14px;">
+        <div class="sub-module" style="padding: 20px;" onclick="navigateTo('tips-notes')">
+          <div class="sub-module-icon" style="width: 48px; height: 48px; font-size: 22px;">📋</div>
+          <div class="sub-module-text">
+            <div class="sub-module-title" style="font-size: 16px;">活动注意事项</div>
+            <div class="sub-module-desc">衣着建议 · 酒店事项 · 提供物品 · 酒店结构</div>
+          </div>
+          <span style="color: var(--ink-light);">›</span>
+        </div>
+        <div class="sub-module" style="padding: 20px;" onclick="navigateTo('tips-contacts')">
+          <div class="sub-module-icon" style="width: 48px; height: 48px; font-size: 22px;">📞</div>
+          <div class="sub-module-text">
+            <div class="sub-module-title" style="font-size: 16px;">联系人通讯录</div>
+            <div class="sub-module-desc">项目负责人 · 应急医疗 · 投诉反馈</div>
+          </div>
+          <span style="color: var(--ink-light);">›</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图5:活动注意事项 ============ -->
+  <section class="view" data-view="tips-notes">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('tips')">‹</div>
+      <div class="page-title">活动注意事项</div>
+    </div>
+    <div class="page-content">
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">👕</span>衣着建议</div>
+        <div class="card-content">
+          <p>• <strong>必备:</strong>防滑运动鞋 · 长袖防晒外套 · 雨具(轻便雨衣)</p>
+          <p>• <strong>春秋:</strong>保暖薄羽绒/抓绒衣 · 透气速干内层</p>
+          <p>• <strong>夏季:</strong>透气长袖(防晒) · 遮阳帽 · 防蚊虫长裤</p>
+          <p>• <strong>冬季:</strong>羽绒服 · 保暖手套 · 防滑户外鞋</p>
+          <p>• <strong>禁止:</strong>高跟鞋 · 拖鞋凉鞋 · 过于宽松易绊倒衣物</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">🏨</span>酒店入住事项</div>
+        <div class="card-content">
+          <p>• <strong>入住时间:</strong>Day1上午10:30办理入住,Day5上午8:00前退房</p>
+          <p>• <strong>房型:</strong>标准4人间,男女分楼,教师同楼层巡查</p>
+          <p>• <strong>设施:</strong>独立卫浴/空调/暖气/Wi-Fi/24小时热水</p>
+          <p>• <strong>用电:</strong>每房6口插座,自带充电器</p>
+          <p>• <strong>禁止:</strong>携带大功率电器/明火/宠物</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">🎁</span>组委会提供</div>
+        <div class="card-content">
+          <p>• 《梨乡护照》《研学手册》《调查手册》《手账》各1本</p>
+          <p>• 彩色丝带(组别标识)、研学营T恤、识别卡</p>
+          <p>• 工具包(放大镜、压花板、毛笔、记录笔)</p>
+          <p>• 急救包(每组1套) · 30/50万保险</p>
+          <p>• 双证书 + 综合素质评定单 + 梨乡伴手礼</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">🏠</span>酒店结构</div>
+        <div class="card-content">
+          <p>🏛 <strong>主楼A栋(男生楼):</strong>3层,共20间标间</p>
+          <p>🏛 <strong>主楼B栋(女生楼):</strong>3层,共20间标间</p>
+          <p>🎪 <strong>研学楼:</strong>会议室/实验室/创作工坊/答辩厅</p>
+          <p>🍽 <strong>餐饮区:</strong>大食堂(可容200人) · VIP包间(全梨宴)</p>
+          <p>🌳 <strong>庭院广场:</strong>百年古树 · 户外活动场地</p>
+          <p>📞 <strong>前台电话:</strong><a href="tel:010-69859999" style="color: var(--pear-leaf-deep); font-weight: 500;">010-6985-9999</a> (24小时)</p>
+        </div>
+      </div>
+
+      <div class="card" style="background: rgba(178, 52, 43, 0.04); border-left: 4px solid var(--cinnabar);">
+        <div class="card-title"><span class="card-title-icon">⚠️</span>安全须知</div>
+        <div class="card-content">
+          <p style="color: var(--cinnabar); font-weight: 500;">• 严禁单独脱团活动,集合信号:短笛三声+举黄旗</p>
+          <p>• 古道徒步段穿防滑鞋,严禁追逐打闹</p>
+          <p>• 厨房明火区禁入,锣鼓课配耳塞</p>
+          <p>• 有过敏史/慢性病请提前告知带队老师</p>
+          <p>• 应急转诊:孟悟村卫生所(3分钟) · 区医院(25分钟)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图6:联系人 ============ -->
+  <section class="view" data-view="tips-contacts">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('tips')">‹</div>
+      <div class="page-title">联系人通讯录</div>
+    </div>
+    <div class="page-content" id="contacts-content"></div>
+  </section>
+
+  <!-- ============ 视图7:报名入口 ============ -->
+  <section class="view" data-view="register">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('home')">‹</div>
+      <div class="page-title">报名入口</div>
+    </div>
+    <div class="page-content">
+      <div class="tabs">
+        <div class="tab active" data-tab="personal">个人报名</div>
+        <div class="tab" data-tab="group">团体报名</div>
+      </div>
+
+      <!-- 个人报名 -->
+      <div class="tab-content active" data-tab-content="personal">
+        <div class="card" style="background: rgba(178, 52, 43, 0.04); border-left: 4px solid var(--cinnabar);">
+          <div class="card-content">
+            <p style="color: var(--cinnabar); font-weight: 500; margin-bottom: 6px;">⚠️ 个人报名说明</p>
+            <p style="font-size: 12px;">由于无团体编制,部分团体活动暂无随团专属引导;</p>
+            <p style="font-size: 12px;">如未拼团成功,大部分时间需要您自行了解 (类似自助旅游,平台仍可全程辅助)。</p>
+            <p style="font-size: 12px; margin-top: 6px;">建议优先选择一日研学产品或等待拼团。</p>
+          </div>
+        </div>
+
+        <form id="personal-form">
+          <div class="form-group">
+            <label class="form-label">姓名 <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="请输入真实姓名" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">手机号 <span class="required">*</span></label>
+            <input type="tel" class="form-input" placeholder="11位手机号" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">学段</label>
+            <div class="form-radio-group">
+              <div class="form-radio" onclick="selectRadio(this)">小学</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">初中</div>
+              <div class="form-radio" onclick="selectRadio(this)">高中</div>
+              <div class="form-radio" onclick="selectRadio(this)">家长</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">研学方案 <span class="required">*</span></label>
+            <div class="form-radio-group">
+              <div class="form-radio selected" onclick="selectRadio(this)">一日研学</div>
+              <div class="form-radio" onclick="selectRadio(this)">五日深度</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">期望出团日期</label>
+            <input type="date" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">特殊需求(过敏源、慢性病等)</label>
+            <textarea class="form-textarea" placeholder="可填写过敏源、饮食偏好、特殊需要等"></textarea>
+          </div>
+          <div class="form-group">
+            <p class="form-hint">提交后将由专员在24小时内联系您,如未拼团成功可继续等待或转为自由行模式。</p>
+          </div>
+          <button type="button" class="btn btn-imperial" onclick="submitForm('personal')">✓ 提交个人报名</button>
+        </form>
+      </div>
+
+      <!-- 团体报名 -->
+      <div class="tab-content" data-tab-content="group">
+        <div class="card" style="background: rgba(107, 142, 78, 0.06); border-left: 4px solid var(--pear-leaf);">
+          <div class="card-content">
+            <p style="color: var(--pear-leaf-deep); font-weight: 500; margin-bottom: 6px;">✓ 团体报名优势</p>
+            <p style="font-size: 12px;">30人以上团体享受9折优惠 · 配备专属研学导师 · 定制化课程方案</p>
+          </div>
+        </div>
+
+        <form id="group-form">
+          <div class="form-group">
+            <label class="form-label">单位名称 <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="如:XX中学 / XX教育机构" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">团体性质</label>
+            <div class="form-radio-group">
+              <div class="form-radio selected" onclick="selectRadio(this)">中小学校</div>
+              <div class="form-radio" onclick="selectRadio(this)">教育机构</div>
+              <div class="form-radio" onclick="selectRadio(this)">夏冬令营</div>
+              <div class="form-radio" onclick="selectRadio(this)">企事业单位</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">联系人姓名 <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="带队负责人" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">联系人手机 <span class="required">*</span></label>
+            <input type="tel" class="form-input" placeholder="11位手机号" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">联系人职务</label>
+            <input type="text" class="form-input" placeholder="如:教导主任 / 课程负责人">
+          </div>
+          <div class="form-group">
+            <label class="form-label">学段构成</label>
+            <div class="form-radio-group">
+              <div class="form-radio" onclick="selectRadio(this)">小学低年级</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">小学高年级</div>
+              <div class="form-radio" onclick="selectRadio(this)">初中</div>
+              <div class="form-radio" onclick="selectRadio(this)">高中</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">预计人数 <span class="required">*</span></label>
+            <input type="number" class="form-input" placeholder="含师生总人数" min="10" max="500" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">研学方案 <span class="required">*</span></label>
+            <div class="form-radio-group">
+              <div class="form-radio" onclick="selectRadio(this)">一日研学</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">五日深度</div>
+              <div class="form-radio" onclick="selectRadio(this)">需要定制</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">期望出团日期范围</label>
+            <input type="text" class="form-input" placeholder="如:2026年4月-5月">
+          </div>
+          <div class="form-group">
+            <label class="form-label">预算范围(人均)</label>
+            <div class="form-radio-group">
+              <div class="form-radio" onclick="selectRadio(this)">500-800</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">800-2000</div>
+              <div class="form-radio" onclick="selectRadio(this)">2000-4000</div>
+              <div class="form-radio" onclick="selectRadio(this)">不限</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">特殊需求与备注</label>
+            <textarea class="form-textarea" placeholder="过敏源汇总、医疗需求、定制需求、其他备注等"></textarea>
+          </div>
+          <div class="form-group">
+            <p class="form-hint">提交后,系统将自动推送至军庄镇研学服务平台后台,专员将在4小时内主动联系您协商详细方案。</p>
+          </div>
+          <button type="button" class="btn" onclick="submitForm('group')">✓ 提交团体报名</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图8:个人中心 ============ -->
+  <section class="view" data-view="profile">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('home')">‹</div>
+      <div class="page-title">个人中心</div>
+    </div>
+
+    <div class="profile-header">
+      <div class="profile-avatar">🧑‍🎓</div>
+      <div class="profile-name">梨乡小使者</div>
+      <div class="profile-meta">学号 LX2026008 · 已参与研学 2 次</div>
+      <div class="profile-tags">
+        <span class="profile-tag">🍐 贡梨文化小使者</span>
+        <span class="profile-tag">🥁 锣鼓小传承人</span>
+      </div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <div class="profile-stat-num">12</div>
+        <div class="profile-stat-label">已完成课程</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-num">6</div>
+        <div class="profile-stat-label">收藏作品</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-num">3</div>
+        <div class="profile-stat-label">获得证书</div>
+      </div>
+    </div>
+
+    <div class="profile-menu">
+      <div class="menu-item" onclick="showToast('我的消息(3条未读)')">
+        <div class="menu-icon">💬</div>
+        <div class="menu-title">我的消息</div>
+        <span class="menu-badge">3</span>
+        <span class="menu-arrow">›</span>
+      </div>
+      <div class="menu-item" onclick="navigateTo('tips')">
+        <div class="menu-icon">📋</div>
+        <div class="menu-title">温馨提示</div>
+        <span class="menu-arrow">›</span>
+      </div>
+      <div class="menu-item" onclick="navigateTo('tips-contacts')">
+        <div class="menu-icon">📞</div>
+        <div class="menu-title">联系我们</div>
+        <span class="menu-arrow">›</span>
+      </div>
+      <div class="menu-item" onclick="navigateTo('feedback')">
+        <div class="menu-icon">💭</div>
+        <div class="menu-title">意见反馈</div>
+        <span class="menu-arrow">›</span>
+      </div>
+      <div class="menu-item" onclick="showCheckin()">
+        <div class="menu-icon">✓</div>
+        <div class="menu-title">核销签到</div>
+        <span class="menu-arrow">›</span>
+      </div>
+    </div>
+
+    <div class="profile-menu" style="margin-top: 14px;">
+      <div class="menu-item" onclick="showToast('您的电子证书已生成')">
+        <div class="menu-icon">🏆</div>
+        <div class="menu-title">我的证书</div>
+        <span class="menu-arrow">›</span>
+      </div>
+      <div class="menu-item" onclick="showToast('收藏作品共6件')">
+        <div class="menu-icon">⭐</div>
+        <div class="menu-title">我的收藏</div>
+        <span class="menu-arrow">›</span>
+      </div>
+      <div class="menu-item" onclick="showToast('设置功能演示中')">
+        <div class="menu-icon">⚙️</div>
+        <div class="menu-title">设置</div>
+        <span class="menu-arrow">›</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图9:图片直播(新闻列表) ============ -->
+  <section class="view" data-view="news">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('home')">‹</div>
+      <div class="page-title">图片直播</div>
+    </div>
+    <div class="page-content" id="news-list"></div>
+  </section>
+
+  <!-- ============ 视图10:新闻详情 ============ -->
+  <section class="view" data-view="news-detail">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('news')">‹</div>
+      <div class="page-title">研学动态</div>
+    </div>
+    <div class="page-content" id="news-detail-content"></div>
+  </section>
+
+  <!-- ============ 视图11:研学寄语 ============ -->
+  <section class="view" data-view="feedback">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('home')">‹</div>
+      <div class="page-title">研学寄语</div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="background: linear-gradient(135deg, rgba(232, 217, 181, 0.4), rgba(201, 169, 97, 0.15));">
+        <div class="card-title"><span class="card-title-icon">✨</span>留下您的研学感悟</div>
+        <div class="card-content">
+          <p style="font-size: 12px;">您的每一句反馈,都是梨乡研学不断进步的动力。我们珍视每位研学者的真实心声。</p>
+        </div>
+      </div>
+
+      <form id="feedback-form">
+        <div class="form-group">
+          <label class="form-label">您的昵称</label>
+          <input type="text" class="form-input" placeholder="可填真实姓名或昵称" value="梨乡小使者">
+        </div>
+        <div class="form-group">
+          <label class="form-label">整体评价</label>
+          <div class="form-radio-group">
+            <div class="form-radio selected" onclick="selectRadio(this)">★★★★★</div>
+            <div class="form-radio" onclick="selectRadio(this)">★★★★</div>
+            <div class="form-radio" onclick="selectRadio(this)">★★★</div>
+            <div class="form-radio" onclick="selectRadio(this)">★★</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">参与的研学项目</label>
+          <select class="form-select">
+            <option>一日研学:一颗贡梨读懂京西</option>
+            <option>五日深度:五日梨乡穿越京西</option>
+            <option>季节限定:梨花授粉</option>
+            <option>季节限定:秋收采摘</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">您的寄语 <span class="required">*</span></label>
+          <textarea class="form-textarea" placeholder="分享您在军庄研学中最难忘的瞬间、最深刻的感悟、最希望改进的建议……" style="min-height: 120px;"></textarea>
+        </div>
+        <button type="button" class="btn btn-imperial" onclick="submitForm('feedback')">📜 留下我的寄语</button>
+      </form>
+
+      <div class="section-title" style="margin-top: 24px; padding-left: 0;">
+        <span>梨乡留言</span>
+        <span class="section-en">MESSAGES</span>
+      </div>
+      <div id="messages-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ 视图12:数字课堂主页 ============ -->
+  <section class="view" data-view="classroom">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('home')">‹</div>
+      <div class="page-title">梨娃数字课堂</div>
+    </div>
+
+    <div class="classroom-hero">
+      <div class="classroom-hero-title">梨娃说 · 数字研学</div>
+      <div class="classroom-hero-subtitle">把课堂从田野带到指尖</div>
+    </div>
+
+    <div class="classroom-modules">
+      <!-- 进度卡 -->
+      <div class="progress-card">
+        <div class="progress-title">📚 研学进度</div>
+        <div class="progress-stats">已完成 8/15 课程任务 · 待答辩 1 项</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 53%;"></div></div>
+      </div>
+
+      <!-- 京白梨进京记 -->
+      <div class="classroom-module">
+        <div class="classroom-module-header">
+          <div class="classroom-module-icon" style="background: linear-gradient(135deg, #C9A961, #8C2A24);">🎲</div>
+          <div class="classroom-module-info">
+            <h3>京白梨进京记</h3>
+            <p>沙盘博弈 · 8幕推进 · 课程4.5</p>
+          </div>
+        </div>
+        <div class="classroom-module-body">
+          <div class="classroom-feature" onclick="navigateTo('classroom-game')">
+            <div class="feature-icon">🏛</div>
+            <div class="feature-text">进入沙盘游戏<small>角色扮演 · 知识闯关</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('查看本次研学的8幕历史进度')">
+            <div class="feature-icon">📜</div>
+            <div class="feature-text">我的闯关记录<small>已通过 3/8 关</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('查看历届「首席皇商」名单')">
+            <div class="feature-icon">🏆</div>
+            <div class="feature-text">皇商排行榜<small>查看本届首席皇商</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 化石猎人 -->
+      <div class="classroom-module">
+        <div class="classroom-module-header">
+          <div class="classroom-module-icon" style="background: linear-gradient(135deg, #8A7C5E, #2C3539);">🔍</div>
+          <div class="classroom-module-info">
+            <h3>小小化石猎人</h3>
+            <p>化石图鉴 · AI辨识 · 课程4.10</p>
+          </div>
+        </div>
+        <div class="classroom-module-body">
+          <div class="classroom-feature" onclick="navigateTo('classroom-fossil')">
+            <div class="feature-icon">📷</div>
+            <div class="feature-text">提交化石照片<small>拍照上传 · AI辨识 · 累积图鉴</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="navigateTo('classroom-fossil')">
+            <div class="feature-icon">🗺</div>
+            <div class="feature-text">我的化石图鉴<small>已收集 3/6 种</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('地层柱状图工具')">
+            <div class="feature-icon">📊</div>
+            <div class="feature-text">地层柱状图工具<small>在线绘制 · 模板填空</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 梨乡少年说 -->
+      <div class="classroom-module">
+        <div class="classroom-module-header">
+          <div class="classroom-module-icon" style="background: linear-gradient(135deg, #B2342B, #8C2A24);">🎤</div>
+          <div class="classroom-module-info">
+            <h3>梨乡少年说</h3>
+            <p>故事采集 · 演讲展演 · 课程4.8</p>
+          </div>
+        </div>
+        <div class="classroom-module-body">
+          <div class="classroom-feature" onclick="navigateTo('classroom-speech')">
+            <div class="feature-icon">🎙</div>
+            <div class="feature-text">录制我的演讲<small>录音/视频上传 · 三要素打分</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('故事采集卡(3张点位卡)')">
+            <div class="feature-icon">📝</div>
+            <div class="feature-text">故事采集卡<small>过街楼 · 古道 · 将军山</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('查看其他研学者的演讲')">
+            <div class="feature-icon">🎬</div>
+            <div class="feature-text">少年说展演厅<small>欣赏同伴的演讲作品</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 拓展功能 -->
+      <div class="section-title" style="padding-left: 0; padding-top: 8px;">
+        <span>更多研学工具</span>
+      </div>
+      <div class="classroom-module">
+        <div class="classroom-module-body" style="padding: 8px 16px 16px;">
+          <div class="classroom-feature" onclick="showToast('数字护照已自动同步6枚印章')">
+            <div class="feature-icon">🪪</div>
+            <div class="feature-text">数字梨乡护照<small>已收集 6 枚印章</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('日记本同步至云端')">
+            <div class="feature-icon">📔</div>
+            <div class="feature-text">研学日记本<small>每日感悟 · 云端同步</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('家庭口述史课程')">
+            <div class="feature-icon">👵</div>
+            <div class="feature-text">家庭口述史<small>采访爷爷奶奶 · 课后延展</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+          <div class="classroom-feature" onclick="showToast('梨树VR成长视频')">
+            <div class="feature-icon">🌳</div>
+            <div class="feature-text">我的梨树成长<small>跨季回访 · 每月更新</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图13:化石猎人 ============ -->
+  <section class="view" data-view="classroom-fossil">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">小小化石猎人</div>
+    </div>
+    <div class="page-content">
+      <div class="progress-card" style="background: linear-gradient(135deg, #8A7C5E, #2C3539);">
+        <div class="progress-title">🔍 我的化石图鉴</div>
+        <div class="progress-stats">已收集 3 / 6 种 · 等级 3 (初级猎人)</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+      </div>
+
+      <!-- 上传区 -->
+      <div class="upload-zone" onclick="showToast('调起相机/相册功能演示')">
+        <div class="upload-icon">📷</div>
+        <div class="upload-title">拍照上传化石照片</div>
+        <div class="upload-hint">AI将自动辨识化石种类 · 解锁图鉴</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">📌</span>采集任务</div>
+        <div class="card-content">
+          <p style="background: rgba(178, 52, 43, 0.06); padding: 10px; border-radius: 6px; font-size: 12px; line-height: 1.7; border-left: 3px solid var(--cinnabar);">
+            <strong>本次任务:</strong>在灰峪化石山三大站点(太原组化石层 / 不整合面 / 褶皱构造区)寻找并拍摄至少3种不同化石,上传后AI将辨识其门类(石松纲/节蕨纲/真蕨纲/裸子植物纲)。
+          </p>
+        </div>
+      </div>
+
+      <div class="section-title" style="padding-left: 0; padding-top: 8px;">
+        <span>化石图鉴</span>
+        <span class="section-en">FOSSIL ALBUM</span>
+      </div>
+      <div class="fossil-grid" id="fossil-grid"></div>
+
+      <div class="spacer-20"></div>
+      <div class="card" style="background: linear-gradient(135deg, rgba(107, 142, 78, 0.06), rgba(201, 169, 97, 0.08));">
+        <div class="card-title"><span class="card-title-icon">🏆</span>等级体系</div>
+        <div class="card-content" style="font-size: 12px;">
+          <p>🥉 初级猎人(LV1-3): 解锁 3 种化石</p>
+          <p>🥈 中级猎人(LV4-5): 解锁 5 种化石</p>
+          <p>🥇 高级猎人(LV6+): 解锁全部 6 种化石</p>
+          <p>👑 化石宗师: 提交考察报告并通过专家评审</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图14:京白梨进京记 ============ -->
+  <section class="view" data-view="classroom-game">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">京白梨进京记</div>
+    </div>
+    <div class="page-content">
+      <div class="classroom-hero" style="border-radius: var(--radius-md); padding: 20px; margin-bottom: 16px;">
+        <div style="position: relative; z-index: 1;">
+          <div class="seal" style="margin-bottom: 12px;">乾隆<br>御赏</div>
+          <div class="classroom-hero-title" style="font-size: 20px;">乾隆御赏 · 京白梨进京记</div>
+          <div class="classroom-hero-subtitle" style="font-size: 11px; margin-top: 4px;">8幕沙盘博弈 · 角色扮演 · 知识闯关</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">👤</span>我的身份</div>
+        <div class="card-content">
+          <p style="font-size: 13px;"><strong style="color: var(--cinnabar);">梨农商队</strong> · 第3组</p>
+          <p style="font-size: 12px; margin-top: 6px;">任务:将15筐贡梨从军庄运至紫禁城,通过8幕闯关获得最高封赏</p>
+          <p style="font-size: 11px; color: var(--ink-light); margin-top: 6px;">当前金币: <strong style="color: var(--imperial-gold);">8 两</strong> · 贡梨损耗: 2 筐 / 15 筐</p>
+        </div>
+      </div>
+
+      <div class="game-board">
+        <div style="margin-bottom: 12px; font-family: var(--font-display); font-size: 14px; color: var(--ink-black); letter-spacing: 1px;">📜 闯关进度</div>
+        <div class="game-stages" id="game-stages"></div>
+        <div class="game-status">
+          <strong>当前幕:第四幕「驿站小憩」</strong><br>
+          🏯 您来到京西第一驿站,驿丞要您回答3道贡梨知识题,答对即可继续前行。
+          <br><br>📖 <em>"京白梨400年贡梨史中,首位将其列为皇家贡品的皇帝是?"</em>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
+          <button class="form-radio" onclick="selectGameOption(this, false)">A. 乾隆帝</button>
+          <button class="form-radio" onclick="selectGameOption(this, true)">B. 康熙帝</button>
+          <button class="form-radio" onclick="selectGameOption(this, false)">C. 雍正帝</button>
+          <button class="form-radio" onclick="selectGameOption(this, false)">D. 嘉庆帝</button>
+        </div>
+      </div>
+
+      <div class="card" style="background: rgba(178, 52, 43, 0.05); border-left: 4px solid var(--cinnabar);">
+        <div class="card-content">
+          <p style="font-size: 12px; color: var(--ink-gray);">
+            <strong style="color: var(--cinnabar);">💡 沙盘小提示</strong><br>
+            完整版游戏将在Day3晚间度假村活动厅展开,8幕推进:采摘→分拣→运输Ⅰ→驿站→运输Ⅱ→盘查→吆喝售卖→皇上召见。
+            您将在现场与其他7组同台博弈,争夺<strong style="color: var(--imperial-gold);">「首席皇商」</strong>称号。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图15:梨乡少年说 ============ -->
+  <section class="view" data-view="classroom-speech">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">梨乡少年说</div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="background: linear-gradient(135deg, rgba(178, 52, 43, 0.08), rgba(201, 169, 97, 0.12));">
+        <div class="card-title"><span class="card-title-icon">🎙</span>讲述属于你的军庄故事</div>
+        <div class="card-content">
+          <p style="font-size: 12px;">使用「地点-遗存-历史作用-个人理解」四要素结构,讲一段3-5分钟的军庄历史故事,AI将从声音/逻辑/情感/台风四个维度为你打分。</p>
+        </div>
+      </div>
+
+      <div class="text-center" style="padding: 16px 0;">
+        <div class="record-circle" onclick="toggleRecord(this)">🎙</div>
+        <div style="font-family: var(--font-display); font-size: 16px; color: var(--ink-black); margin-bottom: 4px;">点击开始录音</div>
+        <div style="font-size: 11px; color: var(--ink-light);">已采集故事素材 3 张 · 可参考演讲小锦囊</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">📝</span>我的故事素材</div>
+        <div class="card-content" style="padding: 0; margin-top: 6px;">
+          <div style="border-bottom: 1px dashed var(--border-soft); padding: 10px 0;">
+            <p style="font-weight: 500; font-size: 13px;">📍 过街楼</p>
+            <p style="font-size: 11px; color: var(--ink-gray); margin-top: 2px;">关键词:卵石砌筑、「极善为乐」石匾、清代民居</p>
+          </div>
+          <div style="border-bottom: 1px dashed var(--border-soft); padding: 10px 0;">
+            <p style="font-weight: 500; font-size: 13px;">📍 香山古道</p>
+            <p style="font-size: 11px; color: var(--ink-gray); margin-top: 2px;">关键词:贡梨送京之路、明清石刻、古磨盘</p>
+          </div>
+          <div style="padding: 10px 0;">
+            <p style="font-weight: 500; font-size: 13px;">📍 将军山遗址</p>
+            <p style="font-size: 11px; color: var(--ink-gray); margin-top: 2px;">关键词:将军洞、瞭望孔、明代防御体系</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="background: linear-gradient(135deg, rgba(107, 142, 78, 0.06), rgba(201, 169, 97, 0.08));">
+        <div class="card-title"><span class="card-title-icon">💡</span>演讲小锦囊</div>
+        <div class="card-content">
+          <p style="font-size: 12px;"><strong>🎬 开场白:</strong>「你知道吗?在军庄镇,有一座600年前的洞穴……」</p>
+          <p style="font-size: 12px;"><strong>🌉 过渡句:</strong>「不仅如此」「说到这里,我想起了……」</p>
+          <p style="font-size: 12px;"><strong>🎯 结尾金句:</strong>「我希望未来的我,也能成为守护这段历史的人。」</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">🏆</span>我的演讲历史</div>
+        <div class="card-content" style="padding: 0;">
+          <div style="display: flex; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--border-soft);">
+            <div style="flex: 1;">
+              <p style="font-size: 13px; font-weight: 500;">将军山的秘密</p>
+              <p style="font-size: 11px; color: var(--ink-light); margin-top: 2px;">2026-04-25 · 时长 3'42"</p>
+            </div>
+            <div class="seal" style="width: 40px; height: 40px; font-size: 10px;">优秀</div>
+          </div>
+          <div style="display: flex; align-items: center; padding: 12px 0;">
+            <div style="flex: 1;">
+              <p style="font-size: 13px; font-weight: 500;">贡梨送京之路</p>
+              <p style="font-size: 11px; color: var(--ink-light); margin-top: 2px;">2026-04-15 · 时长 2'58"</p>
+            </div>
+            <div class="seal" style="width: 40px; height: 40px; font-size: 10px; background: var(--imperial-gold);">良好</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Toast / 弹窗 ============ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+      <div class="modal-icon">✓</div>
+      <div class="modal-title">提交成功</div>
+      <div class="modal-text">系统后台已收到您的报名信息,工作人员将在24小时内主动联系您。<br><br><small style="color: var(--ink-light);">[评委提示:此为样本演示,实际部署会推送通知至军庄镇研学服务平台后台,触发短信、邮件、企业微信等多通道提醒]</small></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal()">好的</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="toast-overlay">
+    <div class="modal" id="toast">
+      <div class="modal-icon">💡</div>
+      <div class="modal-title" id="toast-title">提示</div>
+      <div class="modal-text" id="toast-text"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeToast()">好的</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== data.js =====
+/* =========================================================
+   军庄镇研学服务平台 · 数据文件
+   ========================================================= */
+
+// === 一日研学行程 ===
+const ONE_DAY_SCHEDULE = [
+  {
+    time: "07:30-08:30",
+    location: "学校 → 军庄镇",
+    title: "集合乘车 · 车上预习",
+    desc: "京白梨3分钟导学动画 + 角色身份卡剧透,情境导入",
+    tag: "出发"
+  },
+  {
+    time: "08:30-09:00",
+    location: "孟悟村梨享田园广场",
+    title: "开营仪式",
+    desc: "领取《梨乡护照》+ 彩色丝带分6组(皇帝/大臣/梨农/商人/百姓/史官)+ 安全宣讲 + 古树合影",
+    tag: "开营"
+  },
+  {
+    time: "09:00-10:00",
+    location: "军庄镇文化站",
+    title: "古籍档案 · 老梨农口述",
+    desc: "破解古籍线索卡(白话文+原文对照),专访80岁+老梨农2-3位,录音并填写《贡梨故事调查手册》",
+    tag: "课程4.2"
+  },
+  {
+    time: "10:00-11:00",
+    location: "东山村大清御梨园遗址",
+    title: "御梨园实地考察",
+    desc: "300+岁古树致敬仪式,观察古树叶脉/树干/挂果,完成「一树一故事」速写记录",
+    tag: "课程4.2"
+  },
+  {
+    time: "11:00-12:00",
+    location: "香山古道东山段(约1km)",
+    title: "贡梨送京之路徒步",
+    desc: "文化讲师沿途讲解皇家贡品运输路线、古道石刻;学生完成「古道5感观察」手账",
+    tag: "课程4.2"
+  },
+  {
+    time: "12:00-13:30",
+    location: "梦我度假村餐厅",
+    title: "全梨宴 · 京西美食文化课",
+    desc: "厨师讲解6道菜+锅翻儿典故;分组动手做梨糕/烙锅翻儿;品尝全梨宴午餐",
+    tag: "课程4.12"
+  },
+  {
+    time: "13:30-14:00",
+    location: "度假村庭院",
+    title: "梨园漫步 · 自由活动",
+    desc: "补水休整,体力恢复",
+    tag: "休整"
+  },
+  {
+    time: "14:00-15:00",
+    location: "度假村创作工坊",
+    title: "创作工坊三选一",
+    desc: "A.手绘连环画(6-8格) / B.情景剧编排(3-5min) / C.微纪录片(2-3min),戏剧美术指导巡回辅导",
+    tag: "课程4.2"
+  },
+  {
+    time: "15:00-15:40",
+    location: "度假村创作工坊",
+    title: "贡梨故事会 · 汇报展演",
+    desc: "每组5-7分钟展演 + 评委团点评,评选「御赐金牌讲故事人」与「最佳故事团队」",
+    tag: "课程4.2"
+  },
+  {
+    time: "16:00-17:30",
+    location: "军庄村党建文化广场",
+    title: "威风锣鼓 · 非遗体验(浓缩版)",
+    desc: "陈列馆视频导入 + 1998建队故事 + 乐器识别+口诀学谱 + 分声部练习 + 三声部合奏展演",
+    tag: "课程4.11"
+  },
+  {
+    time: "17:30-18:00",
+    location: "孟悟村梨享田园广场",
+    title: "闭营仪式",
+    desc: "三分钟反思写作 + 颁发《贡梨文化小使者》+《锣鼓小传承人》双证书 + 梨乡护照最终盖章",
+    tag: "闭营"
+  },
+  {
+    time: "18:00-19:00",
+    location: "军庄镇 → 学校",
+    title: "返程",
+    desc: "车上完成研学日记初稿 + 分享今日感受",
+    tag: "返程"
+  }
+];
+
+// === 五日研学行程 ===
+const FIVE_DAY_SCHEDULE = [
+  {
+    day: 1,
+    title: "梨乡初识",
+    subtitle: "文化启程 · 京白梨初印象",
+    items: [
+      { time: "10:30-11:00", location: "度假村大堂", title: "入住登记", desc: "4人间·男女分楼·熟悉环境", tag: "入住" },
+      { time: "11:00-12:00", location: "军庄镇历史文化陈列馆", title: "陈列馆主题导览", desc: "「党建-革命-地质-文物」四展室参观,完成展品速写", tag: "课程" },
+      { time: "12:00-13:30", location: "度假村餐厅", title: "全梨宴 · 京西美食文化课", desc: "厨师讲解6道菜+锅翻儿典故,分2组动手制作", tag: "课程4.12" },
+      { time: "14:00-15:30", location: "军庄镇文化站", title: "贡梨故事会 · 破冰+古籍解密", desc: "角色身份卡分配+古籍档案解密+专访老梨农", tag: "课程4.2" },
+      { time: "15:30-16:30", location: "东山村大清御梨园遗址", title: "御梨园实地考察", desc: "300+岁古树致敬仪式+一树一故事速写", tag: "课程4.2" },
+      { time: "16:30-17:30", location: "度假村创作工坊", title: "创作工坊", desc: "连环画/情景剧/微纪录片三选一", tag: "课程4.2" },
+      { time: "19:00-20:30", location: "百年古树下", title: "梨乡夜话", desc: "民间传说讲述+星空观察+研学日记", tag: "夜话" }
+    ]
+  },
+  {
+    day: 2,
+    title: "生态密码 DAY1",
+    subtitle: "京白梨科学探究 · 田野采样",
+    items: [
+      { time: "07:00-07:30", location: "度假村", title: "晨跑+早间梨汁", desc: "梨园外圈1km慢跑", tag: "健康" },
+      { time: "08:30-09:00", location: "度假村会议室", title: "PBL开营讲座", desc: "北京联合大学教授讲授科学研究方法论", tag: "课程4.3" },
+      { time: "09:00-12:00", location: "度假村会议室", title: "选题与实验设计", desc: "8个子课题方向分组,完成假设与实验方案", tag: "课程4.3" },
+      { time: "13:30-17:30", location: "东山村核心保护区", title: "田野采样(4小时)", desc: "土壤采样+气温湿度光照记录+植物样本+古树测量", tag: "课程4.3" },
+      { time: "19:00-20:30", location: "度假村会议室", title: "围炉夜话", desc: "各组白板汇报数据+交叉讨论+教授答疑", tag: "课程4.3" },
+      { time: "20:30-21:00", location: "度假村创作工坊", title: "贡梨故事会展演", desc: "Day1作品汇报+评选「御赐金牌讲故事人」", tag: "课程4.2" }
+    ]
+  },
+  {
+    day: 3,
+    title: "科研答辩 + 博弈",
+    subtitle: "研究升华 · 论文产出",
+    items: [
+      { time: "08:30-11:30", location: "东山村+实验室", title: "古树专题+实验室检测", desc: "48株古树测量+土壤pH/有机质/含水率检测+显微镜花粉观察", tag: "课程4.3" },
+      { time: "12:30-15:00", location: "度假村会议室", title: "报告撰写工作坊", desc: "7段式撰写2000-3000字研究小论文+答辩PPT制作", tag: "课程4.3" },
+      { time: "15:00-17:00", location: "度假村会议室", title: "正式答辩会", desc: "每组10min汇报+5min问答,评选最佳论文/答辩/协作", tag: "课程4.3" },
+      { time: "19:00-21:00", location: "度假村活动厅", title: "京白梨进京记沙盘博弈", desc: "8幕推进:采摘→分拣→运输I→驿站→运输II→盘查→吆喝→召见", tag: "课程4.5" }
+    ]
+  },
+  {
+    day: 4,
+    title: "京西人文日",
+    subtitle: "古道巡礼 · 军事地理 · 少年演讲",
+    items: [
+      { time: "09:00-09:30", location: "军庄村过街楼", title: "梨乡少年说 · 导入", desc: "清代京西民居聚落格局讲解+「极善为乐」石匾", tag: "课程4.8" },
+      { time: "09:30-11:00", location: "香山古道东山段", title: "古道徒步+军事地理", desc: "1km徒步+明清石刻识别+5感观察手账", tag: "课程4.14" },
+      { time: "11:00-12:30", location: "将军山军事遗址", title: "军事地理探秘", desc: "将军洞/古堡/瞭望孔考察+防御推演+手绘地形图", tag: "课程4.14" },
+      { time: "12:30-13:30", location: "梨园野餐点", title: "梨园野餐", desc: "便当+梨汁+上午感受分享", tag: "野餐" },
+      { time: "14:00-15:30", location: "度假村会议室", title: "「我是小史官」写作", desc: "四要素结构撰写300字军庄军事史讲稿", tag: "课程4.8" },
+      { time: "15:30-17:00", location: "度假村活动厅", title: "成果演讲分享会", desc: "每人3-5分钟公开演讲+评委点评+评选最具洞察力讲述人", tag: "课程4.8" },
+      { time: "19:00-20:30", location: "度假村创作工坊", title: "自由选做", desc: "微电影拍摄/护照插画/梨园夜观三选一", tag: "自由" }
+    ]
+  },
+  {
+    day: 5,
+    title: "非遗华章",
+    subtitle: "结营升华 · 大集与季节体验",
+    items: [
+      { time: "08:30-09:00", location: "陈列馆", title: "威风锣鼓 · 视频导入", desc: "申奥+农运会+詹天佑片段播放+1998建队故事口述", tag: "课程4.11" },
+      { time: "09:00-11:30", location: "军庄村党建广场", title: "威风锣鼓标准版(2.5h)", desc: "识器→学谱→分练→合奏→访谈→展演,完整非遗体验", tag: "课程4.11" },
+      { time: "11:30-12:00", location: "广场", title: "三层反思+颁证", desc: "技能/情感/社会责任反思+《锣鼓小传承人证书》", tag: "课程4.11" },
+      { time: "12:00-13:30", location: "度假村餐厅", title: "庆功餐 · 全套产品品鉴", desc: "梨酒/梨膏/梨干/玫瑰梨茶/梨线香品鉴", tag: "美食" },
+      { time: "13:30-15:30", location: "西杨坨大集 / 梨园", title: "京郊经济学 / 季节限定课", desc: "大集田野调查 或 春季授粉/秋季采摘/冬季修剪", tag: "课程4.15" },
+      { time: "15:30-16:30", location: "百年古树下", title: "结营仪式", desc: "回忆墙+五项大奖+双证书+《综合素质评定单》+跨季约定", tag: "结营" },
+      { time: "16:30-18:00", location: "军庄镇 → 学校", title: "返程", desc: "梨乡伴手礼发放+研学日记+难忘瞬间分享", tag: "返程" }
+    ]
+  }
+];
+
+// === 新闻数据 ===
+const NEWS_LIST = [
+  {
+    id: 1,
+    title: "「一颗贡梨读懂京西」首届研学营圆满开营",
+    excerpt: "来自门头沟实验中学的120名师生齐聚军庄镇,在百年古梨树下开启了为期五日的深度研学之旅。开营仪式上,孩子们手系彩色丝带,郑重领取属于自己的《梨乡护照》……",
+    image: "linear-gradient(135deg, #8FB16E 0%, #3D5C3F 100%)",
+    icon: "🎉",
+    tag: "营地动态",
+    date: "2026-05-15",
+    views: 1284,
+    likes: 96
+  },
+  {
+    id: 2,
+    title: "百年古树下听老梨农讲贡梨故事",
+    excerpt: "孟悟村王大爷今年82岁,种了一辈子京白梨。他向围坐的孩子们讲述了家族四代人守护贡梨园的故事,讲到动情处,这位耄耋老人眼中泛起泪光……",
+    image: "linear-gradient(135deg, #C9A961 0%, #8C2A24 100%)",
+    icon: "🍐",
+    tag: "口述史",
+    date: "2026-05-12",
+    views: 892,
+    likes: 78
+  },
+  {
+    id: 3,
+    title: "威风锣鼓震天响,孩子们三声部合奏首秀",
+    excerpt: "在军庄村党建文化广场,孩子们与拥有400+成员、三分之二为女性队员的军庄威风锣鼓队同台合奏。鼓、锣、镲三声部完美配合,展现了非遗传承的青春力量……",
+    image: "linear-gradient(135deg, #B2342B 0%, #8C2A24 100%)",
+    icon: "🥁",
+    tag: "非遗体验",
+    date: "2026-05-10",
+    views: 1567,
+    likes: 142
+  },
+  {
+    id: 4,
+    title: "京白梨生态密码PBL:8组学生产出8篇论文",
+    excerpt: "为期两天的科研闭环,来自北京八中的同学们完成了从田野采样到正式答辩的完整科研流程。其中「古树根系分布与水源关系」一组提出了创新性的生态保护建议……",
+    image: "linear-gradient(135deg, #6B8E4E 0%, #3D5C3F 100%)",
+    icon: "🔬",
+    tag: "科研课程",
+    date: "2026-05-08",
+    views: 1023,
+    likes: 87
+  },
+  {
+    id: 5,
+    title: "全梨宴登陆京西!六道菜尝尽京白梨百变滋味",
+    excerpt: "梨糕、梨羹、京白梨饭、锅翻儿……军庄镇老厨师亲自掌勺,孩子们围在灶台旁,既是品味者也是制作者。一颗贡梨能变出多少种吃法?答案令人惊喜……",
+    image: "linear-gradient(135deg, #E8D9B5 0%, #C9A961 100%)",
+    icon: "🍽️",
+    tag: "美食文化",
+    date: "2026-05-05",
+    views: 2134,
+    likes: 218
+  },
+  {
+    id: 6,
+    title: "重走贡梨送京之路 香山古道徒步体验",
+    excerpt: "脚踩400年前的古道石,孩子们沿着皇家贡品的运输路线一步步走过。文化讲师沿途讲解古道石刻、明清碉堡遗迹,让历史从书本走入脚下……",
+    image: "linear-gradient(135deg, #8A9199 0%, #5C6670 100%)",
+    icon: "⛰️",
+    tag: "古道徒步",
+    date: "2026-05-03",
+    views: 756,
+    likes: 64
+  },
+  {
+    id: 7,
+    title: "小化石猎人 3亿年前的植物在他们手中复活",
+    excerpt: "灰峪村化石山上,初一年级的孩子们用放大镜仔细观察鳞木、芦木的化石纹理。在地质学家指导下,他们成功识别出4种古植物化石,并制作了精美的拓片作品……",
+    image: "linear-gradient(135deg, #5C4F3A 0%, #2C3539 100%)",
+    icon: "🔍",
+    tag: "地质科考",
+    date: "2026-04-28",
+    views: 1245,
+    likes: 103
+  },
+  {
+    id: 8,
+    title: "「梨乡少年说」演讲大会让历史从孩子口中流出",
+    excerpt: "从过街楼到将军山,从京白梨到威风锣鼓,孩子们用稚嫩却铿锵的声音讲述着军庄的历史。「最具感染力讲述人」奖项花落初二年级的张同学……",
+    image: "linear-gradient(135deg, #B2342B 0%, #C9A961 100%)",
+    icon: "🎤",
+    tag: "演讲课",
+    date: "2026-04-25",
+    views: 887,
+    likes: 76
+  },
+  {
+    id: 9,
+    title: "春日授粉小使者:亲手为京白梨送上「礼物」",
+    excerpt: "三月的梨花盛开如雪。小朋友们在梨农师傅指导下,用毛笔轻点柱头,完成了人生第一次授粉操作。每人挂上认养牌,约定秋天回来摘下「自己的梨」……",
+    image: "linear-gradient(135deg, #FFFBF0 0%, #E8D9B5 100%)",
+    icon: "🌸",
+    tag: "季节活动",
+    date: "2026-04-15",
+    views: 1876,
+    likes: 195
+  },
+  {
+    id: 10,
+    title: "西杨坨大集 京郊经济学的活态课堂",
+    excerpt: "周六的西杨坨大集人头攒动。孩子们分4组扮演「价格侦探」「摊主访谈员」「消费者画像师」「品类地图绘制员」,完成了一场真实的田野调查……",
+    image: "linear-gradient(135deg, #6B8E4E 0%, #C9A961 100%)",
+    icon: "🛒",
+    tag: "经济学",
+    date: "2026-04-10",
+    views: 645,
+    likes: 52
+  }
+];
+
+// === 寄语数据 ===
+const MESSAGES = [
+  { name: "李同学", date: "2026-05-16", rating: 5, content: "古树下听老梨农讲故事的那一刻,我突然明白了什么叫文化传承。这趟研学让我对家乡的农业文化遗产有了全新的认识!" },
+  { name: "王老师", date: "2026-05-15", rating: 5, content: "作为带队教师,我从未见过孩子们这样投入。PBL科研课程的设计非常专业,孩子们完成的论文质量超出预期,值得推广。" },
+  { name: "张家长", date: "2026-05-14", rating: 5, content: "孩子回来后一直跟我们讲「咚呛嚓哒空」的口诀,还想组建学校锣鼓队。这种发自内心的喜爱,比任何说教都有效。" },
+  { name: "赵同学", date: "2026-05-13", rating: 4, content: "化石猎人活动太有趣了!我找到了一块特别清晰的鳞木化石,做拓片的时候手都在发抖。希望能多设计一些这样的探索类课程。" },
+  { name: "陈同学", date: "2026-05-11", rating: 5, content: "全梨宴真的是颠覆认知!原来一颗梨可以做出这么多花样,锅翻儿我回家做给爸妈吃,他们都说比饭店的好吃。" },
+  { name: "刘老师", date: "2026-05-09", rating: 5, content: "把课堂搬进梨园、把答辩放在古树下、把演讲台移到过街楼前——这种沉浸式学习让知识真正活了起来。强烈推荐!" }
+];
+
+// === 化石图鉴 ===
+const FOSSILS = [
+  { name: "鳞木", emoji: "🌿", era: "石炭纪", unlocked: true },
+  { name: "芦木", emoji: "🎋", era: "石炭纪", unlocked: true },
+  { name: "科达树", emoji: "🌳", era: "石炭纪", unlocked: true },
+  { name: "封印木", emoji: "🌱", era: "石炭纪", unlocked: false },
+  { name: "种子蕨", emoji: "🍃", era: "二叠纪", unlocked: false },
+  { name: "舌羊齿", emoji: "🌿", era: "二叠纪", unlocked: false }
+];
+
+// === 沙盘游戏阶段 ===
+const GAME_STAGES = [
+  { num: 1, name: "采摘", status: "completed" },
+  { num: 2, name: "分拣", status: "completed" },
+  { num: 3, name: "运输Ⅰ", status: "completed" },
+  { num: 4, name: "驿站小憩", status: "current" },
+  { num: 5, name: "运输Ⅱ", status: "locked" },
+  { num: 6, name: "盘查", status: "locked" },
+  { num: 7, name: "吆喝售卖", status: "locked" },
+  { num: 8, name: "皇上召见", status: "locked" }
+];
+
+// === 联系人数据 ===
+const CONTACTS = [
+  { name: "周主任", role: "研学项目总负责人", phone: "010-6985-8888", group: "项目负责" },
+  { name: "李导师", role: "研学总导师 · 全程随团", phone: "138-1010-1234", group: "项目负责" },
+  { name: "陈教授", role: "PBL科研指导(北京联合大学)", phone: "139-1234-5678", group: "学术指导" },
+  { name: "王师傅", role: "全梨宴主厨", phone: "010-6985-7777", group: "食宿保障" },
+  { name: "张大姐", role: "梦我度假村前台", phone: "010-6985-9999", group: "食宿保障" },
+  { name: "赵队长", role: "军庄威风锣鼓队队长", phone: "137-8888-6666", group: "课程教练" },
+  { name: "孙技师", role: "古树养护技师", phone: "136-2222-3333", group: "课程教练" },
+  { name: "刘医生", role: "孟悟村卫生所急诊", phone: "010-6985-1120", group: "应急医疗" },
+  { name: "投诉反馈", role: "军庄镇政府监督电话", phone: "010-6985-9527", group: "监督投诉" }
+];
+
+// === 食宿信息 ===
+const ACCOMMODATIONS = [
+  {
+    name: "梦我度假村(主营地)",
+    type: "标准研学客房",
+    rooms: "40间标间 · 4人/间",
+    features: "独立卫浴 · 空调暖气 · 无线网络 · 24小时前台",
+    safety: "楼层男女分区 · 全楼监控 · 教师定时巡查"
+  }
+];
+
+
+// ===== main.js =====
+/* =========================================================
+   军庄镇研学服务平台 · 主交互脚本
+   ========================================================= */
+
+// === 视图切换(路由) ===
+function navigateTo(viewName) {
+  // 隐藏所有视图
+  document.querySelectorAll('.view').forEach(v => {
+    v.classList.remove('active');
+  });
+
+  // 显示目标视图
+  const target = document.querySelector(`.view[data-view="${viewName}"]`);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 根据视图初始化内容
+  initView(viewName);
+}
+
+// 初始化各视图内容(懒加载)
+function initView(viewName) {
+  switch (viewName) {
+    case 'schedule':
+      renderOneDayTimeline();
+      renderFiveDaySchedule();
+      break;
+    case 'tips-contacts':
+      renderContacts();
+      break;
+    case 'news':
+      renderNewsList();
+      break;
+    case 'feedback':
+      renderMessages();
+      break;
+    case 'classroom-fossil':
+      renderFossils();
+      break;
+    case 'classroom-game':
+      renderGameStages();
+      break;
+  }
+}
+
+// === Tab 切换通用逻辑 ===
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('tab')) {
+    const tabName = e.target.dataset.tab;
+    const parent = e.target.closest('.view');
+    if (!parent || !tabName) return;
+
+    // 切换 tab 按钮
+    parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+
+    // 切换 tab 内容
+    parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    const targetContent = parent.querySelector(`[data-tab-content="${tabName}"]`);
+    if (targetContent) targetContent.classList.add('active');
+  }
+});
+
+// === 折叠/展开行程 ===
+function toggleSchedule(headerEl) {
+  const day = headerEl.closest('.schedule-day');
+  day.classList.toggle('expanded');
+}
+
+// === 表单单选 ===
+function selectRadio(el) {
+  const group = el.parentElement;
+  group.querySelectorAll('.form-radio').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// === 提交表单 ===
+function submitForm(type) {
+  let title, text;
+  if (type === 'personal') {
+    title = '个人报名已提交';
+    text = '系统后台已收到您的报名信息,工作人员将在 <strong>24小时内</strong> 主动联系您。<br><br>如未拼团成功,您可继续等待或转为<strong>自由行模式</strong> (平台可提供全程辅助)。<br><br><small style="color: var(--ink-light);">[评委提示:系统已模拟向军庄镇研学平台后台推送报名信息,实际部署后会触发<strong>短信+邮件+企业微信</strong>多通道通知]</small>';
+  } else if (type === 'group') {
+    title = '团体报名已提交';
+    text = '感谢您的信任!专员将在 <strong>4小时内</strong> 主动联系您协商详细方案。<br><br>30人以上团体享 9折优惠 · 配备专属研学导师 · 可定制课程方案。<br><br><small style="color: var(--ink-light);">[评委提示:报名信息已模拟推送至军庄镇研学平台后台,实际部署后管理员手机将收到即时提醒]</small>';
+  } else if (type === 'feedback') {
+    title = '寄语已发布';
+    text = '感谢您留下宝贵的研学感悟!您的反馈已发布到「梨乡留言」墙,并同步至研学品质改进系统。<br><br>愿您与梨乡的缘分,延续到下一个春秋。';
+  }
+  showModal(title, text);
+}
+
+// === Modal 控制 ===
+function showModal(title, text) {
+  document.getElementById('modal').querySelector('.modal-title').innerHTML = title;
+  document.getElementById('modal').querySelector('.modal-text').innerHTML = text;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+function showToast(text, title = '提示') {
+  document.getElementById('toast-title').innerHTML = title;
+  document.getElementById('toast-text').innerHTML = text;
+  document.getElementById('toast-overlay').classList.add('active');
+}
+
+function closeToast() {
+  document.getElementById('toast-overlay').classList.remove('active');
+}
+
+// 点击 overlay 关闭
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', (e) => {
+    if (e.target === o) {
+      o.classList.remove('active');
+    }
+  });
+});
+
+// === 签到 ===
+function showCheckin() {
+  showToast(
+    '📍 当前位置:孟悟村梨享田园广场<br>📅 签到时间:2026-05-28 09:15<br>✓ 已成功核销今日研学场次<br><br><small style="color: var(--ink-light);">基于LBS自动核销,无需手动扫码</small>',
+    '✓ 核销签到成功'
+  );
+}
+
+// === 沙盘游戏选项 ===
+function selectGameOption(el, isCorrect) {
+  el.parentElement.querySelectorAll('.form-radio').forEach(r => {
+    r.classList.remove('selected');
+    r.style.pointerEvents = 'none';
+  });
+  el.classList.add('selected');
+  el.style.background = isCorrect
+    ? 'linear-gradient(135deg, var(--pear-leaf-light), var(--pear-leaf))'
+    : 'linear-gradient(135deg, #E89A8A, var(--cinnabar))';
+  el.style.color = 'white';
+  el.style.borderColor = isCorrect ? 'var(--pear-leaf)' : 'var(--cinnabar)';
+
+  setTimeout(() => {
+    if (isCorrect) {
+      showToast(
+        '✨ 答对啦!康熙帝是首位将京白梨列为皇家贡品的皇帝。<br><br>🪙 +3 两金币 · 通往「运输Ⅱ」之路已开启',
+        '驿丞为您放行'
+      );
+    } else {
+      showToast(
+        '答错啦~ 正确答案是 <strong>B. 康熙帝</strong><br><br>🪙 -1 两金币 · 仍可继续前行,但封赏减半',
+        '驿丞摇了摇头'
+      );
+    }
+  }, 400);
+}
+
+// === 录音按钮 ===
+function toggleRecord(el) {
+  el.classList.toggle('recording');
+  if (el.classList.contains('recording')) {
+    el.style.background = 'linear-gradient(135deg, var(--pear-leaf-light), var(--pear-leaf-deep))';
+    el.innerHTML = '⏸';
+    showToast(
+      '🎙 录音功能演示中...<br>实际部署时,系统将调用浏览器录音API,完成后上传至服务器,由AI从声音/逻辑/情感/台风四维度评分。',
+      '开始录音'
+    );
+  } else {
+    el.style.background = '';
+    el.innerHTML = '🎙';
+  }
+}
+
+// =========================================================
+// 动态渲染:一日研学行程
+// =========================================================
+function renderOneDayTimeline() {
+  const container = document.getElementById('one-day-timeline');
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  container.innerHTML = ONE_DAY_SCHEDULE.map(item => `
+    <div class="timeline-item">
+      <div class="timeline-time">${item.time}</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-location">📍 ${item.location}</div>
+        <div class="timeline-title">
+          ${item.tag ? `<span class="timeline-tag">${item.tag}</span>` : ''}
+          ${item.title}
+        </div>
+        <div class="timeline-desc">${item.desc}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =========================================================
+// 动态渲染:五日研学行程
+// =========================================================
+function renderFiveDaySchedule() {
+  const container = document.getElementById('five-day-schedule');
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  container.innerHTML = FIVE_DAY_SCHEDULE.map((day, idx) => `
+    <div class="schedule-day ${idx === 0 ? 'expanded' : ''}">
+      <div class="schedule-day-header" onclick="toggleSchedule(this)">
+        <div class="schedule-day-title">
+          <div class="schedule-day-num">${['一','二','三','四','五'][day.day-1]}</div>
+          <div class="schedule-day-info">
+            <h3>Day ${day.day} · ${day.title}</h3>
+            <p>${day.subtitle}</p>
+          </div>
+        </div>
+        <span class="schedule-toggle">▼</span>
+      </div>
+      <div class="schedule-timeline">
+        ${day.items.map(item => `
+          <div class="timeline-item">
+            <div class="timeline-time">${item.time}</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-location">📍 ${item.location}</div>
+              <div class="timeline-title">
+                ${item.tag ? `<span class="timeline-tag">${item.tag}</span>` : ''}
+                ${item.title}
+              </div>
+              <div class="timeline-desc">${item.desc}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// =========================================================
+// 动态渲染:联系人
+// =========================================================
+function renderContacts() {
+  const container = document.getElementById('contacts-content');
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  // 按 group 分组
+  const groups = {};
+  CONTACTS.forEach(c => {
+    if (!groups[c.group]) groups[c.group] = [];
+    groups[c.group].push(c);
+  });
+
+  const groupIcons = {
+    '项目负责': '📋',
+    '学术指导': '🎓',
+    '食宿保障': '🏨',
+    '课程教练': '🎯',
+    '应急医疗': '🚑',
+    '监督投诉': '⚠️'
+  };
+
+  container.innerHTML = Object.keys(groups).map(group => `
+    <div class="card">
+      <div class="card-title">
+        <span class="card-title-icon">${groupIcons[group] || '📞'}</span>
+        ${group}
+      </div>
+      <div>
+        ${groups[group].map(c => `
+          <div class="contact-item">
+            <div class="contact-avatar">${c.name.charAt(0)}</div>
+            <div class="contact-info">
+              <div class="contact-name">${c.name}</div>
+              <div class="contact-role">${c.role}</div>
+            </div>
+            <a href="tel:${c.phone}" class="contact-phone">📞 ${c.phone.length > 11 ? c.phone : c.phone.substr(0,3) + '-' + c.phone.substr(3,4) + '-' + c.phone.substr(7)}</a>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  // 在最末尾加一条提示
+  container.innerHTML += `
+    <div class="card" style="background: rgba(178, 52, 43, 0.05); border-left: 4px solid var(--cinnabar);">
+      <div class="card-content">
+        <p style="font-size: 13px; color: var(--ink-black); font-weight: 500; margin-bottom: 4px;">💡 紧急时刻请优先拨打:</p>
+        <p style="font-size: 12px;">• 研学总导师 138-1010-1234</p>
+        <p style="font-size: 12px;">• 卫生所急诊 010-6985-1120</p>
+        <p style="font-size: 12px;">• 110 / 120 / 119</p>
+      </div>
+    </div>
+  `;
+}
+
+// =========================================================
+// 动态渲染:新闻列表
+// =========================================================
+function renderNewsList() {
+  const container = document.getElementById('news-list');
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  container.innerHTML = `
+    <div class="card" style="background: linear-gradient(135deg, rgba(178, 52, 43, 0.06), rgba(201, 169, 97, 0.08)); border-left: 4px solid var(--cinnabar);">
+      <div class="card-content">
+        <p style="font-size: 12px;"><strong style="color: var(--cinnabar);">📷 图片直播</strong> · 军庄镇研学服务平台官方发布</p>
+        <p style="font-size: 11px; color: var(--ink-light); margin-top: 4px;">研学动态、课程速递、营地纪实、孩子们的精彩瞬间</p>
+      </div>
+    </div>
+  ` + NEWS_LIST.map(n => `
+    <div class="news-item" onclick="showNewsDetail(${n.id})">
+      <div class="news-image" style="background: ${n.image};">
+        <div class="news-tag">${n.tag}</div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; color: white; z-index: 1;">
+          <div style="font-size: 36px; line-height: 1;">${n.icon}</div>
+        </div>
+      </div>
+      <div class="news-body">
+        <div class="news-title">${n.title}</div>
+        <div class="news-excerpt">${n.excerpt}</div>
+        <div class="news-footer">
+          <span>${n.date}</span>
+          <div class="news-footer-meta">
+            <span>👁 ${n.views}</span>
+            <span>❤ ${n.likes}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// === 新闻详情 ===
+function showNewsDetail(id) {
+  const news = NEWS_LIST.find(n => n.id === id);
+  if (!news) return;
+
+  const container = document.getElementById('news-detail-content');
+  container.innerHTML = `
+    <div class="news-item" style="border: none; box-shadow: none; background: transparent;">
+      <div class="news-image" style="background: ${news.image}; height: 200px; border-radius: var(--radius-md);">
+        <div class="news-tag">${news.tag}</div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; color: white; z-index: 1;">
+          <div style="font-size: 48px; line-height: 1;">${news.icon}</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 4px;">
+      <h1 style="font-family: var(--font-serif); font-size: 22px; color: var(--ink-black); line-height: 1.4; margin: 16px 0 10px;">${news.title}</h1>
+      <div style="display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--ink-light); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px dashed var(--border-soft);">
+        <span>军庄镇研学服务平台</span>
+        <span>·</span>
+        <span>${news.date}</span>
+        <span>·</span>
+        <span>👁 ${news.views} 阅读</span>
+      </div>
+      <div style="font-size: 14px; color: var(--ink-black); line-height: 1.85;">
+        <p style="margin-bottom: 14px;">${news.excerpt}</p>
+        <p style="margin-bottom: 14px;">活动现场,来自各地的研学者们围绕京白梨400年贡梨文化主线,在专家学者、非遗传承人、老梨农的共同引导下,完成了从文化溯源到田野探查、从美食体验到非遗传承的完整学习闭环。每一位参与者都在百年古树下、在皇家贡梨的故乡,完成了一次属于自己的「文化守护者」的成长仪式。</p>
+        <p style="margin-bottom: 14px;">研学结束后,孩子们将自己的作品上传至「梨娃数字课堂」小程序,与全国研学者分享他们的发现与感动。秋天再到来时,他们还将收到《秋日采摘邀请函》——回到军庄,摘下自己春天授粉的那颗京白梨。这种<strong style="color: var(--cinnabar);">「春授粉—秋回访」</strong>的跨季节情感闭环,让研学不再是一次性消费,而成为一段长期的乡土情感联结。</p>
+        <p style="text-align: center; color: var(--ink-light); font-size: 12px; margin: 20px 0; padding: 12px; background: rgba(232, 217, 181, 0.3); border-radius: 6px;">— 把课堂搬进百年梨园 · 让研学成为乡村振兴的新质引擎 —</p>
+      </div>
+      <div style="display: flex; gap: 12px; margin: 24px 0;">
+        <div style="flex: 1; text-align: center; padding: 12px; background: var(--paper-white); border-radius: var(--radius-sm); border: 1px solid var(--border-soft);" onclick="showToast('已点赞')">
+          <div style="font-size: 18px; color: var(--cinnabar);">❤</div>
+          <div style="font-size: 11px; color: var(--ink-gray); margin-top: 2px;">${news.likes} 点赞</div>
+        </div>
+        <div style="flex: 1; text-align: center; padding: 12px; background: var(--paper-white); border-radius: var(--radius-sm); border: 1px solid var(--border-soft);" onclick="showToast('已收藏到「我的收藏」')">
+          <div style="font-size: 18px; color: var(--imperial-gold);">⭐</div>
+          <div style="font-size: 11px; color: var(--ink-gray); margin-top: 2px;">收藏</div>
+        </div>
+        <div style="flex: 1; text-align: center; padding: 12px; background: var(--paper-white); border-radius: var(--radius-sm); border: 1px solid var(--border-soft);" onclick="showToast('分享给好友')">
+          <div style="font-size: 18px; color: var(--pear-leaf-deep);">↗</div>
+          <div style="font-size: 11px; color: var(--ink-gray); margin-top: 2px;">分享</div>
+        </div>
+      </div>
+    </div>
+  `;
+  navigateTo('news-detail');
+}
+
+// =========================================================
+// 动态渲染:寄语墙
+// =========================================================
+function renderMessages() {
+  const container = document.getElementById('messages-list');
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  container.innerHTML = MESSAGES.map(m => {
+    const stars = '★'.repeat(m.rating) + '☆'.repeat(5 - m.rating);
+    return `
+      <div class="message-card">
+        <div class="message-header">
+          <div class="message-avatar">${m.name.charAt(0)}</div>
+          <div class="message-meta">
+            <div class="message-name">${m.name}</div>
+            <div class="message-time">${m.date}</div>
+          </div>
+          <div class="message-rating">${stars}</div>
+        </div>
+        <div class="message-body">${m.content}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// =========================================================
+// 动态渲染:化石图鉴
+// =========================================================
+function renderFossils() {
+  const container = document.getElementById('fossil-grid');
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  container.innerHTML = FOSSILS.map(f => `
+    <div class="fossil-card ${f.unlocked ? 'unlocked' : 'locked'}" onclick="${f.unlocked ? `showToast('已收藏的化石:<strong>${f.name}</strong> (${f.era})<br><br>解锁奖励:经验值 +10,已计入研学档案')` : `showToast('该化石尚未解锁<br><br>提示:前往灰峪化石山田野考察,拍照上传即可解锁')`}">
+      <div class="fossil-image">${f.unlocked ? f.emoji : ''}</div>
+      <div class="fossil-info">
+        <div class="fossil-name">${f.unlocked ? f.name : '???'}</div>
+        <div class="fossil-meta">${f.unlocked ? f.era : '未解锁'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =========================================================
+// 动态渲染:沙盘游戏阶段
+// =========================================================
+function renderGameStages() {
+  const container = document.getElementById('game-stages');
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  container.innerHTML = GAME_STAGES.map(s => `
+    <div class="game-stage ${s.status}">
+      <span class="game-stage-num">${s.num}</span>
+      ${s.name}
+    </div>
+  `).join('');
+}
+
+// =========================================================
+// 启动
+// =========================================================
+document.addEventListener('DOMContentLoaded', () => {
+  // 默认显示主页
+  console.log('🍐 军庄镇研学服务平台已就绪');
+});
+
+// === 防止双击缩放(iOS) ===
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) e.preventDefault();
+  lastTouchEnd = now;
+}, { passive: false });
+
+</script>
+</body>
+</html>
