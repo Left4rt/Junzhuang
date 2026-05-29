@@ -207,6 +207,10 @@ body::before {
   border: 2px solid var(--pear-leaf-deep);
 }
 
+.hero-bell.read::after {
+  display: none;
+}
+
 .hero-title {
   font-family: var(--font-serif);
   font-weight: 700;
@@ -2088,6 +2092,58 @@ body::before {
   background: var(--paper-white);
 }
 
+/* === 顶部下拉海报(下拉搜索式) === */
+.poster-pull {
+  overflow: hidden;
+  height: 54px;                 /* 默认仅露出一点点 */
+  /* 弹簧回弹曲线 */
+  transition: height 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: linear-gradient(135deg, var(--pear-leaf-deep) 0%, #2C3539 100%);
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.poster-pull.dragging {
+  transition: none;             /* 拖动时跟手,无过渡 */
+}
+.poster-inner {
+  width: 100%;
+}
+.poster-img {
+  width: 100%;
+  display: block;
+}
+.poster-fallback {
+  display: none;                /* 图片加载失败时由 JS/onerror 切换为 flex */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  color: #fff;
+  text-align: center;
+  padding: 30px 22px;
+}
+.poster-hint {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  text-align: center;
+  font-size: 11px;
+  color: #fff;
+  letter-spacing: 2px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+  padding: 12px 0 6px;
+  pointer-events: none;
+  animation: posterHintBounce 1.6s ease-in-out infinite;
+}
+.poster-pull.expanded .poster-hint {
+  animation: none;
+}
+@keyframes posterHintBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50% { transform: translateY(3px); opacity: 1; }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='60' r='30' fill='%23F8E9C8'/%3E%3Cpath d='M50 30 Q50 20 55 15' stroke='%236B8E4E' fill='none' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M55 25 Q65 20 68 28' fill='%236B8E4E'/%3E%3C/svg%3E">
 </head>
@@ -2096,6 +2152,20 @@ body::before {
 
   <!-- ============ 视图1:主页 ============ -->
   <section class="view active" data-view="home">
+    <!-- 顶部下拉海报:默认仅露一点,下拉展开 -->
+    <div class="poster-pull" id="posterPull" onclick="posterClick()">
+      <div class="poster-inner" id="posterInner">
+        <img src="images/poster.jpg" alt="军庄研学海报" class="poster-img"
+             onerror="this.style.display='none';var f=document.getElementById('posterFallback');if(f)f.style.display='flex';">
+        <div class="poster-fallback" id="posterFallback">
+          <div style="font-size:42px;">🍐</div>
+          <div style="font-family:var(--font-display);font-size:19px;letter-spacing:3px;margin-top:10px;">军庄 · 梨乡研学海报</div>
+          <div style="font-size:11px;opacity:0.82;margin-top:8px;line-height:1.7;">把海报图片命名为 <strong>images/poster.jpg</strong><br>放入 GitHub 仓库,这里就会自动显示</div>
+        </div>
+      </div>
+      <div class="poster-hint" id="posterHint">↓ 下拉查看完整海报</div>
+    </div>
+
     <!-- Hero -->
     <div class="hero">
       <div class="hero-top">
@@ -2103,7 +2173,7 @@ body::before {
           <div class="hero-brand-icon">🍐</div>
           <div class="hero-brand-text">军庄·梨乡</div>
         </div>
-        <div class="hero-bell" onclick="showToast('您有3条新消息')">🔔</div>
+        <div class="hero-bell" id="heroBell" onclick="navigateTo('messages')">🔔</div>
       </div>
       <div class="hero-title">梨乡京韵 · 军庄四季</div>
       <div class="hero-subtitle">JUNZHUANG  ·  PEAR  STUDY</div>
@@ -2191,6 +2261,15 @@ body::before {
       <div style="margin-bottom:8px; font-family: var(--font-display); font-size:13px; color: var(--imperial-gold); letter-spacing: 4px;">— 北京·门头沟·军庄镇 —</div>
       <div>京白梨400年贡梨文化 × 中华农业文化遗产</div>
     </div>
+  </section>
+
+  <!-- ============ 视图:消息通知 ============ -->
+  <section class="view" data-view="messages">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('home')">‹</div>
+      <div class="page-title">消息通知</div>
+    </div>
+    <div class="page-content" id="messages-content"></div>
   </section>
 
   <!-- ============ 视图2:活动日程 ============ -->
@@ -3609,6 +3688,18 @@ const ACCOMMODATIONS = [
 ];
 
 
+// === 消息通知数据(模拟) ===
+let INBOX = [
+  { id: 1, icon: "📅", title: "夏季研学营预约开启", time: "2026-05-28 09:00", unread: true,
+    body: "「一颗贡梨读懂京西」夏季研学营现已开放预约,7—8月共6个班期,每期名额有限。点击主页「报名入口」即可登记,拼团成功还可享团体优惠。" },
+  { id: 2, icon: "🎫", title: "您的报名已受理", time: "2026-05-27 16:30", unread: true,
+    body: "您提交的「五日深度」研学报名已被受理。专属研学导师李老师将在24小时内与您电话联系,确认出团日期、过敏源登记与食宿细节,请保持电话畅通。" },
+  { id: 3, icon: "🏆", title: "恭喜获得「贡梨文化小使者」证书", time: "2026-05-20 18:00", unread: true,
+    body: "在上一期研学营中您表现优异,已获颁《贡梨文化小使者》电子证书,可前往「个人中心 — 我的证书」查看与下载,欢迎分享到朋友圈。" },
+  { id: 4, icon: "🍐", title: "秋日采摘邀请函(预告)", time: "2026-05-18 10:00", unread: false,
+    body: "还记得春天您亲手授粉的那颗京白梨吗?今秋9月,我们将寄出《秋日采摘邀请函》,邀您回到军庄,亲手摘下「属于自己的那颗梨」,完成春授粉—秋回访的约定。" }
+];
+
 // ===== main.js =====
 /* =========================================================
    军庄镇研学服务平台 · 主交互脚本
@@ -3693,6 +3784,9 @@ function initView(viewName) {
       break;
     case 'classroom-diary':
       renderDiary();
+      break;
+    case 'messages':
+      renderInbox();
       break;
   }
 }
@@ -4379,8 +4473,128 @@ function saveDiary() {
 document.addEventListener('DOMContentLoaded', () => {
   // 默认显示主页,并写入历史起点,确保浏览器返回键可用
   history.replaceState({ view: 'home' }, '', '#home');
+  initPosterPull();   // 初始化顶部下拉海报
+  updateBellBadge();  // 根据未读数刷新铃铛红点
   console.log('🍐 军庄镇研学服务平台已就绪');
 });
+
+// =========================================================
+// 顶部下拉海报(下拉搜索式 · 带弹簧回弹)
+// =========================================================
+const POSTER_COLLAPSED = 54;
+let posterDragged = false;
+
+function posterFullH() {
+  const i = document.getElementById('posterInner');
+  return i ? Math.max(i.offsetHeight, 120) : 380;
+}
+function expandPoster() {
+  const p = document.getElementById('posterPull'); if (!p) return;
+  p.classList.remove('dragging');
+  p.classList.add('expanded');
+  p.style.height = posterFullH() + 'px';
+  const h = document.getElementById('posterHint'); if (h) h.textContent = '↑ 上滑 / 点击收起';
+}
+function collapsePoster() {
+  const p = document.getElementById('posterPull'); if (!p) return;
+  p.classList.remove('dragging');
+  p.classList.remove('expanded');
+  p.style.height = POSTER_COLLAPSED + 'px';
+  const h = document.getElementById('posterHint'); if (h) h.textContent = '↓ 下拉查看完整海报';
+}
+function togglePoster() {
+  const p = document.getElementById('posterPull'); if (!p) return;
+  p.classList.contains('expanded') ? collapsePoster() : expandPoster();
+}
+// 点击切换;若刚刚发生拖动则忽略这次 click,避免误触
+function posterClick() {
+  if (posterDragged) { posterDragged = false; return; }
+  togglePoster();
+}
+function initPosterPull() {
+  const p = document.getElementById('posterPull'); if (!p) return;
+  collapsePoster();
+  let touching = false, startY = 0, baseH = POSTER_COLLAPSED, maxH = 380;
+
+  window.addEventListener('touchstart', (e) => {
+    if (currentView !== 'home') return;
+    if (window.scrollY > 3) return;        // 仅在页面顶部触发
+    touching = true; posterDragged = false;
+    startY = e.touches[0].clientY;
+    baseH = p.classList.contains('expanded') ? posterFullH() : POSTER_COLLAPSED;
+    maxH = posterFullH();
+    p.classList.add('dragging');
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!touching) return;
+    const dy = e.touches[0].clientY - startY;
+    if (Math.abs(dy) > 6) posterDragged = true;
+    let target = baseH + dy;
+    // 橡皮筋阻尼:超出上下限时位移衰减,产生弹性手感
+    if (target > maxH) target = maxH + (target - maxH) * 0.25;
+    if (target < POSTER_COLLAPSED) target = POSTER_COLLAPSED - (POSTER_COLLAPSED - target) * 0.4;
+    p.style.height = target + 'px';
+    if (dy > 0 && window.scrollY <= 0) e.preventDefault();  // 下拉时接管手势,防止页面回弹
+  }, { passive: false });
+
+  window.addEventListener('touchend', () => {
+    if (!touching) return;
+    touching = false;
+    p.classList.remove('dragging');       // 恢复 transition → 触发弹簧动画
+    const curH = p.getBoundingClientRect().height;
+    // 阈值:拉过 35% 才完全展开,否则弹回(轻微滑动不会全开)
+    const threshold = POSTER_COLLAPSED + (maxH - POSTER_COLLAPSED) * 0.35;
+    (curH > threshold) ? expandPoster() : collapsePoster();
+  }, { passive: true });
+}
+
+// =========================================================
+// 消息通知中心
+// =========================================================
+function renderInbox() {
+  const c = document.getElementById('messages-content');
+  if (!c) return;
+  const unread = INBOX.filter(m => m.unread).length;
+  c.innerHTML = `
+    <div class="card" style="background: linear-gradient(135deg, rgba(178, 52, 43, 0.06), rgba(201, 169, 97, 0.08)); border-left: 4px solid var(--cinnabar);">
+      <div class="card-content">
+        <p style="font-size: 12px;"><strong style="color: var(--cinnabar);">🔔 消息通知</strong> · 当前 ${unread} 条未读</p>
+        <p style="font-size: 11px; color: var(--ink-light); margin-top: 4px;">报名进度、证书发放、活动预告将第一时间通知您</p>
+      </div>
+    </div>
+  ` + INBOX.map(m => `
+    <div class="card" id="msg-${m.id}" style="cursor: pointer; ${m.unread ? 'border-left: 4px solid var(--cinnabar);' : ''}" onclick="readMessage(${m.id})">
+      <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <div class="menu-icon" style="margin-right: 0;">${m.icon}</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 14px; font-weight: 600; color: var(--ink-black);">${m.title}</span>
+            ${m.unread ? '<span style="width: 7px; height: 7px; background: var(--cinnabar); border-radius: 50%; display: inline-block; flex-shrink: 0;"></span>' : ''}
+          </div>
+          <div style="font-size: 11px; color: var(--ink-light); margin: 3px 0 8px;">${m.time}</div>
+          <div style="font-size: 12.5px; color: var(--ink-gray); line-height: 1.65;">${m.body}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function readMessage(id) {
+  const m = INBOX.find(x => x.id === id);
+  if (!m) return;
+  m.unread = false;
+  renderInbox();
+  updateBellBadge();
+  showToast(m.body, m.icon + ' ' + m.title);
+}
+
+// 主页铃铛红点:无未读时隐藏
+function updateBellBadge() {
+  const unread = INBOX.filter(m => m.unread).length;
+  const bell = document.getElementById('heroBell');
+  if (bell) bell.classList.toggle('read', unread === 0);
+}
 
 // === 防止双击缩放(iOS) ===
 let lastTouchEnd = 0;
