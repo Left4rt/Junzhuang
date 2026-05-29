@@ -1953,6 +1953,141 @@ body::before {
   background: rgba(201, 169, 97, 0.5);
 }
 
+/* === 滑动打分 === */
+.rating-slider-wrap {
+  text-align: center;
+  padding: 10px 4px 4px;
+}
+.rating-stars {
+  font-size: 34px;
+  color: var(--imperial-gold);
+  letter-spacing: 4px;
+  margin-bottom: 14px;
+  line-height: 1;
+}
+.rating-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--gold-light), var(--imperial-gold));
+  outline: none;
+}
+.rating-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--paper-white);
+  border: 3px solid var(--imperial-gold);
+  box-shadow: var(--shadow-medium);
+  cursor: pointer;
+}
+.rating-slider::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--paper-white);
+  border: 3px solid var(--imperial-gold);
+  cursor: pointer;
+}
+.rating-label {
+  font-size: 12px;
+  color: var(--ink-gray);
+  margin-top: 12px;
+}
+
+/* === AI 赋能说明 === */
+.ai-note {
+  background: linear-gradient(135deg, rgba(61, 92, 63, 0.06), rgba(201, 169, 97, 0.12));
+  border: 1px dashed var(--pear-leaf-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.ai-note-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+.ai-note-text {
+  font-size: 11.5px;
+  color: var(--ink-gray);
+  line-height: 1.65;
+}
+.ai-note-text strong {
+  color: var(--pear-leaf-deep);
+}
+.ai-note-text .ai-model {
+  color: var(--cinnabar);
+  font-weight: 700;
+}
+
+/* === 地层柱状图工具 === */
+.strata-tool {
+  background: var(--paper-white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-card);
+}
+.strata-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--ink-light);
+  margin-bottom: 8px;
+}
+.strata-layer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  padding: 0 12px;
+  cursor: pointer;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.45);
+  transition: transform 0.2s, filter 0.2s;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.strata-layer:active { transform: scale(0.99); }
+.strata-layer:hover { filter: brightness(1.05); }
+.strata-layer .sl-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+}
+.strata-layer .sl-age {
+  font-size: 10px;
+  opacity: 0.92;
+  margin-left: auto;
+}
+.strata-unconformity {
+  text-align: center;
+  font-size: 10px;
+  color: var(--cinnabar);
+  background: repeating-linear-gradient(90deg, #fff, #fff 6px, #E8DFC8 6px, #E8DFC8 12px);
+  padding: 4px 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* === 故事采集卡地图 === */
+.story-map {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 14px;
+  background: var(--paper-white);
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='60' r='30' fill='%23F8E9C8'/%3E%3Cpath d='M50 30 Q50 20 55 15' stroke='%236B8E4E' fill='none' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M55 25 Q65 20 68 28' fill='%236B8E4E'/%3E%3C/svg%3E">
 </head>
@@ -2319,6 +2454,18 @@ body::before {
       <div class="page-title">报名入口</div>
     </div>
     <div class="page-content">
+      <!-- 联系我们 -->
+      <div class="card" style="background: linear-gradient(135deg, rgba(107, 142, 78, 0.08), rgba(201, 169, 97, 0.12)); border: 1px solid rgba(201, 169, 97, 0.3);">
+        <div class="card-title"><span class="card-title-icon">📞</span>联系我们</div>
+        <div class="card-content">
+          <p style="font-size: 13px;">报名咨询 · 行程定制 · 团体洽谈,欢迎随时联系军庄镇研学服务平台,我们将为您提供一对一答疑。</p>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+          <a href="tel:010-69858888" class="btn" style="text-decoration: none; text-align: center; padding: 12px; letter-spacing: 1px;">📞 咨询热线</a>
+          <button type="button" class="btn btn-secondary" style="padding: 12px; letter-spacing: 1px;" onclick="navigateTo('tips-contacts')">查看全部联系人 ›</button>
+        </div>
+      </div>
+
       <div class="tabs">
         <div class="tab active" data-tab="personal">个人报名</div>
         <div class="tab" data-tab="group">团体报名</div>
@@ -2332,6 +2479,7 @@ body::before {
             <p style="font-size: 12px;">由于无团体编制,部分团体活动暂无随团专属引导;</p>
             <p style="font-size: 12px;">如未拼团成功,大部分时间需要您自行了解 (类似自助旅游,平台仍可全程辅助)。</p>
             <p style="font-size: 12px; margin-top: 6px;">建议优先选择一日研学产品或等待拼团。</p>
+            <p style="font-size: 12px; margin-top: 6px; color: var(--pear-leaf-deep);">🎓 大学生 / 研究生群体:欢迎报名,可参与京白梨生态密码 PBL、地质科考、京郊经济学等研究型课程,平台可提供课题深化与论文辅导。</p>
           </div>
         </div>
 
@@ -2350,6 +2498,7 @@ body::before {
               <div class="form-radio" onclick="selectRadio(this)">小学</div>
               <div class="form-radio selected" onclick="selectRadio(this)">初中</div>
               <div class="form-radio" onclick="selectRadio(this)">高中</div>
+              <div class="form-radio" onclick="selectRadio(this)">大学生</div>
               <div class="form-radio" onclick="selectRadio(this)">家长</div>
             </div>
           </div>
@@ -2393,6 +2542,7 @@ body::before {
             <label class="form-label">团体性质</label>
             <div class="form-radio-group">
               <div class="form-radio selected" onclick="selectRadio(this)">中小学校</div>
+              <div class="form-radio" onclick="selectRadio(this)">高校院系</div>
               <div class="form-radio" onclick="selectRadio(this)">教育机构</div>
               <div class="form-radio" onclick="selectRadio(this)">夏冬令营</div>
               <div class="form-radio" onclick="selectRadio(this)">企事业单位</div>
@@ -2417,6 +2567,7 @@ body::before {
               <div class="form-radio selected" onclick="selectRadio(this)">小学高年级</div>
               <div class="form-radio" onclick="selectRadio(this)">初中</div>
               <div class="form-radio" onclick="selectRadio(this)">高中</div>
+              <div class="form-radio" onclick="selectRadio(this)">大学</div>
             </div>
           </div>
           <div class="form-group">
@@ -2565,7 +2716,7 @@ body::before {
       <div class="card" style="background: linear-gradient(135deg, rgba(232, 217, 181, 0.4), rgba(201, 169, 97, 0.15));">
         <div class="card-title"><span class="card-title-icon">✨</span>留下您的研学感悟</div>
         <div class="card-content">
-          <p style="font-size: 12px;">您的每一句反馈,都是梨乡研学不断进步的动力。我们珍视每位研学者的真实心声。</p>
+          <p style="font-size: 12px;">您的每一句反馈,都是军庄研学不断进步的动力。我们珍视每一位走进军庄镇、走进京白梨梨乡的研学者的真实心声。</p>
         </div>
       </div>
 
@@ -2576,11 +2727,10 @@ body::before {
         </div>
         <div class="form-group">
           <label class="form-label">整体评价</label>
-          <div class="form-radio-group">
-            <div class="form-radio selected" onclick="selectRadio(this)">★★★★★</div>
-            <div class="form-radio" onclick="selectRadio(this)">★★★★</div>
-            <div class="form-radio" onclick="selectRadio(this)">★★★</div>
-            <div class="form-radio" onclick="selectRadio(this)">★★</div>
+          <div class="rating-slider-wrap">
+            <div class="rating-stars" id="rating-stars">★★★★★</div>
+            <input type="range" min="1" max="5" step="1" value="5" class="rating-slider" id="rating-slider" oninput="updateRating(this.value)">
+            <div class="rating-label" id="rating-label">非常满意（5 分）· 左右滑动打分</div>
           </div>
         </div>
         <div class="form-group">
@@ -2600,7 +2750,7 @@ body::before {
       </form>
 
       <div class="section-title" style="margin-top: 24px; padding-left: 0;">
-        <span>梨乡留言</span>
+        <span>军庄研学留言</span>
         <span class="section-en">MESSAGES</span>
       </div>
       <div id="messages-list"></div>
@@ -2639,15 +2789,15 @@ body::before {
         <div class="classroom-module-body">
           <div class="classroom-feature" onclick="navigateTo('classroom-game')">
             <div class="feature-icon">🏛</div>
-            <div class="feature-text">进入沙盘游戏<small>角色扮演 · 知识闯关</small></div>
+            <div class="feature-text">进入沙盘游戏<small>角色扮演 · 8幕闯关 · 实时博弈</small></div>
             <span class="feature-arrow">›</span>
           </div>
-          <div class="classroom-feature" onclick="showToast('查看本次研学的8幕历史进度')">
-            <div class="feature-icon">📜</div>
-            <div class="feature-text">我的闯关记录<small>已通过 3/8 关</small></div>
+          <div class="classroom-feature" onclick="navigateTo('classroom-quiz')">
+            <div class="feature-icon">📝</div>
+            <div class="feature-text">贡梨答题练习场<small>闯关前热身 · 知识刷题</small></div>
             <span class="feature-arrow">›</span>
           </div>
-          <div class="classroom-feature" onclick="showToast('查看历届「首席皇商」名单')">
+          <div class="classroom-feature" onclick="navigateTo('classroom-leaderboard')">
             <div class="feature-icon">🏆</div>
             <div class="feature-text">皇商排行榜<small>查看本届首席皇商</small></div>
             <span class="feature-arrow">›</span>
@@ -2675,7 +2825,7 @@ body::before {
             <div class="feature-text">我的化石图鉴<small>已收集 3/6 种</small></div>
             <span class="feature-arrow">›</span>
           </div>
-          <div class="classroom-feature" onclick="showToast('地层柱状图工具')">
+          <div class="classroom-feature" onclick="navigateTo('classroom-strata')">
             <div class="feature-icon">📊</div>
             <div class="feature-text">地层柱状图工具<small>在线绘制 · 模板填空</small></div>
             <span class="feature-arrow">›</span>
@@ -2698,12 +2848,12 @@ body::before {
             <div class="feature-text">录制我的演讲<small>录音/视频上传 · 三要素打分</small></div>
             <span class="feature-arrow">›</span>
           </div>
-          <div class="classroom-feature" onclick="showToast('故事采集卡(3张点位卡)')">
+          <div class="classroom-feature" onclick="navigateTo('classroom-storycards')">
             <div class="feature-icon">📝</div>
             <div class="feature-text">故事采集卡<small>过街楼 · 古道 · 将军山</small></div>
             <span class="feature-arrow">›</span>
           </div>
-          <div class="classroom-feature" onclick="showToast('查看其他研学者的演讲')">
+          <div class="classroom-feature" onclick="navigateTo('classroom-showcase')">
             <div class="feature-icon">🎬</div>
             <div class="feature-text">少年说展演厅<small>欣赏同伴的演讲作品</small></div>
             <span class="feature-arrow">›</span>
@@ -2722,7 +2872,7 @@ body::before {
             <div class="feature-text">数字梨乡护照<small>已收集 6 枚印章</small></div>
             <span class="feature-arrow">›</span>
           </div>
-          <div class="classroom-feature" onclick="showToast('日记本同步至云端')">
+          <div class="classroom-feature" onclick="navigateTo('classroom-diary')">
             <div class="feature-icon">📔</div>
             <div class="feature-text">研学日记本<small>每日感悟 · 云端同步</small></div>
             <span class="feature-arrow">›</span>
@@ -2756,10 +2906,15 @@ body::before {
       </div>
 
       <!-- 上传区 -->
-      <div class="upload-zone" onclick="showToast('调起相机/相册功能演示')">
+      <div class="upload-zone" onclick="showToast('调起相机/相册功能演示<br><br>实际部署后,照片将由 <strong>DeepSeek-V4-Pro</strong> 视觉大模型自动辨识化石门类并解锁图鉴。','📷 AI 化石辨识')">
         <div class="upload-icon">📷</div>
         <div class="upload-title">拍照上传化石照片</div>
-        <div class="upload-hint">AI将自动辨识化石种类 · 解锁图鉴</div>
+        <div class="upload-hint">AI 将自动辨识化石种类 · 解锁图鉴</div>
+      </div>
+
+      <div class="ai-note">
+        <span class="ai-note-icon">🤖</span>
+        <span class="ai-note-text"><strong>AI 赋能</strong>:本模块的化石智能辨识,由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持,可为研学产品深度引入 AI 赋能。</span>
       </div>
 
       <div class="card">
@@ -2809,8 +2964,8 @@ body::before {
         <div class="card-title"><span class="card-title-icon">👤</span>我的身份</div>
         <div class="card-content">
           <p style="font-size: 13px;"><strong style="color: var(--cinnabar);">梨农商队</strong> · 第3组</p>
-          <p style="font-size: 12px; margin-top: 6px;">任务:将15筐贡梨从军庄运至紫禁城,通过8幕闯关获得最高封赏</p>
-          <p style="font-size: 11px; color: var(--ink-light); margin-top: 6px;">当前金币: <strong style="color: var(--imperial-gold);">8 两</strong> · 贡梨损耗: 2 筐 / 15 筐</p>
+          <p style="font-size: 12px; margin-top: 6px;">任务:将15筐贡梨从军庄运至紫禁城,层层闯关获得最高封赏</p>
+          <p style="font-size: 11px; color: var(--ink-light); margin-top: 6px;">当前金币: <strong style="color: var(--imperial-gold);">14 两</strong> · 贡梨损耗: 3 筐 / 15 筐 · 已闯 5/7 幕</p>
         </div>
       </div>
 
@@ -2818,15 +2973,15 @@ body::before {
         <div style="margin-bottom: 12px; font-family: var(--font-display); font-size: 14px; color: var(--ink-black); letter-spacing: 1px;">📜 闯关进度</div>
         <div class="game-stages" id="game-stages"></div>
         <div class="game-status">
-          <strong>当前幕:第四幕「驿站小憩」</strong><br>
-          🏯 您来到京西第一驿站,驿丞要您回答3道贡梨知识题,答对即可继续前行。
-          <br><br>📖 <em>"京白梨400年贡梨史中,首位将其列为皇家贡品的皇帝是?"</em>
+          <strong>当前幕:第六幕「盘查」</strong><br>
+          🏯 贡梨车队行至京城外的盘查关卡,城门税吏拦下车队,要您回答1道贡梨知识题验明正身,答对方可放行。
+          <br><br>📖 <em>"京白梨的原产地——老君堂、东山村一带,位于北京哪个区?"</em>
         </div>
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
-          <button class="form-radio" onclick="selectGameOption(this, false)">A. 乾隆帝</button>
-          <button class="form-radio" onclick="selectGameOption(this, true)">B. 康熙帝</button>
-          <button class="form-radio" onclick="selectGameOption(this, false)">C. 雍正帝</button>
-          <button class="form-radio" onclick="selectGameOption(this, false)">D. 嘉庆帝</button>
+          <button class="form-radio" onclick="selectGameOption(this, false)">A. 海淀区</button>
+          <button class="form-radio" onclick="selectGameOption(this, true)">B. 门头沟区</button>
+          <button class="form-radio" onclick="selectGameOption(this, false)">C. 昌平区</button>
+          <button class="form-radio" onclick="selectGameOption(this, false)">D. 房山区</button>
         </div>
       </div>
 
@@ -2834,7 +2989,7 @@ body::before {
         <div class="card-content">
           <p style="font-size: 12px; color: var(--ink-gray);">
             <strong style="color: var(--cinnabar);">💡 沙盘小提示</strong><br>
-            完整版游戏将在Day3晚间度假村活动厅展开,8幕推进:采摘→分拣→运输Ⅰ→驿站→运输Ⅱ→盘查→吆喝售卖→皇上召见。
+            完整版游戏将在Day3晚间度假村活动厅展开,7幕公开推进:采摘→分拣→运输Ⅰ→驿站→运输Ⅱ→盘查→吆喝售卖,通关后还将解锁<strong style="color: var(--cinnabar);">隐藏终幕「皇上召见」(???)</strong>。
             您将在现场与其他7组同台博弈,争夺<strong style="color: var(--imperial-gold);">「首席皇商」</strong>称号。
           </p>
         </div>
@@ -2854,6 +3009,11 @@ body::before {
         <div class="card-content">
           <p style="font-size: 12px;">使用「地点-遗存-历史作用-个人理解」四要素结构,讲一段3-5分钟的军庄历史故事,AI将从声音/逻辑/情感/台风四个维度为你打分。</p>
         </div>
+      </div>
+
+      <div class="ai-note">
+        <span class="ai-note-icon">🤖</span>
+        <span class="ai-note-text"><strong>AI 赋能</strong>:四维度演讲评分由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持,实现语音转写、逻辑分析与情感识别。</span>
       </div>
 
       <div class="text-center" style="padding: 16px 0;">
@@ -2908,6 +3068,137 @@ body::before {
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图16:贡梨答题练习场 ============ -->
+  <section class="view" data-view="classroom-quiz">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">贡梨答题练习场</div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="background: linear-gradient(135deg, rgba(201, 169, 97, 0.12), rgba(178, 52, 43, 0.06));">
+        <div class="card-title"><span class="card-title-icon">📝</span>闯关前热身</div>
+        <div class="card-content"><p style="font-size: 12px;">沙盘博弈每一幕都会考验你的贡梨知识。先在练习场刷几道题,正式闯关时就能多赢金币、少走弯路!</p></div>
+      </div>
+      <div class="progress-card" style="background: linear-gradient(135deg, var(--imperial-gold), var(--gold-deep));">
+        <div class="progress-title">🎯 本轮练习</div>
+        <div class="progress-stats" id="quiz-progress">第 1 题 · 已答对 0 题</div>
+        <div class="progress-bar"><div class="progress-fill" id="quiz-bar" style="width: 0%; background: linear-gradient(90deg, #fff, #FAF5E8);"></div></div>
+      </div>
+      <div class="card" id="quiz-card"></div>
+    </div>
+  </section>
+
+  <!-- ============ 视图17:皇商排行榜 ============ -->
+  <section class="view" data-view="classroom-leaderboard">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">皇商排行榜</div>
+    </div>
+    <div class="page-content" id="leaderboard-content"></div>
+  </section>
+
+  <!-- ============ 视图18:地层柱状图工具 ============ -->
+  <section class="view" data-view="classroom-strata">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">地层柱状图工具</div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="background: linear-gradient(135deg, rgba(138, 124, 94, 0.12), rgba(44, 53, 57, 0.06));">
+        <div class="card-title"><span class="card-title-icon">📊</span>灰峪化石山 · 地层柱状图(示意版)</div>
+        <div class="card-content"><p style="font-size: 12px;">点击任意地层,查看年代、岩性与典型化石。正式版支持「模板填空」——你可亲手把考察发现的化石拖入对应地层。</p></div>
+      </div>
+      <div class="strata-tool">
+        <div class="strata-axis"><span>⬆ 地表(新)</span><span>越往下 · 年代越古老 ⬇</span></div>
+        <div id="strata-column"></div>
+      </div>
+      <div class="card" id="strata-detail" style="display: none;"></div>
+      <div class="card" style="background: rgba(107, 142, 78, 0.06);">
+        <div class="card-title"><span class="card-title-icon">✏️</span>模板填空(练习)</div>
+        <div class="card-content" style="font-size: 12px;">
+          <p>1. 太原组中常见的高大乔木状化石是 <span style="color: var(--ink-light);">______</span>(提示:鳞木)</p>
+          <p>2. 不整合面代表两套地层之间存在 <span style="color: var(--ink-light);">______</span>(提示:沉积间断)</p>
+          <p>3. 含煤地层说明当时是 <span style="color: var(--ink-light);">______</span> 环境(提示:温暖湿润的沼泽森林)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图19:故事采集卡 ============ -->
+  <section class="view" data-view="classroom-storycards">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom-speech')">‹</div>
+      <div class="page-title">故事采集卡</div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="background: linear-gradient(135deg, rgba(178, 52, 43, 0.06), rgba(201, 169, 97, 0.1));">
+        <div class="card-title"><span class="card-title-icon">🗺</span>军庄三大故事点位</div>
+        <div class="card-content"><p style="font-size: 12px;">点击地图上的点位定位采集卡。每张卡按「地点-遗存-历史作用-个人理解」四要素填写,集齐3张即可解锁「梨乡少年说」演讲。</p></div>
+      </div>
+      <div class="story-map">
+        <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; display: block;">
+          <defs>
+            <linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FFFBF0"/><stop offset="1" stop-color="#F0E3C5"/>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="200" fill="url(#skyg)"/>
+          <path d="M0 120 L55 62 L105 112 L150 72 L210 122 L210 200 L0 200 Z" fill="#8FB16E" opacity="0.45"/>
+          <path d="M150 130 L225 52 L300 118 L340 92 L340 200 L150 200 Z" fill="#6B8E4E" opacity="0.5"/>
+          <path d="M0 178 Q90 164 165 180 T340 172" stroke="#8FB16E" stroke-width="7" fill="none" opacity="0.4" stroke-linecap="round"/>
+          <text x="14" y="194" font-size="9" fill="#3D5C3F">永定河</text>
+          <path d="M48 152 Q150 132 296 70" stroke="#C9A961" stroke-width="3" fill="none" stroke-dasharray="5 4"/>
+          <text x="236" y="56" font-size="9" fill="#A88944">香山古道</text>
+          <text x="116" y="146" font-size="12" fill="#3D5C3F" font-weight="bold">军庄镇</text>
+          <g style="cursor: pointer;" onclick="focusStoryCard('guojielou')">
+            <circle cx="70" cy="150" r="10" fill="#B2342B"/><text x="70" y="154" font-size="11" fill="#fff" text-anchor="middle">①</text>
+            <text x="70" y="172" font-size="8.5" fill="#2C3539" text-anchor="middle">过街楼</text>
+          </g>
+          <g style="cursor: pointer;" onclick="focusStoryCard('gudao')">
+            <circle cx="186" cy="100" r="10" fill="#C9A961"/><text x="186" y="104" font-size="11" fill="#fff" text-anchor="middle">②</text>
+            <text x="186" y="122" font-size="8.5" fill="#2C3539" text-anchor="middle">香山古道</text>
+          </g>
+          <g style="cursor: pointer;" onclick="focusStoryCard('jiangjunshan')">
+            <circle cx="292" cy="72" r="10" fill="#6B8E4E"/><text x="292" y="76" font-size="11" fill="#fff" text-anchor="middle">③</text>
+            <text x="292" y="56" font-size="8.5" fill="#2C3539" text-anchor="middle">将军山</text>
+          </g>
+        </svg>
+      </div>
+      <div id="storycards-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ 视图20:少年说展演厅 ============ -->
+  <section class="view" data-view="classroom-showcase">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom-speech')">‹</div>
+      <div class="page-title">少年说展演厅</div>
+    </div>
+    <div class="page-content" id="showcase-content"></div>
+  </section>
+
+  <!-- ============ 视图21:研学日记本 ============ -->
+  <section class="view" data-view="classroom-diary">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">研学日记本</div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="background: linear-gradient(135deg, rgba(107, 142, 78, 0.08), rgba(201, 169, 97, 0.1));">
+        <div class="card-title"><span class="card-title-icon">📔</span>写一篇今天的研学日记</div>
+        <div class="form-group" style="margin-top: 8px;">
+          <input type="text" class="form-input" id="diary-title" placeholder="给今天起个标题,如:古树下的第一课">
+        </div>
+        <div class="form-group">
+          <textarea class="form-textarea" id="diary-body" placeholder="记录今天在军庄的所见、所闻、所感……"></textarea>
+        </div>
+        <button type="button" class="btn btn-imperial" onclick="saveDiary()">📝 保存今日日记</button>
+      </div>
+      <div class="section-title" style="padding-left: 0;"><span>我的日记</span><span class="section-en">DIARY</span></div>
+      <div id="diary-list"></div>
     </div>
   </section>
 
@@ -3239,11 +3530,56 @@ const GAME_STAGES = [
   { num: 1, name: "采摘", status: "completed" },
   { num: 2, name: "分拣", status: "completed" },
   { num: 3, name: "运输Ⅰ", status: "completed" },
-  { num: 4, name: "驿站小憩", status: "current" },
-  { num: 5, name: "运输Ⅱ", status: "locked" },
-  { num: 6, name: "盘查", status: "locked" },
-  { num: 7, name: "吆喝售卖", status: "locked" },
-  { num: 8, name: "皇上召见", status: "locked" }
+  { num: 4, name: "驿站小憩", status: "completed" },
+  { num: 5, name: "运输Ⅱ", status: "completed" },
+  { num: 6, name: "盘查", status: "current" },
+  { num: 7, name: "吆喝售卖", status: "locked" }
+  // 第八幕「皇上召见」为隐藏关卡,通关后揭晓,故不在公开进度中显示
+];
+
+// === 皇商排行榜(本届 8 组实时积分) ===
+const MERCHANT_RANKING = [
+  { rank: 1, team: "第7组 · 皇商世家", gold: 26, badge: "首席皇商", stage: 7, you: false },
+  { rank: 2, team: "第2组 · 京韵梨行", gold: 23, badge: "二等皇商", stage: 7, you: false },
+  { rank: 3, team: "第5组 · 西山驼队", gold: 19, badge: "三等皇商", stage: 6, you: false },
+  { rank: 4, team: "第3组 · 梨农商队", gold: 14, badge: "御用梨商", stage: 6, you: true },
+  { rank: 5, team: "第1组 · 老君堂商号", gold: 12, badge: "御用梨商", stage: 6, you: false },
+  { rank: 6, team: "第8组 · 妙峰山货郎", gold: 9, badge: "见习梨商", stage: 5, you: false },
+  { rank: 7, team: "第6组 · 永定河船帮", gold: 7, badge: "见习梨商", stage: 5, you: false },
+  { rank: 8, team: "第4组 · 城南小贩", gold: 5, badge: "见习梨商", stage: 4, you: false }
+];
+
+// === 答题练习场题库 ===
+const QUIZ_QUESTIONS = [
+  { q: "京白梨的原产地——老君堂、东山村一带,位于北京哪个区?", options: ["海淀区", "门头沟区", "昌平区", "房山区"], answer: 1, tip: "京白梨原产于北京门头沟区军庄镇,老君堂、东山村一带至今保留数百年古梨树。" },
+  { q: "京白梨大约有多少年的贡梨栽培历史?", options: ["约100年", "约200年", "约400年", "约600年"], answer: 2, tip: "京白梨拥有约400年贡梨文化历史,曾被列为清代皇家贡品。" },
+  { q: "京白梨成熟后果皮呈现的典型颜色是?", options: ["深褐色", "黄白色", "青绿色", "紫红色"], answer: 1, tip: "京白梨成熟后果皮黄白细腻,故名「白梨」,果肉细嫩、汁多味甜。" },
+  { q: "军庄镇最具代表性的非物质文化遗产表演是?", options: ["威风锣鼓", "皮影戏", "景泰蓝", "风筝制作"], answer: 0, tip: "军庄威风锣鼓队成立于1998年,鼓、锣、镲三声部齐鸣,是当地著名非遗。" },
+  { q: "古时京白梨进贡紫禁城,主要走的是哪条古道?", options: ["茶马古道", "香山古道", "丝绸之路", "京杭运河"], answer: 1, tip: "贡梨沿香山古道运送进京,沿途至今留有明清石刻与古道遗迹。" },
+  { q: "灰峪化石山的太原组地层,主要形成于哪个地质年代?", options: ["寒武纪", "晚石炭世", "侏罗纪", "第四纪"], answer: 1, tip: "太原组属晚石炭世海陆交互相地层,富含鳞木、芦木、科达等古植物化石。" }
+];
+
+// === 地层柱状图数据(灰峪示意) ===
+const STRATA_LAYERS = [
+  { name: "山西组", age: "早二叠世", thickness: "约 60 m", rock: "砂岩、页岩夹煤线", fossil: "种子蕨、舌羊齿", env: "河流-三角洲平原", color: "#C9A961", h: 60 },
+  { name: "太原组", age: "晚石炭世", thickness: "约 80 m", rock: "石灰岩、页岩、煤层", fossil: "鳞木、芦木、科达", env: "海陆交互·滨海沼泽", color: "#8A7C5E", h: 84 },
+  { name: "本溪组", age: "中-晚石炭世", thickness: "约 40 m", rock: "铝土质泥岩、铁质层", fossil: "蜓类、腕足类", env: "滨海泻湖", color: "#B5A580", h: 50 },
+  { name: "马家沟组", age: "中奥陶世", thickness: "约 120 m", rock: "厚层石灰岩", fossil: "头足类、珊瑚", env: "浅海碳酸盐台地", color: "#6B8E4E", h: 96, unconformity: true }
+];
+
+// === 故事采集卡(军庄三大点位) ===
+const STORY_CARDS = [
+  { id: "guojielou", name: "过街楼", emoji: "🏛", relic: "卵石砌筑 · 「极善为乐」石匾 · 清代民居", role: "清代京西村落聚落格局的缩影,是村民通行、聚会与教化的核心节点", mine: "(示意)我在石匾下站了很久,想象百年前村民从楼下经过的模样……", done: true },
+  { id: "gudao", name: "香山古道", emoji: "⛰", relic: "明清石刻 · 古磨盘 · 骡马蹄印", role: "京白梨贡梨送京的必经之路,见证贡梨从军庄走向紫禁城的历史", mine: "(待填写)走在被磨得发亮的古道石上,我想到了……", done: false },
+  { id: "jiangjunshan", name: "将军山遗址", emoji: "🏔", relic: "将军洞 · 瞭望孔 · 明代防御体系", role: "扼守京西的军事要塞,体现古人因山设防的军事地理智慧", mine: "(待填写)站在瞭望孔旁,我仿佛看到了……", done: false }
+];
+
+// === 少年说展演厅(同伴演讲作品) ===
+const SPEECH_SHOWCASE = [
+  { name: "张同学", grade: "初二", title: "将军山的秘密", dur: "3'42\"", score: 95, dims: { "声音": 92, "逻辑": 96, "情感": 94, "台风": 98 }, likes: 128, badge: "最具感染力", color: "linear-gradient(135deg, #B2342B, #8C2A24)" },
+  { name: "李同学", grade: "初一", title: "一颗贡梨的进京路", dur: "4'05\"", score: 91, dims: { "声音": 90, "逻辑": 93, "情感": 88, "台风": 92 }, likes: 96, badge: "逻辑清晰", color: "linear-gradient(135deg, #C9A961, #A88944)" },
+  { name: "王同学", grade: "初三", title: "过街楼下的「极善为乐」", dur: "3'18\"", score: 88, dims: { "声音": 86, "逻辑": 90, "情感": 89, "台风": 86 }, likes: 74, badge: "", color: "linear-gradient(135deg, #6B8E4E, #3D5C3F)" },
+  { name: "赵同学", grade: "初二", title: "咚呛嚓——我听见了威风锣鼓", dur: "2'56\"", score: 90, dims: { "声音": 95, "逻辑": 84, "情感": 93, "台风": 88 }, likes: 112, badge: "声音感染力", color: "linear-gradient(135deg, #8FB16E, #6B8E4E)" }
 ];
 
 // === 联系人数据 ===
@@ -3277,7 +3613,9 @@ const ACCOMMODATIONS = [
    ========================================================= */
 
 // === 视图切换(路由) ===
-function navigateTo(viewName) {
+let currentView = 'home';
+
+function navigateTo(viewName, fromPop) {
   // 隐藏所有视图
   document.querySelectorAll('.view').forEach(v => {
     v.classList.remove('active');
@@ -3290,9 +3628,29 @@ function navigateTo(viewName) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  currentView = viewName;
+
+  // 写入浏览器历史(由 浏览器返回键 / 前进键 触发的导航不再重复入栈)
+  if (!fromPop) {
+    history.pushState({ view: viewName }, '', '#' + viewName);
+  }
+
   // 根据视图初始化内容
   initView(viewName);
 }
+
+// 监听浏览器返回/前进键
+window.addEventListener('popstate', (e) => {
+  // 若有弹窗打开,返回键先关闭弹窗,而不离开当前页面
+  const openOverlay = document.querySelector('.modal-overlay.active');
+  if (openOverlay) {
+    openOverlay.classList.remove('active');
+    history.pushState({ view: currentView }, '', '#' + currentView);
+    return;
+  }
+  const view = (e.state && e.state.view) ? e.state.view : 'home';
+  navigateTo(view, true);
+});
 
 // 初始化各视图内容(懒加载)
 function initView(viewName) {
@@ -3315,6 +3673,24 @@ function initView(viewName) {
       break;
     case 'classroom-game':
       renderGameStages();
+      break;
+    case 'classroom-quiz':
+      initQuiz();
+      break;
+    case 'classroom-leaderboard':
+      renderLeaderboard();
+      break;
+    case 'classroom-strata':
+      renderStrata();
+      break;
+    case 'classroom-storycards':
+      renderStoryCards();
+      break;
+    case 'classroom-showcase':
+      renderShowcase();
+      break;
+    case 'classroom-diary':
+      renderDiary();
       break;
   }
 }
@@ -3360,8 +3736,10 @@ function submitForm(type) {
     title = '团体报名已提交';
     text = '感谢您的信任!专员将在 <strong>4小时内</strong> 主动联系您协商详细方案。<br><br>30人以上团体享 9折优惠 · 配备专属研学导师 · 可定制课程方案。<br><br><small style="color: var(--ink-light);">[评委提示:报名信息已模拟推送至军庄镇研学平台后台,实际部署后管理员手机将收到即时提醒]</small>';
   } else if (type === 'feedback') {
+    const slider = document.getElementById('rating-slider');
+    const score = slider ? slider.value : 5;
     title = '寄语已发布';
-    text = '感谢您留下宝贵的研学感悟!您的反馈已发布到「梨乡留言」墙,并同步至研学品质改进系统。<br><br>愿您与梨乡的缘分,延续到下一个春秋。';
+    text = '感谢您为军庄研学打出 <strong>' + score + ' 分</strong> 并留下宝贵感悟!您的反馈已发布到「军庄研学留言」墙,并同步至研学品质改进系统。<br><br>愿您与军庄、与京白梨梨乡的缘分,延续到下一个春秋。';
   }
   showModal(title, text);
 }
@@ -3420,13 +3798,13 @@ function selectGameOption(el, isCorrect) {
   setTimeout(() => {
     if (isCorrect) {
       showToast(
-        '✨ 答对啦!康熙帝是首位将京白梨列为皇家贡品的皇帝。<br><br>🪙 +3 两金币 · 通往「运输Ⅱ」之路已开启',
-        '驿丞为您放行'
+        '✨ 答对啦!京白梨原产于北京门头沟区军庄镇,老君堂、东山村一带的古梨园至今仍有数百年古树。<br><br>🪙 +3 两金币 · 盘查通过,前往第七幕「吆喝售卖」',
+        '盘查官点头放行'
       );
     } else {
       showToast(
-        '答错啦~ 正确答案是 <strong>B. 康熙帝</strong><br><br>🪙 -1 两金币 · 仍可继续前行,但封赏减半',
-        '驿丞摇了摇头'
+        '答错啦~ 正确答案是 <strong>B. 门头沟区</strong>,军庄镇正是京白梨的故乡。<br><br>🪙 -1 两金币 · 仍可继续前行,但封赏减半',
+        '盘查官皱了皱眉'
       );
     }
   }, 400);
@@ -3439,7 +3817,7 @@ function toggleRecord(el) {
     el.style.background = 'linear-gradient(135deg, var(--pear-leaf-light), var(--pear-leaf-deep))';
     el.innerHTML = '⏸';
     showToast(
-      '🎙 录音功能演示中...<br>实际部署时,系统将调用浏览器录音API,完成后上传至服务器,由AI从声音/逻辑/情感/台风四维度评分。',
+      '🎙 录音功能演示中...<br>实际部署时,系统将调用浏览器录音 API,完成后上传至服务器,由 <strong>DeepSeek-V4-Pro</strong> 等大模型从声音/逻辑/情感/台风四维度评分。<br><br><small style="color: var(--ink-light);">(团队具备 DeepSeek-V4-Pro 等最新国产大模型的开发与接入经验)</small>',
       '开始录音'
     );
   } else {
@@ -3719,10 +4097,284 @@ function renderGameStages() {
 }
 
 // =========================================================
+// 滑动打分
+// =========================================================
+function updateRating(val) {
+  val = parseInt(val);
+  const stars = '★'.repeat(val) + '☆'.repeat(5 - val);
+  const starsEl = document.getElementById('rating-stars');
+  const labelEl = document.getElementById('rating-label');
+  if (starsEl) starsEl.textContent = stars;
+  const labels = {
+    1: '有待提升（1 分）· 左右滑动打分',
+    2: '一般（2 分）· 左右滑动打分',
+    3: '还不错（3 分）· 左右滑动打分',
+    4: '满意（4 分）· 左右滑动打分',
+    5: '非常满意（5 分）· 左右滑动打分'
+  };
+  if (labelEl) labelEl.textContent = labels[val];
+}
+
+// =========================================================
+// 贡梨答题练习场
+// =========================================================
+let quizIndex = 0, quizScore = 0, quizAnswered = false;
+
+function initQuiz() {
+  quizIndex = 0; quizScore = 0; quizAnswered = false;
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const total = QUIZ_QUESTIONS.length;
+  const q = QUIZ_QUESTIONS[quizIndex];
+  document.getElementById('quiz-progress').textContent = `第 ${quizIndex + 1} / ${total} 题 · 已答对 ${quizScore} 题`;
+  document.getElementById('quiz-bar').style.width = (quizIndex / total * 100) + '%';
+  document.getElementById('quiz-card').innerHTML = `
+    <div class="card-title"><span class="card-title-icon">❓</span>第 ${quizIndex + 1} 题</div>
+    <div class="card-content"><p style="font-size: 14px; color: var(--ink-black); font-weight: 500;">${q.q}</p></div>
+    <div id="quiz-options" style="display: grid; gap: 8px; margin-top: 12px;">
+      ${q.options.map((opt, i) => `<button class="form-radio" style="text-align: left;" onclick="answerQuiz(${i})">${'ABCD'[i]}. ${opt}</button>`).join('')}
+    </div>
+    <div id="quiz-feedback" style="margin-top: 12px;"></div>
+  `;
+  quizAnswered = false;
+}
+
+function answerQuiz(i) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = QUIZ_QUESTIONS[quizIndex];
+  document.querySelectorAll('#quiz-options .form-radio').forEach((b, idx) => {
+    b.style.pointerEvents = 'none';
+    if (idx === q.answer) {
+      b.style.background = 'linear-gradient(135deg, var(--pear-leaf-light), var(--pear-leaf))';
+      b.style.color = '#fff'; b.style.borderColor = 'var(--pear-leaf)';
+    } else if (idx === i) {
+      b.style.background = 'linear-gradient(135deg, #E89A8A, var(--cinnabar))';
+      b.style.color = '#fff'; b.style.borderColor = 'var(--cinnabar)';
+    }
+  });
+  const correct = (i === q.answer);
+  if (correct) quizScore++;
+  const last = (quizIndex === QUIZ_QUESTIONS.length - 1);
+  const c = correct ? 'pear-leaf' : 'cinnabar';
+  const rgb = correct ? '107,142,78' : '178,52,43';
+  document.getElementById('quiz-feedback').innerHTML = `
+    <div style="background: rgba(${rgb},0.08); border-left: 3px solid var(--${c}); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.6; color: var(--ink-gray);">
+      <strong style="color: var(--${correct ? 'pear-leaf-deep' : 'cinnabar'});">${correct ? '✓ 答对了!' : '✗ 答错了'}</strong><br>${q.tip}
+    </div>
+    <button class="btn ${last ? 'btn-imperial' : ''}" style="margin-top: 12px;" onclick="${last ? 'finishQuiz()' : 'nextQuiz()'}">${last ? '查看练习成绩' : '下一题 ›'}</button>
+  `;
+}
+
+function nextQuiz() { quizIndex++; renderQuiz(); }
+
+function finishQuiz() {
+  const total = QUIZ_QUESTIONS.length;
+  document.getElementById('quiz-bar').style.width = '100%';
+  document.getElementById('quiz-progress').textContent = `练习完成 · 共 ${total} 题 · 答对 ${quizScore} 题`;
+  const pct = Math.round(quizScore / total * 100);
+  const rankTxt = pct >= 80 ? '🏆 贡梨知识达人!正式闯关稳拿首席皇商。' : pct >= 50 ? '👍 不错!再多练几轮就更稳了。' : '💪 继续加油,翻翻《梨乡护照》知识页再来挑战吧!';
+  document.getElementById('quiz-card').innerHTML = `
+    <div class="text-center" style="padding: 10px;">
+      <div style="font-size: 48px;">${pct >= 80 ? '🏆' : pct >= 50 ? '🎯' : '📚'}</div>
+      <div style="font-family: var(--font-display); font-size: 20px; color: var(--ink-black); margin: 8px 0;">练习成绩:${quizScore} / ${total}</div>
+      <div style="font-size: 13px; color: var(--ink-gray); margin-bottom: 16px;">${rankTxt}</div>
+      <button class="btn btn-imperial" onclick="initQuiz()">🔄 再练一轮</button>
+      <button class="btn btn-secondary" style="margin-top: 10px;" onclick="navigateTo('classroom-game')">🏛 直接去闯关</button>
+    </div>
+  `;
+}
+
+// =========================================================
+// 皇商排行榜
+// =========================================================
+function renderLeaderboard() {
+  const c = document.getElementById('leaderboard-content');
+  if (!c || c.dataset.rendered) return;
+  c.dataset.rendered = '1';
+  const medal = ['🥇', '🥈', '🥉'];
+  c.innerHTML = `
+    <div class="classroom-hero" style="border-radius: var(--radius-md); padding: 18px; margin-bottom: 14px;">
+      <div style="position: relative; z-index: 1;">
+        <div class="classroom-hero-title" style="font-size: 18px;">本届 · 京白梨进京记</div>
+        <div class="classroom-hero-subtitle" style="font-size: 11px; margin-top: 4px;">8 组同台博弈 · 实时积分(截至第六幕「盘查」)</div>
+      </div>
+    </div>
+    <div class="card" style="padding: 8px 16px;">
+      ${MERCHANT_RANKING.map(r => `
+        <div class="contact-item" style="${r.you ? 'background: rgba(201,169,97,0.12); border-radius: 8px; padding: 12px 10px; border-bottom: none;' : ''}">
+          <div class="contact-avatar" style="background: ${r.rank === 1 ? 'linear-gradient(135deg,#F2D98C,#C9A961)' : r.rank === 2 ? 'linear-gradient(135deg,#DADADA,#A8A8A8)' : r.rank === 3 ? 'linear-gradient(135deg,#E0B080,#B5743A)' : 'linear-gradient(135deg,var(--gold-light),var(--imperial-gold))'};">${r.rank <= 3 ? medal[r.rank - 1] : r.rank}</div>
+          <div class="contact-info">
+            <div class="contact-name">${r.team} ${r.you ? '<span style="color: var(--cinnabar); font-size: 11px;">(我的队伍)</span>' : ''}</div>
+            <div class="contact-role">${r.badge} · 已闯 ${r.stage}/7 幕</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--imperial-gold);">${r.gold}</div>
+            <div style="font-size: 10px; color: var(--ink-light);">两金币</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="card" style="background: rgba(178, 52, 43, 0.05); border-left: 4px solid var(--cinnabar);">
+      <div class="card-content"><p style="font-size: 12px;"><strong style="color: var(--cinnabar);">🏆 首席皇商</strong> 将在全部 7 幕公开赛结束后,由积分最高的队伍获得;若达成隐藏成就,还将解锁神秘第八幕 <strong>「皇上召见」(???)</strong>。</p></div>
+    </div>
+  `;
+}
+
+// =========================================================
+// 地层柱状图工具
+// =========================================================
+function renderStrata() {
+  const col = document.getElementById('strata-column');
+  if (!col || col.dataset.rendered) return;
+  col.dataset.rendered = '1';
+  col.innerHTML = STRATA_LAYERS.map((l, i) => `
+    ${l.unconformity ? '<div class="strata-unconformity">～～～ 不整合面（沉积间断）～～～</div>' : ''}
+    <div class="strata-layer" style="background: ${l.color}; height: ${l.h}px;" onclick="showStrata(${i})">
+      <span class="sl-name">${l.name}</span>
+      <span class="sl-age">${l.age}</span>
+    </div>
+  `).join('');
+}
+
+function showStrata(i) {
+  const l = STRATA_LAYERS[i];
+  const d = document.getElementById('strata-detail');
+  d.style.display = 'block';
+  d.innerHTML = `
+    <div class="card-title"><span class="card-title-icon" style="color: ${l.color};">▦</span>${l.name} · ${l.age}</div>
+    <ul class="info-list">
+      <li class="info-item"><span class="info-item-label">厚度</span><span class="info-item-value">${l.thickness}</span></li>
+      <li class="info-item"><span class="info-item-label">主要岩性</span><span class="info-item-value">${l.rock}</span></li>
+      <li class="info-item"><span class="info-item-label">典型化石</span><span class="info-item-value">${l.fossil}</span></li>
+      <li class="info-item"><span class="info-item-label">沉积环境</span><span class="info-item-value">${l.env}</span></li>
+    </ul>
+  `;
+  d.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// =========================================================
+// 故事采集卡
+// =========================================================
+function renderStoryCards() {
+  const c = document.getElementById('storycards-list');
+  if (!c || c.dataset.rendered) return;
+  c.dataset.rendered = '1';
+  c.innerHTML = STORY_CARDS.map(s => `
+    <div class="card" id="card-${s.id}">
+      <div class="card-title"><span class="card-title-icon">${s.emoji}</span>${s.name}
+        ${s.done ? '<span style="margin-left: auto; background: var(--pear-leaf); color: #fff; font-size: 10px; padding: 2px 10px; border-radius: var(--radius-pill);">✓ 已采集</span>' : '<span style="margin-left: auto; font-size: 11px; color: var(--ink-light);">待采集</span>'}
+      </div>
+      <ul class="info-list">
+        <li class="info-item"><span class="info-item-label">📍 地点</span><span class="info-item-value">${s.name}</span></li>
+        <li class="info-item"><span class="info-item-label">🏺 遗存</span><span class="info-item-value">${s.relic}</span></li>
+        <li class="info-item"><span class="info-item-label">📜 历史作用</span><span class="info-item-value">${s.role}</span></li>
+        <li class="info-item"><span class="info-item-label">💭 我的理解</span><span class="info-item-value" style="color: ${s.done ? 'var(--ink-black)' : 'var(--ink-light)'};">${s.mine}</span></li>
+      </ul>
+      ${s.done ? '' : `<button type="button" class="btn btn-secondary" style="margin-top: 10px;" onclick="fillStoryCard('${s.id}')">✍️ 填写这张卡</button>`}
+    </div>
+  `).join('');
+}
+
+function focusStoryCard(id) {
+  const el = document.getElementById('card-' + id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function fillStoryCard(id) {
+  const s = STORY_CARDS.find(x => x.id === id);
+  showToast('在这里输入你在「' + s.name + '」的观察与感受,作为演讲素材。<br><br><small style="color: var(--ink-light);">[示意版:正式版支持文字 / 拍照 / 录音多种采集方式,并自动归档到你的故事库]</small>', '✍️ 采集 · ' + s.name);
+}
+
+// =========================================================
+// 少年说展演厅
+// =========================================================
+function renderShowcase() {
+  const c = document.getElementById('showcase-content');
+  if (!c || c.dataset.rendered) return;
+  c.dataset.rendered = '1';
+  c.innerHTML = `
+    <div class="card" style="background: linear-gradient(135deg, rgba(178,52,43,0.08), rgba(201,169,97,0.1));">
+      <div class="card-title"><span class="card-title-icon">🎬</span>少年说 · 展演厅</div>
+      <div class="card-content"><p style="font-size: 12px;">这里收录了本届研学营同伴们的演讲作品,每段演讲都由 AI 从声音 / 逻辑 / 情感 / 台风四个维度打分。点击即可回放。</p></div>
+    </div>
+    <div class="ai-note">
+      <span class="ai-note-icon">🤖</span>
+      <span class="ai-note-text"><strong>AI 赋能</strong>:演讲多维评分由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持。</span>
+    </div>
+  ` + SPEECH_SHOWCASE.map((s, i) => `
+    <div class="news-item" onclick="playSpeech(${i})">
+      <div class="news-image" style="height: 96px; background: ${s.color}; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.25); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff;">▶</div>
+        ${s.badge ? `<div class="news-tag">${s.badge}</div>` : ''}
+      </div>
+      <div class="news-body">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="news-title" style="font-size: 15px;">${s.title}</div>
+          <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--imperial-gold);">${s.score}</div>
+        </div>
+        <div style="font-size: 11px; color: var(--ink-light); margin: 4px 0 8px;">${s.name} · ${s.grade} · 时长 ${s.dur} · ❤ ${s.likes}</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px;">
+          ${Object.entries(s.dims).map(([k, v]) => `
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 10px; color: var(--ink-gray); width: 28px; flex-shrink: 0;">${k}</span>
+              <div style="flex: 1; height: 5px; background: var(--border-soft); border-radius: 3px; overflow: hidden;"><div style="width: ${v}%; height: 100%; background: linear-gradient(90deg, var(--pear-leaf-light), var(--imperial-gold));"></div></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function playSpeech(i) {
+  const s = SPEECH_SHOWCASE[i];
+  showToast('正在回放《' + s.title + '》……<br><br><small style="color: var(--ink-light);">[示意版:正式版将在此处播放该同学上传的演讲录音 / 视频]</small>', '🎬 ' + s.name + ' · ' + s.dur);
+}
+
+// =========================================================
+// 研学日记本
+// =========================================================
+let DIARY_ENTRIES = [
+  { date: "2026-05-15", weather: "☀️ 晴", title: "古树下的第一课", body: "今天在300多岁的古梨树下,听王大爷讲家族四代守护梨园的故事。原来一颗京白梨背后,藏着这么长的历史。我第一次觉得,军庄镇的农业文化遗产离我这么近。" },
+  { date: "2026-05-16", weather: "⛅ 多云", title: "我把锅翻儿翻成功了!", body: "全梨宴的厨师教我们做锅翻儿,我翻了三次才成功。原来一颗梨能做出梨糕、梨羹、京白梨饭这么多花样,军庄人的智慧真厉害。" }
+];
+
+function renderDiary() {
+  const c = document.getElementById('diary-list');
+  if (!c) return;
+  c.innerHTML = DIARY_ENTRIES.slice().reverse().map(e => `
+    <div class="message-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <span style="font-family: var(--font-display); font-size: 15px; color: var(--ink-black);">${e.title}</span>
+        <span style="font-size: 11px; color: var(--ink-light); flex-shrink: 0; margin-left: 8px;">${e.date} · ${e.weather}</span>
+      </div>
+      <div class="message-body">${e.body}</div>
+    </div>
+  `).join('');
+}
+
+function saveDiary() {
+  const tEl = document.getElementById('diary-title');
+  const bEl = document.getElementById('diary-body');
+  const t = tEl.value.trim();
+  const b = bEl.value.trim();
+  if (!b) { showToast('日记内容还没写呢,记下今天在军庄的一点感受吧～', '✍️ 提示'); return; }
+  const today = new Date().toISOString().slice(0, 10);
+  DIARY_ENTRIES.push({ date: today, weather: "📝 今日", title: t || '无题', body: b });
+  tEl.value = ''; bEl.value = '';
+  renderDiary();
+  showToast('今日日记已保存,并同步至云端档案。<br><br><small style="color: var(--ink-light);">[评委提示:实际部署后日记将加密存储于研学个人档案,可一键生成结业纪念册]</small>', '📔 保存成功');
+}
+
+// =========================================================
 // 启动
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // 默认显示主页
+  // 默认显示主页,并写入历史起点,确保浏览器返回键可用
+  history.replaceState({ view: 'home' }, '', '#home');
   console.log('🍐 军庄镇研学服务平台已就绪');
 });
 
