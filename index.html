@@ -2134,71 +2134,6 @@ body::before {
 
 .hero-bell.read::after { display: none; }
 
-/* === 会员入口徽章(姓名旁) === */
-.member-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0;
-  color: #5C3A12;
-  background: linear-gradient(135deg, var(--gold-light), var(--imperial-gold));
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  margin-left: 8px;
-  vertical-align: middle;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(201, 169, 97, 0.4);
-  white-space: nowrap;
-}
-.member-badge:active { transform: scale(0.95); }
-
-/* === 认养梨树会员页 === */
-.adopt-hero {
-  background: linear-gradient(135deg, var(--pear-leaf) 0%, var(--pear-leaf-deep) 100%);
-  padding: 26px 20px;
-  color: #fff;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.adopt-hero::before {
-  content: '🌳';
-  position: absolute;
-  right: -8px; bottom: -16px;
-  font-size: 120px;
-  opacity: 0.12;
-  line-height: 1;
-}
-.adopt-plan {
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  margin-bottom: 12px;
-  background: var(--paper-white);
-  box-shadow: var(--shadow-card);
-  cursor: pointer;
-  transition: all 0.25s;
-  position: relative;
-}
-.adopt-plan:active { transform: scale(0.98); }
-.adopt-plan.selected {
-  border-color: var(--imperial-gold);
-  box-shadow: 0 0 0 2px rgba(201, 169, 97, 0.35);
-  background: linear-gradient(135deg, #FFFBF0, #F8EBC8);
-}
-.adopt-plan .ap-tag {
-  position: absolute; top: 12px; right: 12px;
-  font-size: 10px; color: #fff; background: var(--cinnabar);
-  padding: 2px 8px; border-radius: var(--radius-pill);
-}
-.adopt-plan .ap-name { font-family: var(--font-display); font-size: 16px; color: var(--ink-black); margin-bottom: 4px; }
-.adopt-plan .ap-price { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--imperial-gold); }
-.adopt-plan .ap-price small { font-size: 12px; color: var(--ink-light); font-weight: 400; }
-.adopt-plan .ap-desc { font-size: 12px; color: var(--ink-gray); line-height: 1.6; margin-top: 6px; }
-
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='60' r='30' fill='%23F8E9C8'/%3E%3Cpath d='M50 30 Q50 20 55 15' stroke='%236B8E4E' fill='none' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M55 25 Q65 20 68 28' fill='%236B8E4E'/%3E%3C/svg%3E">
 </head>
@@ -2240,6 +2175,12 @@ body::before {
       <span class="notice-icon">📢</span>
       <span class="notice-text">「一颗贡梨读懂京西」夏季研学营开放预约中</span>
       <span class="notice-arrow">›</span>
+    </div>
+
+    <!-- 样本演示声明 -->
+    <div style="margin: -6px 20px 18px; background: rgba(178,52,43,0.05); border: 1px dashed var(--cinnabar); border-radius: var(--radius-md); padding: 10px 14px; display: flex; gap: 8px; align-items: flex-start;">
+      <span style="font-size: 14px; flex-shrink: 0; line-height: 1.4;">ℹ️</span>
+      <span style="font-size: 11px; color: var(--ink-gray); line-height: 1.6;">本平台为<strong style="color: var(--cinnabar);">样本演示</strong>:页面内所有电话、姓名、人员安排、住宿名称、价格与日期等均为<strong>虚拟示意数据</strong>,仅用于功能展示,不代表真实信息,请勿拨打或据此联系。实际信息以正式签约协商为准。</span>
     </div>
 
     <!-- 特色:数字课堂 -->
@@ -2421,8 +2362,9 @@ body::before {
           住宿安排
         </div>
         <div class="card-content">
-          <p style="font-weight: 500; color: var(--ink-black); margin-bottom: 6px;">梦我度假村(主营地)</p>
+          <p style="font-weight: 500; color: var(--ink-black); margin-bottom: 6px;">梨乡里民宿(主营地 · 名称仅供参考)</p>
           <p style="font-size: 12px;">五天连续入住,无需迁营。所有教学点摆渡车10分钟内可达。</p>
+          <p style="font-size: 11px; color: var(--cinnabar); margin-top: 8px; background: rgba(178,52,43,0.06); padding: 8px 10px; border-radius: 6px; border-left: 3px solid var(--cinnabar);">⚠️ 此处民宿/度假村名称、房型与配套均为示意,具体住宿单位与安排以实际出团协商、签约确认为准。</p>
         </div>
         <ul class="info-list" style="margin-top: 10px;">
           <li class="info-item">
@@ -2644,10 +2586,8 @@ body::before {
           <div class="form-group">
             <label class="form-label">研学方案 <span class="required">*</span></label>
             <div class="form-radio-group">
-              <div class="form-radio selected" onclick="selectRadio(this)">一日 · 贡梨初探</div>
-              <div class="form-radio" onclick="selectRadio(this)">两日 · 生态密码PBL</div>
-              <div class="form-radio" onclick="selectRadio(this)">五日 · 穿越京西</div>
-              <div class="form-radio" onclick="selectRadio(this)">其他 / 定制</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">一日研学</div>
+              <div class="form-radio" onclick="selectRadio(this)">五日深度</div>
             </div>
           </div>
           <div class="form-group">
@@ -2718,10 +2658,9 @@ body::before {
           <div class="form-group">
             <label class="form-label">研学方案 <span class="required">*</span></label>
             <div class="form-radio-group">
-              <div class="form-radio" onclick="selectRadio(this)">一日 · 贡梨初探</div>
-              <div class="form-radio" onclick="selectRadio(this)">两日 · 生态密码PBL</div>
-              <div class="form-radio selected" onclick="selectRadio(this)">五日 · 穿越京西</div>
-              <div class="form-radio" onclick="selectRadio(this)">其他 / 定制</div>
+              <div class="form-radio" onclick="selectRadio(this)">一日研学</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">五日深度</div>
+              <div class="form-radio" onclick="selectRadio(this)">需要定制</div>
             </div>
           </div>
           <div class="form-group">
@@ -2759,10 +2698,7 @@ body::before {
 
     <div class="profile-header">
       <div class="profile-avatar">🧑‍🎓</div>
-      <div class="profile-name">
-        梨乡小使者
-        <span class="member-badge" onclick="navigateTo('member')">🌳 认养会员 ›</span>
-      </div>
+      <div class="profile-name">梨乡小使者</div>
       <div class="profile-meta">学号 LX2026008 · 已参与研学 2 次</div>
       <div class="profile-tags">
         <span class="profile-tag">🍐 贡梨文化小使者</span>
@@ -2831,83 +2767,6 @@ body::before {
         <span class="menu-arrow">›</span>
       </div>
     </div>
-
-    <div class="profile-menu" style="margin-top: 14px;">
-      <div class="menu-item" onclick="navigateTo('member')">
-        <div class="menu-icon">🌳</div>
-        <div class="menu-title">研学会员 · 认养一棵梨树</div>
-        <span class="menu-badge" style="background: var(--imperial-gold);">NEW</span>
-        <span class="menu-arrow">›</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 视图:研学会员 · 认养梨树 ============ -->
-  <section class="view" data-view="member">
-    <div class="page-header">
-      <div class="page-back" onclick="navigateTo('profile')">‹</div>
-      <div class="page-title">研学会员 · 认养梨树</div>
-    </div>
-
-    <div class="adopt-hero">
-      <div style="position: relative; z-index: 1;">
-        <div style="font-size: 40px;">🌳🍐</div>
-        <div style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; letter-spacing: 2px; margin: 8px 0 4px;">认养一棵京白梨</div>
-        <div style="font-size: 12px; opacity: 0.88; letter-spacing: 1px;">成为梨乡研学会员 · 让一棵古梨树记得你</div>
-      </div>
-    </div>
-
-    <div class="page-content">
-      <div class="card" style="background: linear-gradient(135deg, rgba(107,142,78,0.08), rgba(201,169,97,0.12)); border: 1px solid rgba(201,169,97,0.3);">
-        <div class="card-title"><span class="card-title-icon">✨</span>会员权益</div>
-        <div class="card-content" style="font-size: 12.5px;">
-          <p>🌸 <strong>专属认养:</strong>认养一棵京白梨树并挂上你的姓名牌,树木全年由梨农代为养护</p>
-          <p>📷 <strong>四季回访:</strong>每季度收到你的梨树照片/短视频,见证花开到结果</p>
-          <p>🍐 <strong>秋果到家:</strong>秋收时寄送你认养树所产的京白梨礼盒</p>
-          <p>🎓 <strong>研学优惠:</strong>会员参加各期研学享专属折扣与优先排期</p>
-          <p>🪪 <strong>会员证书:</strong>颁发电子《梨树认养证书》,可线上查看认养档案</p>
-        </div>
-      </div>
-
-      <div class="section-title" style="padding-left: 0;"><span>选择认养方案</span><span class="section-en">PLANS</span></div>
-
-      <div class="adopt-plan selected" onclick="selectAdoptPlan(this)">
-        <div class="ap-name">🌱 一年期 · 体验认养</div>
-        <div class="ap-price">¥299 <small>/ 年 · 1 棵</small></div>
-        <div class="ap-desc">含挂牌认养 + 四季回访 + 秋果礼盒 1 份,适合初次体验的家庭。</div>
-      </div>
-      <div class="adopt-plan" onclick="selectAdoptPlan(this)">
-        <div class="ap-tag">推荐</div>
-        <div class="ap-name">🌳 三年期 · 成长陪伴</div>
-        <div class="ap-price">¥799 <small>/ 3 年 · 1 棵</small></div>
-        <div class="ap-desc">三年连续认养同一棵树,陪它一起长大,含每年秋果礼盒 + 全部研学折扣。</div>
-      </div>
-      <div class="adopt-plan" onclick="selectAdoptPlan(this)">
-        <div class="ap-name">👨‍👩‍👧 古树之友 · 家庭会员</div>
-        <div class="ap-price">¥1,599 <small>/ 年 · 古树1棵</small></div>
-        <div class="ap-desc">认养一棵百年以上古梨树,含家庭研学 1 次 + 古树挂牌 + 专属导师。</div>
-      </div>
-
-      <div class="card" style="margin-top: 8px;">
-        <div class="card-title"><span class="card-title-icon">📝</span>认养意向登记</div>
-        <div class="form-group">
-          <label class="form-label">会员姓名 <span class="required">*</span></label>
-          <input type="text" class="form-input" placeholder="认养证书上显示的姓名">
-        </div>
-        <div class="form-group">
-          <label class="form-label">手机号 <span class="required">*</span></label>
-          <input type="tel" class="form-input" placeholder="11位手机号">
-        </div>
-        <div class="form-group">
-          <label class="form-label">梨树姓名牌寄语</label>
-          <input type="text" class="form-input" placeholder="如:愿你年年硕果 —— 来自XX一家">
-        </div>
-        <div class="form-group">
-          <p class="form-hint warning">📲 提交意向后,我们将通过<strong>手机短信</strong>与您联系,并邀请<strong>添加专属企业微信</strong>,确认认养树木编号、收果地址与付款方式等信息。</p>
-        </div>
-        <button type="button" class="btn btn-imperial" onclick="submitAdopt()">🌳 提交认养意向</button>
-      </div>
-    </div>
   </section>
 
   <!-- ============ 视图9:图片直播(新闻列表) ============ -->
@@ -2959,11 +2818,9 @@ body::before {
           <label class="form-label">参与的研学项目</label>
           <select class="form-select">
             <option>一日研学:一颗贡梨读懂京西</option>
-            <option>两日研学:京白梨生态密码PBL</option>
             <option>五日深度:五日梨乡穿越京西</option>
             <option>季节限定:梨花授粉</option>
             <option>季节限定:秋收采摘</option>
-            <option>研学会员:认养梨树</option>
           </select>
         </div>
         <div class="form-group">
@@ -3130,7 +2987,7 @@ body::before {
       </div>
 
       <!-- 上传区 -->
-      <div class="upload-zone" onclick="showToast('调起相机/相册功能演示<br><br>实际部署后,照片将由 <strong>DeepSeek-V4-Pro</strong> 视觉大模型自动辨识化石门类并解锁图鉴。','📷 AI 化石辨识')">
+      <div class="upload-zone" onclick="showToast('调起相机/相册功能演示<br><br>实际部署后,照片将通过 <strong>DeepSeek-V4-Pro</strong> 视觉能力自动辨识化石门类并解锁图鉴 —— 我们的团队具备定制接入该模型 API 的经验。','📷 AI 化石辨识')">
         <div class="upload-icon">📷</div>
         <div class="upload-title">拍照上传化石照片</div>
         <div class="upload-hint">AI 将自动辨识化石种类 · 解锁图鉴</div>
@@ -3138,7 +2995,7 @@ body::before {
 
       <div class="ai-note">
         <span class="ai-note-icon">🤖</span>
-        <span class="ai-note-text"><strong>AI 赋能</strong>:本模块的化石智能辨识,由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持,可为研学产品深度引入 AI 赋能。</span>
+        <span class="ai-note-text"><strong>AI 赋能</strong>:化石智能辨识依托 <span class="ai-model">DeepSeek-V4-Pro</span> 等国产大模型实现。我们的项目团队具备定制接入 DeepSeek-V4-Pro 的实战经验,能灵活调用其 API 解决图像辨识、知识问答等研学场景需求。</span>
       </div>
 
       <div class="card">
@@ -3232,7 +3089,7 @@ body::before {
 
       <div class="ai-note">
         <span class="ai-note-icon">🤖</span>
-        <span class="ai-note-text"><strong>AI 赋能</strong>:四维度演讲评分由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持,实现语音转写、逻辑分析与情感识别。</span>
+        <span class="ai-note-text"><strong>AI 赋能</strong>:四维度演讲评分依托 <span class="ai-model">DeepSeek-V4-Pro</span> 等国产大模型实现语音转写、逻辑分析与情感识别。我们的项目团队具备定制接入 DeepSeek-V4-Pro 的实战经验,能灵活调用其 API 落地此类评测能力。</span>
       </div>
 
       <div class="text-center" style="padding: 16px 0;">
@@ -3491,7 +3348,7 @@ const ONE_DAY_SCHEDULE = [
   },
   {
     time: "12:00-13:30",
-    location: "梦我度假村餐厅",
+    location: "梨乡里民宿餐厅",
     title: "全梨宴 · 京西美食文化课",
     desc: "厨师讲解6道菜+锅翻儿典故;分组动手做梨糕/烙锅翻儿;品尝全梨宴午餐",
     tag: "课程4.12"
@@ -3814,7 +3671,7 @@ const CONTACTS = [
   { name: "李导师", role: "研学总导师 · 全程随团", phone: "138-1010-1234", group: "项目负责" },
   { name: "陈教授", role: "PBL科研指导(北京联合大学)", phone: "139-1234-5678", group: "学术指导" },
   { name: "王师傅", role: "全梨宴主厨", phone: "010-6985-7777", group: "食宿保障" },
-  { name: "张大姐", role: "梦我度假村前台", phone: "010-6985-9999", group: "食宿保障" },
+  { name: "张大姐", role: "梨乡里民宿前台", phone: "010-6985-9999", group: "食宿保障" },
   { name: "赵队长", role: "军庄威风锣鼓队队长", phone: "137-8888-6666", group: "课程教练" },
   { name: "孙技师", role: "古树养护技师", phone: "136-2222-3333", group: "课程教练" },
   { name: "刘医生", role: "孟悟村卫生所急诊", phone: "010-6985-1120", group: "应急医疗" },
@@ -3824,7 +3681,7 @@ const CONTACTS = [
 // === 食宿信息 ===
 const ACCOMMODATIONS = [
   {
-    name: "梦我度假村(主营地)",
+    name: "梨乡里民宿(主营地)",
     type: "标准研学客房",
     rooms: "40间标间 · 4人/间",
     features: "独立卫浴 · 空调暖气 · 无线网络 · 24小时前台",
@@ -3967,22 +3824,6 @@ function selectRadio(el) {
   el.classList.add('selected');
 }
 
-// === 认养会员:方案选择 ===
-function selectAdoptPlan(el) {
-  document.querySelectorAll('.adopt-plan').forEach(p => p.classList.remove('selected'));
-  el.classList.add('selected');
-}
-
-// === 认养会员:提交意向 ===
-function submitAdopt() {
-  const sel = document.querySelector('.adopt-plan.selected .ap-name');
-  const plan = sel ? sel.textContent.trim() : '认养方案';
-  showModal(
-    '🌳 认养意向已提交',
-    '感谢您愿意成为梨乡研学会员!您选择的是 <strong>' + plan + '</strong>。<br><br>我们将通过 <strong>手机短信</strong> 与您联系,并邀请 <strong>添加专属企业微信</strong>,为您分配认养树木编号、确认收果地址与付款方式,随后寄出《梨树认养证书》。<br><br><small style="color: var(--ink-light);">[评委提示:实际部署后将开通在线签约与支付,认养档案、四季回访照片均可在会员中心查看]</small>'
-  );
-}
-
 // === 个人报名:按人数动态生成每位参与人的性别/年龄 ===
 function renderParticipants() {
   const box = document.getElementById('participants-box');
@@ -4104,7 +3945,7 @@ function toggleRecord(el) {
     el.style.background = 'linear-gradient(135deg, var(--pear-leaf-light), var(--pear-leaf-deep))';
     el.innerHTML = '⏸';
     showToast(
-      '🎙 录音功能演示中...<br>实际部署时,系统将调用浏览器录音 API,完成后上传至服务器,由 <strong>DeepSeek-V4-Pro</strong> 等大模型从声音/逻辑/情感/台风四维度评分。<br><br><small style="color: var(--ink-light);">(团队具备 DeepSeek-V4-Pro 等最新国产大模型的开发与接入经验)</small>',
+      '🎙 录音功能演示中...<br>实际部署时,系统将调用浏览器录音 API,完成后上传服务器,通过 <strong>DeepSeek-V4-Pro</strong> 等大模型从声音/逻辑/情感/台风四维度评分。<br><br><small style="color: var(--ink-light);">(我们的项目团队具备定制接入 DeepSeek-V4-Pro 的经验,能灵活调用其 API 实现该能力)</small>',
       '开始录音'
     );
   } else {
@@ -4591,7 +4432,7 @@ function renderShowcase() {
     </div>
     <div class="ai-note">
       <span class="ai-note-icon">🤖</span>
-      <span class="ai-note-text"><strong>AI 赋能</strong>:演讲多维评分由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持。</span>
+      <span class="ai-note-text"><strong>AI 赋能</strong>:演讲多维评分依托 <span class="ai-model">DeepSeek-V4-Pro</span> 等国产大模型。我们的项目团队具备定制接入 DeepSeek-V4-Pro 的实战经验,能灵活调用其 API 实现评分落地。</span>
     </div>
   ` + SPEECH_SHOWCASE.map((s, i) => `
     <div class="news-item" onclick="playSpeech(${i})">
@@ -4724,14 +4565,23 @@ function initPosterPull() {
   const p = document.getElementById('posterPull'); if (!p) return;
   loadPoster();
   collapsePoster();
-  let touching = false, startY = 0, baseH = POSTER_COLLAPSED, maxH = 380;
+  let touching = false, startY = 0, baseH = POSTER_COLLAPSED, maxH = 380, wasExpanded = false;
+
+  function inPoster(touch) {
+    const r = p.getBoundingClientRect();
+    return touch.clientY >= r.top && touch.clientY <= r.bottom;
+  }
 
   window.addEventListener('touchstart', (e) => {
     if (currentView !== 'home') return;
-    if (window.scrollY > 3) return;
+    const t = e.touches[0];
+    wasExpanded = p.classList.contains('expanded');
+    // 收起态:需在页面顶部(以便和正常上滑页面区分);展开态:触点在海报内即可,方便随时上滑收起
+    if (!wasExpanded && window.scrollY > 3) return;
+    if (wasExpanded && !inPoster(t)) return;
     touching = true; posterDragged = false;
-    startY = e.touches[0].clientY;
-    baseH = p.classList.contains('expanded') ? posterFullH() : POSTER_COLLAPSED;
+    startY = t.clientY;
+    baseH = wasExpanded ? posterFullH() : POSTER_COLLAPSED;
     maxH = posterFullH();
     p.classList.add('dragging');
   }, { passive: true });
@@ -4739,21 +4589,32 @@ function initPosterPull() {
   window.addEventListener('touchmove', (e) => {
     if (!touching) return;
     const dy = e.touches[0].clientY - startY;
-    if (Math.abs(dy) > 6) posterDragged = true;
+    if (Math.abs(dy) > 5) posterDragged = true;
     let target = baseH + dy;
-    if (target > maxH) target = maxH + (target - maxH) * 0.25;
-    if (target < POSTER_COLLAPSED) target = POSTER_COLLAPSED - (POSTER_COLLAPSED - target) * 0.4;
+    if (target > maxH) target = maxH + (target - maxH) * 0.22;          // 顶部橡皮筋
+    if (target < POSTER_COLLAPSED) target = POSTER_COLLAPSED;            // 不低于收起高度
     p.style.height = target + 'px';
-    if (dy > 0 && window.scrollY <= 0) e.preventDefault();
+    // 拖动期间接管手势,避免与页面滚动打架
+    if (Math.abs(dy) > 5) e.preventDefault();
   }, { passive: false });
 
-  window.addEventListener('touchend', () => {
+  window.addEventListener('touchend', (e) => {
     if (!touching) return;
     touching = false;
     p.classList.remove('dragging');
-    const curH = p.getBoundingClientRect().height;
-    const threshold = POSTER_COLLAPSED + (maxH - POSTER_COLLAPSED) * 0.35;
-    (curH > threshold) ? expandPoster() : collapsePoster();
+    const dy = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY - startY : 0;
+
+    if (wasExpanded) {
+      // 已展开:上滑超过 40px,或被拖到不足 8 成高度 → 收起;否则弹回展开
+      const curH = p.getBoundingClientRect().height;
+      if (dy < -40 || curH < maxH * 0.8) collapsePoster();
+      else expandPoster();
+    } else {
+      // 收起态:下拉超过可展开高度的 30% → 展开;否则弹回收起
+      const curH = p.getBoundingClientRect().height;
+      const threshold = POSTER_COLLAPSED + (maxH - POSTER_COLLAPSED) * 0.30;
+      (curH > threshold || dy > 60) ? expandPoster() : collapsePoster();
+    }
   }, { passive: true });
 }
 
