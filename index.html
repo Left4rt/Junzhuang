@@ -2134,6 +2134,71 @@ body::before {
 
 .hero-bell.read::after { display: none; }
 
+/* === 会员入口徽章(姓名旁) === */
+.member-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #5C3A12;
+  background: linear-gradient(135deg, var(--gold-light), var(--imperial-gold));
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  margin-left: 8px;
+  vertical-align: middle;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(201, 169, 97, 0.4);
+  white-space: nowrap;
+}
+.member-badge:active { transform: scale(0.95); }
+
+/* === 认养梨树会员页 === */
+.adopt-hero {
+  background: linear-gradient(135deg, var(--pear-leaf) 0%, var(--pear-leaf-deep) 100%);
+  padding: 26px 20px;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.adopt-hero::before {
+  content: '🌳';
+  position: absolute;
+  right: -8px; bottom: -16px;
+  font-size: 120px;
+  opacity: 0.12;
+  line-height: 1;
+}
+.adopt-plan {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+  background: var(--paper-white);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+}
+.adopt-plan:active { transform: scale(0.98); }
+.adopt-plan.selected {
+  border-color: var(--imperial-gold);
+  box-shadow: 0 0 0 2px rgba(201, 169, 97, 0.35);
+  background: linear-gradient(135deg, #FFFBF0, #F8EBC8);
+}
+.adopt-plan .ap-tag {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 10px; color: #fff; background: var(--cinnabar);
+  padding: 2px 8px; border-radius: var(--radius-pill);
+}
+.adopt-plan .ap-name { font-family: var(--font-display); font-size: 16px; color: var(--ink-black); margin-bottom: 4px; }
+.adopt-plan .ap-price { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--imperial-gold); }
+.adopt-plan .ap-price small { font-size: 12px; color: var(--ink-light); font-weight: 400; }
+.adopt-plan .ap-desc { font-size: 12px; color: var(--ink-gray); line-height: 1.6; margin-top: 6px; }
+
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='60' r='30' fill='%23F8E9C8'/%3E%3Cpath d='M50 30 Q50 20 55 15' stroke='%236B8E4E' fill='none' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M55 25 Q65 20 68 28' fill='%236B8E4E'/%3E%3C/svg%3E">
 </head>
@@ -2579,8 +2644,10 @@ body::before {
           <div class="form-group">
             <label class="form-label">研学方案 <span class="required">*</span></label>
             <div class="form-radio-group">
-              <div class="form-radio selected" onclick="selectRadio(this)">一日研学</div>
-              <div class="form-radio" onclick="selectRadio(this)">五日深度</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">一日 · 贡梨初探</div>
+              <div class="form-radio" onclick="selectRadio(this)">两日 · 生态密码PBL</div>
+              <div class="form-radio" onclick="selectRadio(this)">五日 · 穿越京西</div>
+              <div class="form-radio" onclick="selectRadio(this)">其他 / 定制</div>
             </div>
           </div>
           <div class="form-group">
@@ -2651,9 +2718,10 @@ body::before {
           <div class="form-group">
             <label class="form-label">研学方案 <span class="required">*</span></label>
             <div class="form-radio-group">
-              <div class="form-radio" onclick="selectRadio(this)">一日研学</div>
-              <div class="form-radio selected" onclick="selectRadio(this)">五日深度</div>
-              <div class="form-radio" onclick="selectRadio(this)">需要定制</div>
+              <div class="form-radio" onclick="selectRadio(this)">一日 · 贡梨初探</div>
+              <div class="form-radio" onclick="selectRadio(this)">两日 · 生态密码PBL</div>
+              <div class="form-radio selected" onclick="selectRadio(this)">五日 · 穿越京西</div>
+              <div class="form-radio" onclick="selectRadio(this)">其他 / 定制</div>
             </div>
           </div>
           <div class="form-group">
@@ -2691,7 +2759,10 @@ body::before {
 
     <div class="profile-header">
       <div class="profile-avatar">🧑‍🎓</div>
-      <div class="profile-name">梨乡小使者</div>
+      <div class="profile-name">
+        梨乡小使者
+        <span class="member-badge" onclick="navigateTo('member')">🌳 认养会员 ›</span>
+      </div>
       <div class="profile-meta">学号 LX2026008 · 已参与研学 2 次</div>
       <div class="profile-tags">
         <span class="profile-tag">🍐 贡梨文化小使者</span>
@@ -2760,6 +2831,83 @@ body::before {
         <span class="menu-arrow">›</span>
       </div>
     </div>
+
+    <div class="profile-menu" style="margin-top: 14px;">
+      <div class="menu-item" onclick="navigateTo('member')">
+        <div class="menu-icon">🌳</div>
+        <div class="menu-title">研学会员 · 认养一棵梨树</div>
+        <span class="menu-badge" style="background: var(--imperial-gold);">NEW</span>
+        <span class="menu-arrow">›</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 视图:研学会员 · 认养梨树 ============ -->
+  <section class="view" data-view="member">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('profile')">‹</div>
+      <div class="page-title">研学会员 · 认养梨树</div>
+    </div>
+
+    <div class="adopt-hero">
+      <div style="position: relative; z-index: 1;">
+        <div style="font-size: 40px;">🌳🍐</div>
+        <div style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; letter-spacing: 2px; margin: 8px 0 4px;">认养一棵京白梨</div>
+        <div style="font-size: 12px; opacity: 0.88; letter-spacing: 1px;">成为梨乡研学会员 · 让一棵古梨树记得你</div>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="card" style="background: linear-gradient(135deg, rgba(107,142,78,0.08), rgba(201,169,97,0.12)); border: 1px solid rgba(201,169,97,0.3);">
+        <div class="card-title"><span class="card-title-icon">✨</span>会员权益</div>
+        <div class="card-content" style="font-size: 12.5px;">
+          <p>🌸 <strong>专属认养:</strong>认养一棵京白梨树并挂上你的姓名牌,树木全年由梨农代为养护</p>
+          <p>📷 <strong>四季回访:</strong>每季度收到你的梨树照片/短视频,见证花开到结果</p>
+          <p>🍐 <strong>秋果到家:</strong>秋收时寄送你认养树所产的京白梨礼盒</p>
+          <p>🎓 <strong>研学优惠:</strong>会员参加各期研学享专属折扣与优先排期</p>
+          <p>🪪 <strong>会员证书:</strong>颁发电子《梨树认养证书》,可线上查看认养档案</p>
+        </div>
+      </div>
+
+      <div class="section-title" style="padding-left: 0;"><span>选择认养方案</span><span class="section-en">PLANS</span></div>
+
+      <div class="adopt-plan selected" onclick="selectAdoptPlan(this)">
+        <div class="ap-name">🌱 一年期 · 体验认养</div>
+        <div class="ap-price">¥299 <small>/ 年 · 1 棵</small></div>
+        <div class="ap-desc">含挂牌认养 + 四季回访 + 秋果礼盒 1 份,适合初次体验的家庭。</div>
+      </div>
+      <div class="adopt-plan" onclick="selectAdoptPlan(this)">
+        <div class="ap-tag">推荐</div>
+        <div class="ap-name">🌳 三年期 · 成长陪伴</div>
+        <div class="ap-price">¥799 <small>/ 3 年 · 1 棵</small></div>
+        <div class="ap-desc">三年连续认养同一棵树,陪它一起长大,含每年秋果礼盒 + 全部研学折扣。</div>
+      </div>
+      <div class="adopt-plan" onclick="selectAdoptPlan(this)">
+        <div class="ap-name">👨‍👩‍👧 古树之友 · 家庭会员</div>
+        <div class="ap-price">¥1,599 <small>/ 年 · 古树1棵</small></div>
+        <div class="ap-desc">认养一棵百年以上古梨树,含家庭研学 1 次 + 古树挂牌 + 专属导师。</div>
+      </div>
+
+      <div class="card" style="margin-top: 8px;">
+        <div class="card-title"><span class="card-title-icon">📝</span>认养意向登记</div>
+        <div class="form-group">
+          <label class="form-label">会员姓名 <span class="required">*</span></label>
+          <input type="text" class="form-input" placeholder="认养证书上显示的姓名">
+        </div>
+        <div class="form-group">
+          <label class="form-label">手机号 <span class="required">*</span></label>
+          <input type="tel" class="form-input" placeholder="11位手机号">
+        </div>
+        <div class="form-group">
+          <label class="form-label">梨树姓名牌寄语</label>
+          <input type="text" class="form-input" placeholder="如:愿你年年硕果 —— 来自XX一家">
+        </div>
+        <div class="form-group">
+          <p class="form-hint warning">📲 提交意向后,我们将通过<strong>手机短信</strong>与您联系,并邀请<strong>添加专属企业微信</strong>,确认认养树木编号、收果地址与付款方式等信息。</p>
+        </div>
+        <button type="button" class="btn btn-imperial" onclick="submitAdopt()">🌳 提交认养意向</button>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 视图9:图片直播(新闻列表) ============ -->
@@ -2811,9 +2959,11 @@ body::before {
           <label class="form-label">参与的研学项目</label>
           <select class="form-select">
             <option>一日研学:一颗贡梨读懂京西</option>
+            <option>两日研学:京白梨生态密码PBL</option>
             <option>五日深度:五日梨乡穿越京西</option>
             <option>季节限定:梨花授粉</option>
             <option>季节限定:秋收采摘</option>
+            <option>研学会员:认养梨树</option>
           </select>
         </div>
         <div class="form-group">
@@ -3815,6 +3965,22 @@ function selectRadio(el) {
   const group = el.parentElement;
   group.querySelectorAll('.form-radio').forEach(r => r.classList.remove('selected'));
   el.classList.add('selected');
+}
+
+// === 认养会员:方案选择 ===
+function selectAdoptPlan(el) {
+  document.querySelectorAll('.adopt-plan').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// === 认养会员:提交意向 ===
+function submitAdopt() {
+  const sel = document.querySelector('.adopt-plan.selected .ap-name');
+  const plan = sel ? sel.textContent.trim() : '认养方案';
+  showModal(
+    '🌳 认养意向已提交',
+    '感谢您愿意成为梨乡研学会员!您选择的是 <strong>' + plan + '</strong>。<br><br>我们将通过 <strong>手机短信</strong> 与您联系,并邀请 <strong>添加专属企业微信</strong>,为您分配认养树木编号、确认收果地址与付款方式,随后寄出《梨树认养证书》。<br><br><small style="color: var(--ink-light);">[评委提示:实际部署后将开通在线签约与支付,认养档案、四季回访照片均可在会员中心查看]</small>'
+  );
 }
 
 // === 个人报名:按人数动态生成每位参与人的性别/年龄 ===
