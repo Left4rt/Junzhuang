@@ -2134,6 +2134,121 @@ body::before {
 
 .hero-bell.read::after { display: none; }
 
+/* === 游戏物料展厅 === */
+.mat-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 2px 12px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink-black);
+  letter-spacing: 1px;
+}
+.mat-section-label::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--imperial-gold), var(--pear-leaf));
+}
+.mat-section-label .mat-section-count {
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-light);
+  letter-spacing: 1px;
+}
+
+.mat-card {
+  background: var(--paper-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 14px;
+}
+.mat-figure {
+  position: relative;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(201,169,97,0.10), transparent 60%),
+    linear-gradient(135deg, var(--pear-flesh), #F0E3C5);
+  overflow: hidden;
+}
+.mat-figure img {
+  width: 100%;
+  display: block;
+}
+.mat-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(178,52,43,0.92);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(6px);
+  letter-spacing: 0.5px;
+  z-index: 1;
+}
+.mat-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 150px;
+  color: var(--ink-light);
+  background: repeating-linear-gradient(45deg, #F0E3C5, #F0E3C5 10px, #E8D9B5 10px, #E8D9B5 20px);
+}
+.mat-body {
+  padding: 13px 15px;
+}
+.mat-title {
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  color: var(--ink-black);
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mat-desc {
+  font-size: 12px;
+  color: var(--ink-gray);
+  line-height: 1.65;
+}
+
+/* 资产卡价值梯度 */
+.mat-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--gold-deep);
+  background: rgba(201,169,97,0.12);
+  border: 1px solid rgba(201,169,97,0.35);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+}
+.mat-value .dots { letter-spacing: 1px; font-size: 11px; }
+.mat-value .dot-on { color: var(--imperial-gold); }
+.mat-value .dot-off { color: rgba(201,169,97,0.3); }
+
+/* 事件卡:双列方形 */
+.mat-event-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.mat-event-grid .mat-card { margin-bottom: 0; }
+.mat-event-grid .mat-title { font-size: 14px; }
+.mat-event-grid .mat-desc { font-size: 11px; }
+
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='60' r='30' fill='%23F8E9C8'/%3E%3Cpath d='M50 30 Q50 20 55 15' stroke='%236B8E4E' fill='none' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M55 25 Q65 20 68 28' fill='%236B8E4E'/%3E%3C/svg%3E">
 </head>
@@ -2861,6 +2976,11 @@ body::before {
           </div>
         </div>
         <div class="classroom-module-body">
+          <div class="classroom-feature" onclick="navigateTo('classroom-materials')" style="background: rgba(248, 235, 200, 0.7); border-color: rgba(201, 169, 97, 0.45);">
+            <div class="feature-icon">🎴</div>
+            <div class="feature-text">游戏物料展厅<small>桌游 · 卡牌 · 地图 · 海报(部分实物)</small></div>
+            <span class="feature-arrow">›</span>
+          </div>
           <div class="classroom-feature" onclick="navigateTo('classroom-game')">
             <div class="feature-icon">🏛</div>
             <div class="feature-text">沙盘玩法 · 进度同步<small>角色扮演 · 8幕闯关 · 老师带队推进</small></div>
@@ -3271,6 +3391,30 @@ body::before {
     </div>
   </section>
 
+  <!-- ============ 视图:京白梨进京记 · 游戏物料展厅 ============ -->
+  <section class="view" data-view="classroom-materials">
+    <div class="page-header">
+      <div class="page-back" onclick="navigateTo('classroom')">‹</div>
+      <div class="page-title">游戏物料展厅</div>
+    </div>
+    <div class="page-content">
+      <div class="classroom-hero" style="border-radius: var(--radius-md); padding: 18px; margin-bottom: 14px;">
+        <div style="position: relative; z-index: 1;">
+          <div class="classroom-hero-title" style="font-size: 18px;">京白梨进京记 · 游戏物料</div>
+          <div class="classroom-hero-subtitle" style="font-size: 11px; margin-top: 4px;">主题海报 · 桌游包装 · 进京地图 · 资产卡 · 事件卡</div>
+        </div>
+      </div>
+
+      <div class="card" style="background: rgba(178, 52, 43, 0.05); border-left: 4px solid var(--cinnabar); margin-bottom: 4px;">
+        <div class="card-content">
+          <p style="font-size: 12px; line-height: 1.7;"><strong style="color: var(--cinnabar);">📦 温馨说明</strong><br>这里仅展示「京白梨进京记」沙盘游戏的 <strong>部分</strong> 实物物料。完整套件还包含更多卡牌、道具与教具(银两卡、角色卡、沙盘道具等),最终以活动现场配发为准。</p>
+        </div>
+      </div>
+
+      <div id="materials-grid"></div>
+    </div>
+  </section>
+
   <!-- ============ Toast / 弹窗 ============ -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal" id="modal">
@@ -3625,6 +3769,18 @@ const GAME_HISTORY = [
   { date: "2026-04-12", group: "门头沟新桥路中学 初一(4)班", champion: "第6组 · 永定河船帮", gold: 19, result: "通关,获封首席皇商" }
 ];
 
+// === 京白梨进京记 · 游戏物料(部分实物,图片放在仓库 game/ 文件夹下) ===
+const GAME_MATERIALS = [
+  { file: "game/boxcover.jpg",              title: "桌游包装 · 盒面",     cat: "key",   tag: "包装",   desc: "桌游外盒主视觉,梨乡进京全景图与京白梨卡、贡梨卡、银两卡、事件卡一览。" },
+  { file: "game/boxside.jpg",               title: "桌游包装 · 盒侧",     cat: "key",   tag: "包装",   desc: "盒身侧面装帧,龙凤纹样环绕「乾隆御赏」标题,两侧点缀卡牌与运梨车队。" },
+  { file: "game/map.png",                   title: "进京之路 · 游戏地图",  cat: "map",   tag: "地图",   desc: "从东山村出发,经军庄镇、香山古道、军庄驿站、黑风隘、通京关口、京郊市场,直抵紫禁城。" },
+  { file: "game/capitalcard_pear.png",      title: "京白梨",             cat: "asset", tag: "资产卡", tier: 1, desc: "京西门头沟特产,游戏中的基础资产梨,产自老君堂、东山村一带古梨园。" },
+  { file: "game/capitalcard_bestpear.png",  title: "精品京白梨",          cat: "asset", tag: "资产卡", tier: 2, desc: "优选精品级别的京白梨,品相更佳,价值高于普通京白梨。" },
+  { file: "game/capitalcard_goodpear.jpg",  title: "贡梨",               cat: "asset", tag: "资产卡", tier: 3, desc: "陈于青花宝盏的贡品梨,游戏中价值最高的资产。" },
+  { file: "game/eventcard_badweather.png",  title: "恶劣天气",            cat: "event", tag: "事件卡", desc: "途中遭遇雷电风暴,道路泥泞、贡梨倾覆受损,考验商队的临场应对。" },
+  { file: "game/eventcard_brokencars.png",  title: "载具失修",            cat: "event", tag: "事件卡", desc: "车轴断裂、货物倾覆,需就地修车并承担贡梨损耗,影响进京进度。" }
+];
+
 // === 答题练习场题库 ===
 const QUIZ_QUESTIONS = [
   { q: "京白梨的原产地——老君堂、东山村一带,位于北京哪个区?", options: ["海淀区", "门头沟区", "昌平区", "房山区"], answer: 1, tip: "京白梨原产于北京门头沟区军庄镇,老君堂、东山村一带至今保留数百年古梨树。" },
@@ -3761,6 +3917,9 @@ function initView(viewName) {
       break;
     case 'classroom-game':
       renderGameStages();
+      break;
+    case 'classroom-materials':
+      renderMaterials();
       break;
     case 'classroom-quiz':
       initQuiz();
@@ -4215,6 +4374,66 @@ function renderGameStages() {
       ${s.name}
     </div>
   `).join('');
+}
+
+// =========================================================
+// 游戏物料展厅
+// =========================================================
+function renderMaterials() {
+  const c = document.getElementById('materials-grid');
+  if (!c || c.dataset.rendered) return;
+  c.dataset.rendered = '1';
+
+  // 单张物料卡
+  function figure(m, opts = {}) {
+    const valueBadge = (m.cat === 'asset')
+      ? `<span class="mat-value">价值
+           <span class="dots">${'●'.repeat(m.tier).replace(/●/g, '<span class="dot-on">●</span>')}${'<span class="dot-off">●</span>'.repeat(3 - m.tier)}</span>
+         </span>`
+      : '';
+    return `
+      <div class="mat-card">
+        <div class="mat-figure">
+          <img src="${m.file}" alt="${m.title}"
+               onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="mat-fallback">
+            <div style="font-size: 34px;">🖼</div>
+            <div style="font-size: 11px; margin-top: 8px;">图片待上传</div>
+            <div style="font-size: 10px; margin-top: 2px;">${m.file}</div>
+          </div>
+          <div class="mat-tag">${m.tag}</div>
+        </div>
+        <div class="mat-body">
+          <div class="mat-title">${m.title}${valueBadge}</div>
+          <div class="mat-desc">${m.desc}</div>
+        </div>
+      </div>`;
+  }
+
+  const byCat = (cat) => GAME_MATERIALS.filter(m => m.cat === cat);
+  const sec = (label, count) => `<div class="mat-section-label">${label}<span class="mat-section-count">${count}</span></div>`;
+
+  const key = byCat('key');
+  const map = byCat('map');
+  const asset = byCat('asset');
+  const event = byCat('event');
+
+  c.innerHTML =
+    sec('桌游包装', key.length + ' 件') +
+    key.map(m => figure(m)).join('') +
+
+    sec('进京地图', map.length + ' 件') +
+    map.map(m => figure(m)).join('') +
+
+    sec('资产卡 · 价值梯度', '京白梨 ‹ 精品京白梨 ‹ 贡梨') +
+    asset.map(m => figure(m)).join('') +
+
+    sec('事件卡 · 旅途风险', event.length + ' 张') +
+    `<div class="mat-event-grid">${event.map(m => figure(m)).join('')}</div>` +
+
+    `<div class="card" style="background: linear-gradient(135deg, rgba(107, 142, 78, 0.06), rgba(201, 169, 97, 0.08)); text-align: center; margin-top: 16px;">
+      <div class="card-content"><p style="font-size: 12px;">— 以上仅为部分物料展示 · 完整套件以活动现场为准 —</p></div>
+    </div>`;
 }
 
 // =========================================================
