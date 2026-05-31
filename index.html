@@ -2152,7 +2152,7 @@ body::before {
           <div style="font-size:11px;opacity:0.82;margin-top:8px;line-height:1.7;">把海报命名为 <strong>poster.png</strong>(或 .jpg)<br>放进 GitHub 仓库的 <strong>images/</strong> 文件夹即可显示</div>
         </div>
       </div>
-      <div class="poster-hint" id="posterHint">↓ 点击查看完整海报</div>
+      <div class="poster-hint" id="posterHint">↓ 下拉 / 点击 查看完整海报</div>
     </div>
 
     <!-- Hero -->
@@ -4544,7 +4544,7 @@ function collapsePoster() {
   p.classList.remove('dragging');
   p.classList.remove('expanded');
   p.style.height = POSTER_COLLAPSED + 'px';
-  const h = document.getElementById('posterHint'); if (h) h.textContent = '↓ 点击查看完整海报';
+  const h = document.getElementById('posterHint'); if (h) h.textContent = '↓ 下拉 / 点击 查看完整海报';
 }
 function togglePoster() {
   const p = document.getElementById('posterPull'); if (!p) return;
@@ -4559,8 +4559,38 @@ function initPosterPull() {
   loadPoster();
   collapsePoster();
 
-  // 展开后:页面一旦向下滚动就自动收起。只读 scroll,不拦截任何手势,
-  // 因此正常下滑浏览始终畅通。
+  let startY = 0, tracking = false, atTop = false;
+
+  // —— 触摸开始:记录起点 ——
+  window.addEventListener('touchstart', (e) => {
+    if (currentView !== 'home') return;
+    startY = e.touches[0].clientY;
+    atTop = (window.scrollY <= 0);     // 起手时是否已在顶部
+    tracking = true;
+    posterDragged = false;
+  }, { passive: true });
+
+  // —— 触摸移动:只“读”手势,绝不 preventDefault,因此页面滚动永远畅通 ——
+  window.addEventListener('touchmove', (e) => {
+    if (!tracking) return;
+    const dy = e.touches[0].clientY - startY;
+    if (Math.abs(dy) > 8) posterDragged = true;
+
+    if (p.classList.contains('expanded')) {
+      // 展开态:手指向上滑(想往下看)→ 收起
+      if (dy < -20) { collapsePoster(); tracking = false; }
+    } else {
+      // 收起态:已在页面顶部 + 明显下拽 → 展开(此时页面到顶本就无法再下滚,不冲突)
+      if (atTop && window.scrollY <= 0 && dy > 60) {
+        expandPoster();
+        tracking = false;
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => { tracking = false; }, { passive: true });
+
+  // —— 展开后:页面一旦向下滚动就自动收起(只读 scroll,不拦截) ——
   let lastY = window.scrollY;
   window.addEventListener('scroll', () => {
     if (p.classList.contains('expanded')) {
@@ -4569,7 +4599,7 @@ function initPosterPull() {
     lastY = window.scrollY;
   }, { passive: true });
 
-  // 桌面端:展开时向下滚轮也收起(不阻止默认滚动)
+  // —— 桌面端:展开时向下滚轮收起 ——
   window.addEventListener('wheel', (e) => {
     if (p.classList.contains('expanded') && e.deltaY > 0) collapsePoster();
   }, { passive: true });
