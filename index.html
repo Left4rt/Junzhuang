@@ -2152,7 +2152,7 @@ body::before {
           <div style="font-size:11px;opacity:0.82;margin-top:8px;line-height:1.7;">把海报命名为 <strong>poster.png</strong>(或 .jpg)<br>放进 GitHub 仓库的 <strong>images/</strong> 文件夹即可显示</div>
         </div>
       </div>
-      <div class="poster-hint" id="posterHint">↓ 下拉查看完整海报</div>
+      <div class="poster-hint" id="posterHint">↓ 点击查看完整海报</div>
     </div>
 
     <!-- Hero -->
@@ -2175,12 +2175,6 @@ body::before {
       <span class="notice-icon">📢</span>
       <span class="notice-text">「一颗贡梨读懂京西」夏季研学营开放预约中</span>
       <span class="notice-arrow">›</span>
-    </div>
-
-    <!-- 样本演示声明 -->
-    <div style="margin: -6px 20px 18px; background: rgba(178,52,43,0.05); border: 1px dashed var(--cinnabar); border-radius: var(--radius-md); padding: 10px 14px; display: flex; gap: 8px; align-items: flex-start;">
-      <span style="font-size: 14px; flex-shrink: 0; line-height: 1.4;">ℹ️</span>
-      <span style="font-size: 11px; color: var(--ink-gray); line-height: 1.6;">本平台为<strong style="color: var(--cinnabar);">样本演示</strong>:页面内所有电话、姓名、人员安排、住宿名称、价格与日期等均为<strong>虚拟示意数据</strong>,仅用于功能展示,不代表真实信息,请勿拨打或据此联系。实际信息以正式签约协商为准。</span>
     </div>
 
     <!-- 特色:数字课堂 -->
@@ -2362,9 +2356,8 @@ body::before {
           住宿安排
         </div>
         <div class="card-content">
-          <p style="font-weight: 500; color: var(--ink-black); margin-bottom: 6px;">梨乡里民宿(主营地 · 名称仅供参考)</p>
+          <p style="font-weight: 500; color: var(--ink-black); margin-bottom: 6px;">梦我度假村(主营地)</p>
           <p style="font-size: 12px;">五天连续入住,无需迁营。所有教学点摆渡车10分钟内可达。</p>
-          <p style="font-size: 11px; color: var(--cinnabar); margin-top: 8px; background: rgba(178,52,43,0.06); padding: 8px 10px; border-radius: 6px; border-left: 3px solid var(--cinnabar);">⚠️ 此处民宿/度假村名称、房型与配套均为示意,具体住宿单位与安排以实际出团协商、签约确认为准。</p>
         </div>
         <ul class="info-list" style="margin-top: 10px;">
           <li class="info-item">
@@ -2987,7 +2980,7 @@ body::before {
       </div>
 
       <!-- 上传区 -->
-      <div class="upload-zone" onclick="showToast('调起相机/相册功能演示<br><br>实际部署后,照片将通过 <strong>DeepSeek-V4-Pro</strong> 视觉能力自动辨识化石门类并解锁图鉴 —— 我们的团队具备定制接入该模型 API 的经验。','📷 AI 化石辨识')">
+      <div class="upload-zone" onclick="showToast('调起相机/相册功能演示<br><br>实际部署后,照片将由 <strong>DeepSeek-V4-Pro</strong> 视觉大模型自动辨识化石门类并解锁图鉴。','📷 AI 化石辨识')">
         <div class="upload-icon">📷</div>
         <div class="upload-title">拍照上传化石照片</div>
         <div class="upload-hint">AI 将自动辨识化石种类 · 解锁图鉴</div>
@@ -2995,7 +2988,7 @@ body::before {
 
       <div class="ai-note">
         <span class="ai-note-icon">🤖</span>
-        <span class="ai-note-text"><strong>AI 赋能</strong>:化石智能辨识依托 <span class="ai-model">DeepSeek-V4-Pro</span> 等国产大模型实现。我们的项目团队具备定制接入 DeepSeek-V4-Pro 的实战经验,能灵活调用其 API 解决图像辨识、知识问答等研学场景需求。</span>
+        <span class="ai-note-text"><strong>AI 赋能</strong>:本模块的化石智能辨识,由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持,可为研学产品深度引入 AI 赋能。</span>
       </div>
 
       <div class="card">
@@ -3089,7 +3082,7 @@ body::before {
 
       <div class="ai-note">
         <span class="ai-note-icon">🤖</span>
-        <span class="ai-note-text"><strong>AI 赋能</strong>:四维度演讲评分依托 <span class="ai-model">DeepSeek-V4-Pro</span> 等国产大模型实现语音转写、逻辑分析与情感识别。我们的项目团队具备定制接入 DeepSeek-V4-Pro 的实战经验,能灵活调用其 API 落地此类评测能力。</span>
+        <span class="ai-note-text"><strong>AI 赋能</strong>:四维度演讲评分由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持,实现语音转写、逻辑分析与情感识别。</span>
       </div>
 
       <div class="text-center" style="padding: 16px 0;">
@@ -3348,7 +3341,7 @@ const ONE_DAY_SCHEDULE = [
   },
   {
     time: "12:00-13:30",
-    location: "梨乡里民宿餐厅",
+    location: "梦我度假村餐厅",
     title: "全梨宴 · 京西美食文化课",
     desc: "厨师讲解6道菜+锅翻儿典故;分组动手做梨糕/烙锅翻儿;品尝全梨宴午餐",
     tag: "课程4.12"
@@ -3671,7 +3664,7 @@ const CONTACTS = [
   { name: "李导师", role: "研学总导师 · 全程随团", phone: "138-1010-1234", group: "项目负责" },
   { name: "陈教授", role: "PBL科研指导(北京联合大学)", phone: "139-1234-5678", group: "学术指导" },
   { name: "王师傅", role: "全梨宴主厨", phone: "010-6985-7777", group: "食宿保障" },
-  { name: "张大姐", role: "梨乡里民宿前台", phone: "010-6985-9999", group: "食宿保障" },
+  { name: "张大姐", role: "梦我度假村前台", phone: "010-6985-9999", group: "食宿保障" },
   { name: "赵队长", role: "军庄威风锣鼓队队长", phone: "137-8888-6666", group: "课程教练" },
   { name: "孙技师", role: "古树养护技师", phone: "136-2222-3333", group: "课程教练" },
   { name: "刘医生", role: "孟悟村卫生所急诊", phone: "010-6985-1120", group: "应急医疗" },
@@ -3681,7 +3674,7 @@ const CONTACTS = [
 // === 食宿信息 ===
 const ACCOMMODATIONS = [
   {
-    name: "梨乡里民宿(主营地)",
+    name: "梦我度假村(主营地)",
     type: "标准研学客房",
     rooms: "40间标间 · 4人/间",
     features: "独立卫浴 · 空调暖气 · 无线网络 · 24小时前台",
@@ -3945,7 +3938,7 @@ function toggleRecord(el) {
     el.style.background = 'linear-gradient(135deg, var(--pear-leaf-light), var(--pear-leaf-deep))';
     el.innerHTML = '⏸';
     showToast(
-      '🎙 录音功能演示中...<br>实际部署时,系统将调用浏览器录音 API,完成后上传服务器,通过 <strong>DeepSeek-V4-Pro</strong> 等大模型从声音/逻辑/情感/台风四维度评分。<br><br><small style="color: var(--ink-light);">(我们的项目团队具备定制接入 DeepSeek-V4-Pro 的经验,能灵活调用其 API 实现该能力)</small>',
+      '🎙 录音功能演示中...<br>实际部署时,系统将调用浏览器录音 API,完成后上传至服务器,由 <strong>DeepSeek-V4-Pro</strong> 等大模型从声音/逻辑/情感/台风四维度评分。<br><br><small style="color: var(--ink-light);">(团队具备 DeepSeek-V4-Pro 等最新国产大模型的开发与接入经验)</small>',
       '开始录音'
     );
   } else {
@@ -4432,7 +4425,7 @@ function renderShowcase() {
     </div>
     <div class="ai-note">
       <span class="ai-note-icon">🤖</span>
-      <span class="ai-note-text"><strong>AI 赋能</strong>:演讲多维评分依托 <span class="ai-model">DeepSeek-V4-Pro</span> 等国产大模型。我们的项目团队具备定制接入 DeepSeek-V4-Pro 的实战经验,能灵活调用其 API 实现评分落地。</span>
+      <span class="ai-note-text"><strong>AI 赋能</strong>:演讲多维评分由具备 <span class="ai-model">DeepSeek-V4-Pro</span> 等最新国产大模型 开发与接入经验的团队提供技术支持。</span>
     </div>
   ` + SPEECH_SHOWCASE.map((s, i) => `
     <div class="news-item" onclick="playSpeech(${i})">
@@ -4544,14 +4537,14 @@ function expandPoster() {
   p.classList.remove('dragging');
   p.classList.add('expanded');
   p.style.height = posterFullH() + 'px';
-  const h = document.getElementById('posterHint'); if (h) h.textContent = '↑ 上滑 / 点击收起';
+  const h = document.getElementById('posterHint'); if (h) h.textContent = '↓ 向下滑动 / 点击 收起';
 }
 function collapsePoster() {
   const p = document.getElementById('posterPull'); if (!p) return;
   p.classList.remove('dragging');
   p.classList.remove('expanded');
   p.style.height = POSTER_COLLAPSED + 'px';
-  const h = document.getElementById('posterHint'); if (h) h.textContent = '↓ 下拉查看完整海报';
+  const h = document.getElementById('posterHint'); if (h) h.textContent = '↓ 点击查看完整海报';
 }
 function togglePoster() {
   const p = document.getElementById('posterPull'); if (!p) return;
@@ -4565,56 +4558,20 @@ function initPosterPull() {
   const p = document.getElementById('posterPull'); if (!p) return;
   loadPoster();
   collapsePoster();
-  let touching = false, startY = 0, baseH = POSTER_COLLAPSED, maxH = 380, wasExpanded = false;
 
-  function inPoster(touch) {
-    const r = p.getBoundingClientRect();
-    return touch.clientY >= r.top && touch.clientY <= r.bottom;
-  }
-
-  window.addEventListener('touchstart', (e) => {
-    if (currentView !== 'home') return;
-    const t = e.touches[0];
-    wasExpanded = p.classList.contains('expanded');
-    // 收起态:需在页面顶部(以便和正常上滑页面区分);展开态:触点在海报内即可,方便随时上滑收起
-    if (!wasExpanded && window.scrollY > 3) return;
-    if (wasExpanded && !inPoster(t)) return;
-    touching = true; posterDragged = false;
-    startY = t.clientY;
-    baseH = wasExpanded ? posterFullH() : POSTER_COLLAPSED;
-    maxH = posterFullH();
-    p.classList.add('dragging');
+  // 展开后:页面一旦向下滚动就自动收起。只读 scroll,不拦截任何手势,
+  // 因此正常下滑浏览始终畅通。
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    if (p.classList.contains('expanded')) {
+      if (window.scrollY > lastY + 1 || window.scrollY > 6) collapsePoster();
+    }
+    lastY = window.scrollY;
   }, { passive: true });
 
-  window.addEventListener('touchmove', (e) => {
-    if (!touching) return;
-    const dy = e.touches[0].clientY - startY;
-    if (Math.abs(dy) > 5) posterDragged = true;
-    let target = baseH + dy;
-    if (target > maxH) target = maxH + (target - maxH) * 0.22;          // 顶部橡皮筋
-    if (target < POSTER_COLLAPSED) target = POSTER_COLLAPSED;            // 不低于收起高度
-    p.style.height = target + 'px';
-    // 拖动期间接管手势,避免与页面滚动打架
-    if (Math.abs(dy) > 5) e.preventDefault();
-  }, { passive: false });
-
-  window.addEventListener('touchend', (e) => {
-    if (!touching) return;
-    touching = false;
-    p.classList.remove('dragging');
-    const dy = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY - startY : 0;
-
-    if (wasExpanded) {
-      // 已展开:上滑超过 40px,或被拖到不足 8 成高度 → 收起;否则弹回展开
-      const curH = p.getBoundingClientRect().height;
-      if (dy < -40 || curH < maxH * 0.8) collapsePoster();
-      else expandPoster();
-    } else {
-      // 收起态:下拉超过可展开高度的 30% → 展开;否则弹回收起
-      const curH = p.getBoundingClientRect().height;
-      const threshold = POSTER_COLLAPSED + (maxH - POSTER_COLLAPSED) * 0.30;
-      (curH > threshold || dy > 60) ? expandPoster() : collapsePoster();
-    }
+  // 桌面端:展开时向下滚轮也收起(不阻止默认滚动)
+  window.addEventListener('wheel', (e) => {
+    if (p.classList.contains('expanded') && e.deltaY > 0) collapsePoster();
   }, { passive: true });
 }
 
